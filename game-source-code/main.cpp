@@ -1,8 +1,15 @@
+#include <stdio.h>
 #include <iostream>
-
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <ctime>
+#include <math.h>
+#include "Game.h"
 using namespace std;
 
 int main()
 {
-        cout << "Hello World!" << endl;
+    Game game;
+    game.run();
+    
 }
