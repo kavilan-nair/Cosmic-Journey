@@ -24,11 +24,11 @@ class Game
 private:
         static const sf::Time	TimePerFrame;
         sf::RenderWindow _window;
-		
-        sf::RectangleShape _playerShip;
+		sf::Texture _texture;
+        sf::Sprite _playerShipSprite;
         Player _player;
         bool _isMovingClockwise, _isMovingAntiClockwise;
-        //float _originX, _originY, _radius ;
+       
 };
 
 

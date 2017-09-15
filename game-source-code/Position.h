@@ -15,7 +15,7 @@ class Position
         
     private:
         int _x, _y;
-        float _angle;
+        int _angle;
     
 };
 

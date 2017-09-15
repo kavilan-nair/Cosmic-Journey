@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <math.h>
 #include <ctime>
+#include <cmath>
 #include <vector>
 
 #include <iostream>
@@ -12,29 +13,19 @@
 
 const auto PI = 3.14159265358979323846;
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
-//This here is terrible, not sure where to put it
-//auto xPosition = 0;
-//auto yPosition = 0;
-//int angle = 0;
-//double theta = 0;
-auto originFix = PI/2;
-auto radiusFactor = 0.0000;
 sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
 
-Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _playerShip() , _player(), _isMovingClockwise(false), _isMovingAntiClockwise(false)
+Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _player(), _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
 	
         _window.setVerticalSyncEnabled(true);
         GameWindowProperties gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
-        _player = Player(gameWindowProperties);   
-       
-        
-        sf::Vector2f blockSize(10, 10);
-        _playerShip.setSize(blockSize);
-        _playerShip.setFillColor(sf::Color::Green);
-        
-        _playerShip.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
-        
+        _player = Player(gameWindowProperties);          
+        _texture.loadFromFile("Resources/spaceship.png");
+        _playerShipSprite.setTexture(_texture);
+        _playerShipSprite.setScale(0.15f, 0.15f);
+        _playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
+
 }
 
 void Game::run()
@@ -79,25 +70,14 @@ void Game::processEvents()
 
 void Game::update(sf::Time deltaTime)
 {
-    if (_isMovingClockwise)
-    {
-        
+    if (_isMovingClockwise)        
         _player.moveClockwise();
-        _playerShip.rotate(-1*_player.getPosition().getAngle()/5);
-
-    }
         
     if (_isMovingAntiClockwise)
-    {
         _player.moveAntiClockwise();
-        _playerShip.rotate(1*_player.getPosition().getAngle()/5);
-    }
-    
-   
-    _playerShip.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
-    
-      //  _player.setPosition(xPosition, yPosition);
-   //_player.setPosition(xPosition * deltaTime.asSeconds(), yPosition * deltaTime.asSeconds());
+        
+    _playerShipSprite.setRotation(_player.getPosition().getAngle()*-5);
+    _playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
 }
 
 void Game::render()
@@ -105,11 +85,10 @@ void Game::render()
         _window.clear();
        
         sf::Texture backgroundImage;
-        backgroundImage.loadFromFile("Resources/SpaceA.png");
+        backgroundImage.loadFromFile("Resources/background.png");
         sf::Sprite background(backgroundImage);
         _window.draw(background);
-        _window.draw(_playerShip);
-        
+        _window.draw(_playerShipSprite);        
         _window.display();
 }
 
