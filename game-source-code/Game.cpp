@@ -2,6 +2,7 @@
 #include "GameWindowProperties.h"
 #include "Position.h"
 #include "Player.h"
+#include "SplashScreen.h"
 #include <SFML/Graphics.hpp>
 #include <math.h>
 #include <ctime>
@@ -17,7 +18,9 @@ sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
 
 Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _player(), _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
-	
+        SplashScreen splashscreen;
+        splashscreen.show(_window);
+        
         _window.setVerticalSyncEnabled(true);
         GameWindowProperties gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
         _player = Player(gameWindowProperties);          

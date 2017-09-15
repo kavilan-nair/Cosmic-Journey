@@ -5,6 +5,8 @@
 #include <ctime>
 #include <math.h>
 #include "Game.h"
+#include "SplashScreen.h"
+
 using namespace std;
 
 int main()
