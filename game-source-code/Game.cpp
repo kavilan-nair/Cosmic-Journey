@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <math.h>
 #include <ctime>
+#include <vector>
 
 #include <iostream>
 
@@ -18,11 +19,11 @@ const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 //double theta = 0;
 auto originFix = PI/2;
 auto radiusFactor = 0.0000;
+sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
 
-
-
-Game::Game() : _window(sf::VideoMode(640, 480), "Software II Project"), _playerShip() , _player(), _isMovingClockwise(false), _isMovingAntiClockwise(false)
+Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _playerShip() , _player(), _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
+	
         _window.setVerticalSyncEnabled(true);
         GameWindowProperties gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
         _player = Player(gameWindowProperties);   
@@ -72,9 +73,6 @@ void Game::processEvents()
 			case sf::Event::Closed:
 				_window.close();
 				break;
-                
-            default:
-                break;
 		}
 	}
 }
@@ -92,7 +90,7 @@ void Game::update(sf::Time deltaTime)
     if (_isMovingAntiClockwise)
     {
         _player.moveAntiClockwise();
-        _playerShip.rotate(_player.getPosition().getAngle()/5);
+        _playerShip.rotate(1*_player.getPosition().getAngle()/5);
     }
     
    

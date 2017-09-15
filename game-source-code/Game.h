@@ -11,7 +11,8 @@ class Game
     public: 
         Game();
         void run();
-        
+		Player& getPlayer(){return _player;};
+		
     private:
         void processEvents();
         void update();
@@ -19,14 +20,14 @@ class Game
         
         void update(sf::Time deltaTime);	
         void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-        
+
 private:
         static const sf::Time	TimePerFrame;
         sf::RenderWindow _window;
+		
         sf::RectangleShape _playerShip;
         Player _player;
         bool _isMovingClockwise, _isMovingAntiClockwise;
-        
         //float _originX, _originY, _radius ;
 };
 

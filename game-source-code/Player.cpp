@@ -14,8 +14,8 @@ Player::Player(GameWindowProperties gameWindowProperties)
 {
        _gameWindowProperties = gameWindowProperties;
        _position.setAngle(0.f);
-       _position.setX(_gameWindowProperties.getXOrigin() - _gameWindowProperties.getRadius());
-       _position.setY(_gameWindowProperties.getYOrigin());
+       _position.setX(_gameWindowProperties.getXOrigin());
+       _position.setY(_gameWindowProperties.getYOrigin() + _gameWindowProperties.getRadius());
 }
 
 void Player::moveClockwise()

@@ -15,8 +15,7 @@ public:
         void moveAntiClockwise();
         
 		~Player();
-        
-        
+        GameWindowProperties getWindowProperties(){return _gameWindowProperties;};
     private:
         Position _position;
         GameWindowProperties _gameWindowProperties;
