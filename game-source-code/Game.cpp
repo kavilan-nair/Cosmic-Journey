@@ -88,7 +88,7 @@ void Game::render()
         _window.clear();
        
         sf::Texture backgroundImage;
-        backgroundImage.loadFromFile("Resources/background.png");
+        backgroundImage.loadFromFile("Resources/Space.png");
         sf::Sprite background(backgroundImage);
         _window.draw(background);
         _window.draw(_playerShipSprite);        
