@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -14,7 +15,8 @@ class Game
 		Player& getPlayer(){return _player;};
 		
     private:
-        void processEvents();
+        void processInputEvents();
+		void processAI();
         void update();
         void render();
         
@@ -24,9 +26,12 @@ class Game
 private:
         static const sf::Time	TimePerFrame;
         sf::RenderWindow _window;
-		sf::Texture _texture;
+		sf::Texture _texturePlayer;
+		sf::Texture _textureEnemy;
         sf::Sprite _playerShipSprite;
+		sf::Sprite _enemyShipSprite;
         Player _player;
+		Enemy _enemy;
         bool _isMovingClockwise, _isMovingAntiClockwise;
        
 };
