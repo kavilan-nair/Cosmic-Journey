@@ -2,6 +2,7 @@
 
 GameWindowProperties::GameWindowProperties()
 {	
+	
 }
 
 GameWindowProperties::GameWindowProperties(int width, int height)
@@ -11,14 +12,11 @@ GameWindowProperties::GameWindowProperties(int width, int height)
 	_xOrigin =  _width/2;
 	_yOrigin = _height/2;
  
-    
-    if (_width < _height)
-        _radius = 0.8 * _width/2;
-    else
-        _radius = 0.8 * _height/2;
-        
+    if (_width < _height)_radius = 0.95 * _width/2;
+    else _radius = 0.95 * _height/2;
 }
 
 GameWindowProperties::~GameWindowProperties()
 {
+	
 }

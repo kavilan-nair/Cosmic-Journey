@@ -1,83 +1,112 @@
+#include <math.h>
+#include <ctime>
+#include <cmath>
+#include <vector>
+#include <iostream>
+#include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "GameWindowProperties.h"
 #include "Position.h"
 #include "Player.h"
 #include "SplashScreen.h"
-#include <SFML/Graphics.hpp>
-#include <math.h>
-#include <ctime>
-#include <cmath>
-#include <vector>
-#include "enemy.h"
-#include <iostream>
+#include "Enemy.h"
+#include "Bullet.h"
 
-
-const auto PI = 3.14159265358979323846;
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
-sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
-
-Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _player(), _enemy(), _isMovingClockwise(false), _isMovingAntiClockwise(false)
+Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
-        
+        srand(time(0));
+		float halfSize = 0.5f;
+		_window.setKeyRepeatEnabled(false);
         _window.setVerticalSyncEnabled(true);
-        GameWindowProperties gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
-        _player = Player(gameWindowProperties); 
-		_enemy = Enemy(gameWindowProperties);
+		_gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
+        _player = Player(_gameWindowProperties); 
 		
+		Enemy tempEnemy = Enemy(_gameWindowProperties);
+		enemyStack.push_back(tempEnemy);
+		
+		_textureBackground.loadFromFile("Resources/Space.png");
         _texturePlayer.loadFromFile("Resources/spaceship.png");
 		_textureEnemy.loadFromFile("Resources/Enemy.png");
+        _textureBullet.loadFromFile("Resources/laser.png");
+		
+		_background.setTexture(_textureBackground);
 		
         _playerShipSprite.setTexture(_texturePlayer);
-		auto playerCenterX = _texturePlayer.getSize().x*0.5f;
-		auto playerCenterY = _texturePlayer.getSize().y*0.5f;
+		auto playerCenterX = _texturePlayer.getSize().x*halfSize;
+		auto playerCenterY = _texturePlayer.getSize().y*halfSize;
 		_playerShipSprite.setOrigin(playerCenterX, playerCenterY);
 		_playerShipSprite.setScale(0.10f, 0.10f);
         _playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
 
 		_enemyShipSprite.setTexture(_textureEnemy);
-		auto enemyCenterX = _textureEnemy.getSize().x*0.5f;
-		auto enemyCenterY = _textureEnemy.getSize().y*0.5f;
+		auto enemyCenterX = _textureEnemy.getSize().x*halfSize;
+		auto enemyCenterY = _textureEnemy.getSize().y*halfSize;
 		_enemyShipSprite.setOrigin(enemyCenterX, enemyCenterY);
         _enemyShipSprite.setScale(0.10f, 0.10f);
-        _enemyShipSprite.setPosition(_enemy.getPositionX(), _enemy.getPositionY());
-		cout << _enemyShipSprite.getPosition().x << ";" << _enemyShipSprite.getPosition().y << endl;
+        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+		
+		_bulletSprite.setTexture(_textureBullet);
+		auto bulletCenterX = _textureBullet.getSize().x*halfSize;
+		auto bulletCenterY = _textureBullet.getSize().y*halfSize;
+		_bulletSprite.setOrigin(bulletCenterX, bulletCenterY);
+		_bulletSprite.setScale(0.05f, 0.05f);
+		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+		
+		enemySpriteControl.push_back(_enemyShipSprite);
 }
 
 void Game::run()
 {
-	int count = 0;
-		SplashScreen splashscreen;
-		splashscreen.show(_window);
+	SplashScreen splashscreen;
+	splashscreen.show(_window);
 	
-		
-	
-        sf::Clock clock;
-        sf::Time timeSinceLastUpdate = sf::Time::Zero;
-        while (_window.isOpen())
-        {
-                processInputEvents();
-				processAI();
-				//process events is for input, need a process for AI
-                timeSinceLastUpdate += clock.restart();
-                while (timeSinceLastUpdate > TimePerFrame)
-                {
-                        timeSinceLastUpdate -= TimePerFrame;
-                        processInputEvents();
-                        update(TimePerFrame);
-                }
-				count++;
-				std::cout << "I am going to render now " << count << std::endl;
-                render();
-        }
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	while (_window.isOpen())
+	{
+		processInputEvents();
+		processAI();
+		timeSinceLastUpdate += clock.restart();
+		while (timeSinceLastUpdate > TimePerFrame)
+		{
+			timeSinceLastUpdate -= TimePerFrame;
+			processInputEvents();
+			update(TimePerFrame);
+		}
+		render();
+	}
 }
 
 void Game::processAI()
 {
-	if(_enemy.isAlive())
-	{
-		_enemy.move();
-		_enemyShipSprite.setPosition(_enemy.getPositionX(),_enemy.getPositionY());
+	int indexEnemy = 0;
+	for (auto& i : enemyStack)
+	{   
+		{
+			if(i.isAlive() == false)
+			{
+				enemyStack.erase(enemyStack.begin());
+				enemySpriteControl.erase(enemySpriteControl.begin());
+			}
+			else
+			{
+				i.move();
+				enemySpriteControl[indexEnemy].setPosition(enemyStack[indexEnemy].getPosition().getX(), enemyStack[indexEnemy].getPosition().getY());
+			}
+			indexEnemy++;
+		}
 	}
+	int indexBullets = 0;
+    for (auto& i : _bullets)
+    {   
+        if(i.isBulletAlive())
+        {
+			i.updateBullet();
+            bulletSprites[indexBullets].setPosition(i.getPosition().getX(), i.getPosition().getY());
+            indexBullets++;
+        }
+    }
 }
 
 void Game::processInputEvents()
@@ -99,7 +128,6 @@ void Game::processInputEvents()
 				_window.close();
 				break;
 		}
-
 	}
 }
 
@@ -118,13 +146,24 @@ void Game::update(sf::Time deltaTime)
 void Game::render()
 {
         _window.clear();
-       
-        sf::Texture backgroundImage;
-        backgroundImage.loadFromFile("Resources/Space.png");
-        sf::Sprite background(backgroundImage);
-        _window.draw(background);
+        _window.draw(_background);
         _window.draw(_playerShipSprite); 
-		_window.draw(_enemyShipSprite);
+		
+		for(auto& i : enemySpriteControl)
+		{
+			_window.draw(i);
+		}
+		
+		int indexBulSprites = 0;
+        for (auto bullet : _bullets)
+        {
+            if (bullet.isBulletAlive())
+            {
+                _window.draw(bulletSprites[indexBulSprites]);
+                indexBulSprites++;
+            }
+        }
+
         _window.display();
 }
 
@@ -134,4 +173,11 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 		_isMovingClockwise = isPressed;
 	else if (key == sf::Keyboard::Left)
 		_isMovingAntiClockwise = isPressed;
+	else if (key == sf::Keyboard::Space && isPressed == true)
+    {
+        Bullet bullet(_player.getPosition(), _gameWindowProperties);
+        _bullets.push_back(bullet);
+		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+        bulletSprites.push_back(_bulletSprite);
+    }
 }

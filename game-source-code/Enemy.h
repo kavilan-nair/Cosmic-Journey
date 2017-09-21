@@ -7,24 +7,21 @@
 
 class Enemy
 {
-public:
+	public:
 		Enemy();
-        Enemy(GameWindowProperties gameWindowProperties);
-		
-		&getPositionX(){return _coordinateX;};
-		&getPositionY(){return _coordinateY;};
-		setAlive();
-		isAlive();
-		move();
-private:
-		int _coordinateX;
-		int _coordinateY;
-		bool _alive = false;
-		int Pos1 = 0;
-		int Pos2 = 0;
+		Enemy(GameWindowProperties gameWindowProperties);
+        bool& isAlive(){return _aliveStatus;};
+        void setDead(){_aliveStatus = false;};
+        void setAlive(){_aliveStatus = true;};
+		void move();
+		Position getPosition(){return _enemyPosition;};
+	
+	public:
+		float factor = 0.01;
+		float PI = atan(1)*4; //if you put const, some other shit goes down
+	private:
+		Position _enemyPosition;
+        bool _aliveStatus;
 };
-
-
-
 
 #endif // ENEMY_H

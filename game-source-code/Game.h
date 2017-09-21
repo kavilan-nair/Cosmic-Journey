@@ -4,12 +4,14 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Enemy.h"
+#include "Bullet.h"
+#include <vector>
 
 using namespace std;
 
 class Game
 {
-    public: 
+	public: 
         Game();
         void run();
 		Player& getPlayer(){return _player;};
@@ -23,20 +25,31 @@ class Game
         void update(sf::Time deltaTime);	
         void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
-private:
-        static const sf::Time	TimePerFrame;
-        sf::RenderWindow _window;
+	public:
+		sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
+		const float PI = atan(1)*4;
+		
+	private:
+        static const sf::Time TimePerFrame;
+		sf::RenderWindow _window;
+		GameWindowProperties _gameWindowProperties;
+		Player _player;
+        bool _isMovingClockwise, _isMovingAntiClockwise;
+        
+		sf::Texture _textureBackground;
 		sf::Texture _texturePlayer;
 		sf::Texture _textureEnemy;
-        sf::Sprite _playerShipSprite;
+		sf::Texture _textureBullet;
+
+		sf::Sprite _background;
+		sf::Sprite _playerShipSprite;
 		sf::Sprite _enemyShipSprite;
-        Player _player;
-		Enemy _enemy;
-        bool _isMovingClockwise, _isMovingAntiClockwise;
-       
+		sf::Sprite _bulletSprite;
+		
+		std::vector<Enemy> enemyStack;
+		std::vector<sf::Sprite> enemySpriteControl;
+        std::vector<Bullet> _bullets;
+		std::vector<sf::Sprite> bulletSprites;
 };
-
-
-
 
 #endif
