@@ -20,9 +20,11 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
 		_window.setKeyRepeatEnabled(false);
         _window.setVerticalSyncEnabled(true);
 		_gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
+        _gameWindowProperties.displayProperties();
         _player = Player(_gameWindowProperties); 
 		
 		Enemy tempEnemy = Enemy(_gameWindowProperties);
+        
 		enemyStack.push_back(tempEnemy);
 		
 		_textureBackground.loadFromFile("Resources/Space.png");
@@ -37,6 +39,9 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
 		auto playerCenterY = _texturePlayer.getSize().y*halfSize;
 		_playerShipSprite.setOrigin(playerCenterX, playerCenterY);
 		_playerShipSprite.setScale(0.10f, 0.10f);
+        std::cout << _playerShipSprite.getGlobalBounds().width << std::endl;
+        std::cout << _playerShipSprite.getGlobalBounds().height << std::endl;
+        
         _playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
 
 		_enemyShipSprite.setTexture(_textureEnemy);
@@ -44,6 +49,14 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
 		auto enemyCenterY = _textureEnemy.getSize().y*halfSize;
 		_enemyShipSprite.setOrigin(enemyCenterX, enemyCenterY);
         _enemyShipSprite.setScale(0.10f, 0.10f);
+        std::cout << _enemyShipSprite.getGlobalBounds().width << std::endl;
+        std::cout << _enemyShipSprite.getGlobalBounds().height << std::endl;
+        
+        auto enemyWidth = _enemyShipSprite.getGlobalBounds().width;
+        auto enemyHeight = _enemyShipSprite.getGlobalBounds().height;
+        
+        
+                
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
 		
 		_bulletSprite.setTexture(_textureBullet);
@@ -51,6 +64,9 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
 		auto bulletCenterY = _textureBullet.getSize().y*halfSize;
 		_bulletSprite.setOrigin(bulletCenterX, bulletCenterY);
 		_bulletSprite.setScale(0.05f, 0.05f);
+        std::cout << _bulletSprite.getGlobalBounds().width << std::endl;
+        std::cout << _bulletSprite.getGlobalBounds().height << std::endl;
+        
 		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
 		
 		enemySpriteControl.push_back(_enemyShipSprite);
@@ -179,5 +195,12 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
         _bullets.push_back(bullet);
 		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
         bulletSprites.push_back(_bulletSprite);
+    }
+    else if (key == sf::Keyboard::BackSpace)
+    {
+        Enemy spawn = Enemy(_gameWindowProperties);
+        enemyStack.push_back(spawn);
+        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        enemySpriteControl.push_back(_enemyShipSprite);
     }
 }

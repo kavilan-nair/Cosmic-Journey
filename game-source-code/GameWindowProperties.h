@@ -7,6 +7,8 @@ class GameWindowProperties
 		GameWindowProperties();
 		GameWindowProperties(int width, int height);
 		~GameWindowProperties();	
+        
+        void displayProperties();
 		
 		void setWidth(int width) {_width = width;};
 		void setHeight(int height) {_height = height;};

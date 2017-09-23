@@ -14,8 +14,7 @@ class Enemy
         void setDead(){_aliveStatus = false;};
         void setAlive(){_aliveStatus = true;};
 		void move();
-		Position getPosition(){return _enemyPosition;};
-	
+		Position& getPosition(){return _enemyPosition;};
 	public:
 		float factor = 0.01;
 		float PI = atan(1)*4; //if you put const, some other shit goes down

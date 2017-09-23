@@ -44,4 +44,3 @@ void Enemy::move()
         setDead();
     }
 }
-
