@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "SplashScreen.h"
 #include "Enemy.h"
+#include "EnemyBullet.h"
 #include "Bullet.h"
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
@@ -23,7 +24,7 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
         _gameWindowProperties.displayProperties();
         _player = Player(_gameWindowProperties); 
 		
-		Enemy tempEnemy = Enemy(_gameWindowProperties);
+		Enemy tempEnemy = Enemy(_gameWindowProperties, _player.getPosition());
         
 		enemyStack.push_back(tempEnemy);
 		
@@ -31,6 +32,7 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
         _texturePlayer.loadFromFile("Resources/spaceship.png");
 		_textureEnemy.loadFromFile("Resources/Enemy.png");
         _textureBullet.loadFromFile("Resources/laser.png");
+        _textureEnemyBullet.loadFromFile("Resources/laser.png");
 		
 		_background.setTexture(_textureBackground);
 		
@@ -66,6 +68,12 @@ Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",s
 		_bulletSprite.setScale(0.05f, 0.05f);
         std::cout << _bulletSprite.getGlobalBounds().width << std::endl;
         std::cout << _bulletSprite.getGlobalBounds().height << std::endl;
+        
+        _enemyBulletSprite.setTexture(_textureBullet);
+        auto enemyBulletCenterX = _textureEnemyBullet.getSize().x*halfSize;
+        auto enemyBulletCenterY = _textureEnemyBullet.getSize().y*halfSize;
+        _enemyBulletSprite.setOrigin(enemyBulletCenterX, enemyBulletCenterY);
+        _enemyBulletSprite.setScale(0.05f, 0.05f);
         
 		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
 		
@@ -123,6 +131,18 @@ void Game::processAI()
             indexBullets++;
         }
     }
+    
+    int indexEnemyBullets = 0;
+    for (auto& i : _enemyBullets)
+    {
+        if (i.isEnemyBulletAlive())
+        {
+            i.updateEnemyBullet();
+            enemyBulletSprites[indexEnemyBullets].setPosition(i.getPosition().getX(), i.getPosition().getY());
+            indexEnemyBullets++;
+        }
+    }
+    
 }
 
 void Game::processInputEvents()
@@ -143,6 +163,9 @@ void Game::processInputEvents()
 			case sf::Event::Closed:
 				_window.close();
 				break;
+                
+            default:
+                break;
 		}
 	}
 }
@@ -179,6 +202,21 @@ void Game::render()
                 indexBulSprites++;
             }
         }
+        
+        int indexEnemyBulletSprites = 0;
+        
+        for(auto enemyBullet : _enemyBullets)
+        {
+            if (enemyBullet.isEnemyBulletAlive())
+            {
+                _window.draw(enemyBulletSprites[indexEnemyBulletSprites]);
+                indexEnemyBulletSprites++;
+              //  std::cout << "EnemyBullet x: " << enemyBullet.getPosition().getX() << endl;// << "y: " << spawn.getPosition().getY() << endl;
+
+            }
+        }
+
+
 
         _window.display();
 }
@@ -198,7 +236,16 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
     }
     else if (key == sf::Keyboard::BackSpace)
     {
-        Enemy spawn = Enemy(_gameWindowProperties);
+        Enemy spawn = Enemy(_gameWindowProperties, _player.getPosition());
+        
+         EnemyBullet enemyBullet = EnemyBullet(spawn.getPosition(), _gameWindowProperties);
+        _enemyBullets.push_back(enemyBullet);
+        _enemyBulletSprite.setPosition(spawn.getPosition().getX(), spawn.getPosition().getY());
+        enemyBulletSprites.push_back(_enemyBulletSprite);
+        
+      //  std::cout << "EnemyBullet x: " << spawn.getPosition().getX() << "y: " << spawn.getPosition().getY() << endl;
+        
+        
         enemyStack.push_back(spawn);
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
         enemySpriteControl.push_back(_enemyShipSprite);

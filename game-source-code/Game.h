@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "EnemyBullet.h"
 #include <vector>
 
 using namespace std;
@@ -40,14 +41,20 @@ class Game
 		sf::Texture _texturePlayer;
 		sf::Texture _textureEnemy;
 		sf::Texture _textureBullet;
+        sf::Texture _textureEnemyBullet;
 
 		sf::Sprite _background;
 		sf::Sprite _playerShipSprite;
 		sf::Sprite _enemyShipSprite;
 		sf::Sprite _bulletSprite;
+        sf::Sprite _enemyBulletSprite;
 		
 		std::vector<Enemy> enemyStack;
 		std::vector<sf::Sprite> enemySpriteControl;
+        
+        std::vector<EnemyBullet> _enemyBullets;
+        std::vector<sf::Sprite> enemyBulletSprites;
+        
         std::vector<Bullet> _bullets;
 		std::vector<sf::Sprite> bulletSprites;
 };

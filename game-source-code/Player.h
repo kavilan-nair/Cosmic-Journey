@@ -25,6 +25,7 @@ class Player
     private:
         Position _position;
         GameWindowProperties _gameWindowProperties;
+       
 };
 
 #endif // PLAYER_H
