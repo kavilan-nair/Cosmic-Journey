@@ -11,10 +11,11 @@ class Bullet
 		Bullet(Position position, GameWindowProperties gameWindowProperties);
 		Position getPosition() {return _positionSpawn;};
 		bool isBulletAlive() {return _isAlive;};
+        void setBulletDead() {_isAlive = false;};
 		void updateBullet();
 		~Bullet();
 	public:
-		const float PI = 3.14159265358979323846;
+		static constexpr float PI = 3.14159265358979323846;
 		float originFix = PI/2;
 	
 	private:

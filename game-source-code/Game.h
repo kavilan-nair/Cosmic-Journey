@@ -7,6 +7,7 @@
 #include "Bullet.h"
 #include "EnemyBullet.h"
 #include <vector>
+#include "Satellites.h"
 
 using namespace std;
 
@@ -16,15 +17,15 @@ class Game
         Game();
         void run();
 		Player& getPlayer(){return _player;};
-		
+		void setTextureOrigin(sf::Texture& spriteTexture, sf::Sprite& currSprite, float sizeScale);
     private:
         void processInputEvents();
 		void processAI();
         void update();
         void render();
-        
         void update(sf::Time deltaTime);	
         void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+        void collisions();
 
 	public:
 		sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
@@ -42,15 +43,20 @@ class Game
 		sf::Texture _textureEnemy;
 		sf::Texture _textureBullet;
         sf::Texture _textureEnemyBullet;
-
+		sf::Texture _textureSatellite;
+		
 		sf::Sprite _background;
 		sf::Sprite _playerShipSprite;
 		sf::Sprite _enemyShipSprite;
 		sf::Sprite _bulletSprite;
         sf::Sprite _enemyBulletSprite;
+		sf::Sprite _satellite;
 		
 		std::vector<Enemy> enemyStack;
 		std::vector<sf::Sprite> enemySpriteControl;
+		
+		std::vector<Satellites> satStack;
+		std::vector<sf::Sprite> satSpriteControl;
         
         std::vector<EnemyBullet> _enemyBullets;
         std::vector<sf::Sprite> enemyBulletSprites;

@@ -8,7 +8,7 @@ class EnemyBullet
 {
     public:
         EnemyBullet();
-        EnemyBullet(Position position, GameWindowProperties gameWindowProperties);
+        EnemyBullet(Position position, GameWindowProperties gameWindowProperties, Position posPlayer);
         Position getPosition() {return _positionSpawn;};
         bool isEnemyBulletAlive() {return _isAlive;};
         void updateEnemyBullet();
@@ -18,16 +18,20 @@ class EnemyBullet
     public:
         const float PI = 3.14159265358979323846;
 		float originFix = PI/2;
-
-
-    private:
+int newX;
+int newY;
+int newRadius;
+float newAngle;
+private:
+	Position _posPlayer;
         Position _positionSpawn;
         GameWindowProperties _gameWindowProperties;
         bool _isAlive;
         int _enemyBulletRadius;
         int _enemyBulletSpeed;
-        float _factor = 0.01;
-
+		int _playerPosition;
+        float _factor = 0.1;
+		int _countX = 0;
 };
 
 

@@ -12,72 +12,45 @@
 #include "Enemy.h"
 #include "EnemyBullet.h"
 #include "Bullet.h"
+#include "Satellites.h"
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
-Game::Game() : _window(sf::VideoMode(_screenDimensions), "Software II Project",sf::Style::Fullscreen), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
+Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software II Project",sf::Style::Default /*sf::Style::Fullscreen*/), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
         srand(time(0));
-		float halfSize = 0.5f;
 		_window.setKeyRepeatEnabled(false);
         _window.setVerticalSyncEnabled(true);
 		_gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
-        _gameWindowProperties.displayProperties();
         _player = Player(_gameWindowProperties); 
-		
-		Enemy tempEnemy = Enemy(_gameWindowProperties, _player.getPosition());
-        
-		enemyStack.push_back(tempEnemy);
 		
 		_textureBackground.loadFromFile("Resources/Space.png");
         _texturePlayer.loadFromFile("Resources/spaceship.png");
 		_textureEnemy.loadFromFile("Resources/Enemy.png");
         _textureBullet.loadFromFile("Resources/laser.png");
         _textureEnemyBullet.loadFromFile("Resources/laser.png");
+		_textureSatellite.loadFromFile("Resources/Sat.png");
 		
 		_background.setTexture(_textureBackground);
-		
-        _playerShipSprite.setTexture(_texturePlayer);
-		auto playerCenterX = _texturePlayer.getSize().x*halfSize;
-		auto playerCenterY = _texturePlayer.getSize().y*halfSize;
-		_playerShipSprite.setOrigin(playerCenterX, playerCenterY);
-		_playerShipSprite.setScale(0.10f, 0.10f);
-        std::cout << _playerShipSprite.getGlobalBounds().width << std::endl;
-        std::cout << _playerShipSprite.getGlobalBounds().height << std::endl;
-        
-        _playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
 
-		_enemyShipSprite.setTexture(_textureEnemy);
-		auto enemyCenterX = _textureEnemy.getSize().x*halfSize;
-		auto enemyCenterY = _textureEnemy.getSize().y*halfSize;
-		_enemyShipSprite.setOrigin(enemyCenterX, enemyCenterY);
-        _enemyShipSprite.setScale(0.10f, 0.10f);
-        std::cout << _enemyShipSprite.getGlobalBounds().width << std::endl;
-        std::cout << _enemyShipSprite.getGlobalBounds().height << std::endl;
-        
-        auto enemyWidth = _enemyShipSprite.getGlobalBounds().width;
-        auto enemyHeight = _enemyShipSprite.getGlobalBounds().height;
-        
-        
-                
+		setTextureOrigin(_texturePlayer,_playerShipSprite, 0.10f);
+		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
+		setTextureOrigin(_textureBullet,_bulletSprite, 0.05f);
+		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.05f);
+		setTextureOrigin(_textureSatellite,_satellite,0.10f);
+
+		_playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-		
-		_bulletSprite.setTexture(_textureBullet);
-		auto bulletCenterX = _textureBullet.getSize().x*halfSize;
-		auto bulletCenterY = _textureBullet.getSize().y*halfSize;
-		_bulletSprite.setOrigin(bulletCenterX, bulletCenterY);
-		_bulletSprite.setScale(0.05f, 0.05f);
-        std::cout << _bulletSprite.getGlobalBounds().width << std::endl;
-        std::cout << _bulletSprite.getGlobalBounds().height << std::endl;
-        
-        _enemyBulletSprite.setTexture(_textureBullet);
-        auto enemyBulletCenterX = _textureEnemyBullet.getSize().x*halfSize;
-        auto enemyBulletCenterY = _textureEnemyBullet.getSize().y*halfSize;
-        _enemyBulletSprite.setOrigin(enemyBulletCenterX, enemyBulletCenterY);
-        _enemyBulletSprite.setScale(0.05f, 0.05f);
-        
-		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
-		
-		enemySpriteControl.push_back(_enemyShipSprite);
+		_satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+}
+
+void Game::setTextureOrigin(sf::Texture& spriteTexture, sf::Sprite& currSprite, float sizeScale)
+{
+	float halfScale = 0.5f; 
+	currSprite.setTexture(spriteTexture);
+	auto oriXSprite = spriteTexture.getSize().x*halfScale;
+	auto oriYSprite = spriteTexture.getSize().y*halfScale;
+	currSprite.setOrigin(oriXSprite, oriYSprite);
+	currSprite.setScale(sizeScale,sizeScale);
 }
 
 void Game::run()
@@ -91,6 +64,7 @@ void Game::run()
 	{
 		processInputEvents();
 		processAI();
+        collisions();
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
@@ -110,9 +84,9 @@ void Game::processAI()
 		{
 			if(i.isAlive() == false)
 			{
-				enemyStack.erase(enemyStack.begin());
-				enemySpriteControl.erase(enemySpriteControl.begin());
-			}
+				enemyStack.erase(enemyStack.begin() + indexEnemy);
+				enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+            }
 			else
 			{
 				i.move();
@@ -121,6 +95,25 @@ void Game::processAI()
 			indexEnemy++;
 		}
 	}
+	
+	int indexSat = 0;
+	for (auto& i : satStack)
+	{   
+		{
+			if(i.isAlive() == false)
+			{
+				satStack.erase(satStack.begin() + indexSat);
+				satSpriteControl.erase(satSpriteControl.begin() + indexSat);
+			}
+			else
+			{
+				i.move();
+				satSpriteControl[indexSat].setPosition(satStack[indexSat].getPosition().getX(), satStack[indexSat].getPosition().getY());
+			}
+			indexSat++;
+		}
+	}
+	
 	int indexBullets = 0;
     for (auto& i : _bullets)
     {   
@@ -128,10 +121,38 @@ void Game::processAI()
         {
 			i.updateBullet();
             bulletSprites[indexBullets].setPosition(i.getPosition().getX(), i.getPosition().getY());
-            indexBullets++;
+            
         }
+        else
+        {
+            _bullets.erase(_bullets.begin() + indexBullets);
+            bulletSprites.erase(bulletSprites.begin() + indexBullets);
+        }
+        
+        indexBullets++;
+//        std::cout << "Size of the bullets: " << _bullets.size() << std::endl;
+//        std::cout << "Size of the bullet sprites: " << bulletSprites.size() << std::endl;
+        
     }
     
+	int enemyFire = rand()%50 +1;
+	if(enemyFire == 1)
+	{
+		bool fired = false;
+		for(auto i : enemyStack)
+		{
+
+			if(i.isAlive() == true && fired == false)
+			{
+				EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
+				_enemyBullets.push_back(enemyBullet);
+				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
+				enemyBulletSprites.push_back(_enemyBulletSprite);
+				fired = true;
+			}
+		}
+	}
+	
     int indexEnemyBullets = 0;
     for (auto& i : _enemyBullets)
     {
@@ -141,8 +162,7 @@ void Game::processAI()
             enemyBulletSprites[indexEnemyBullets].setPosition(i.getPosition().getX(), i.getPosition().getY());
             indexEnemyBullets++;
         }
-    }
-    
+    }    
 }
 
 void Game::processInputEvents()
@@ -193,6 +213,11 @@ void Game::render()
 			_window.draw(i);
 		}
 		
+		for(auto& i : satSpriteControl)
+		{
+			_window.draw(i);
+		}
+		
 		int indexBulSprites = 0;
         for (auto bullet : _bullets)
         {
@@ -211,8 +236,6 @@ void Game::render()
             {
                 _window.draw(enemyBulletSprites[indexEnemyBulletSprites]);
                 indexEnemyBulletSprites++;
-              //  std::cout << "EnemyBullet x: " << enemyBullet.getPosition().getX() << endl;// << "y: " << spawn.getPosition().getY() << endl;
-
             }
         }
 
@@ -234,20 +257,63 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
         bulletSprites.push_back(_bulletSprite);
     }
-    else if (key == sf::Keyboard::BackSpace)
+    else if (key == sf::Keyboard::BackSpace && isPressed == true)
     {
-        Enemy spawn = Enemy(_gameWindowProperties, _player.getPosition());
-        
-         EnemyBullet enemyBullet = EnemyBullet(spawn.getPosition(), _gameWindowProperties);
-        _enemyBullets.push_back(enemyBullet);
-        _enemyBulletSprite.setPosition(spawn.getPosition().getX(), spawn.getPosition().getY());
-        enemyBulletSprites.push_back(_enemyBulletSprite);
-        
-      //  std::cout << "EnemyBullet x: " << spawn.getPosition().getX() << "y: " << spawn.getPosition().getY() << endl;
-        
-        
+        Enemy spawn = Enemy(_gameWindowProperties);        
         enemyStack.push_back(spawn);
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
         enemySpriteControl.push_back(_enemyShipSprite);
+		
+		Satellites satSpawn(_gameWindowProperties);
+		satStack.push_back(satSpawn);
+        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        satSpriteControl.push_back(_satellite);
     }
+}
+
+void Game::collisions()
+{
+    int counter = 0;
+    int counter2 = 0;
+    int counter3 = 0;
+    for (auto iter = bulletSprites.begin(); iter != bulletSprites.end(); iter++)
+    {
+        
+        counter2 = 0;
+        for (auto iter2 = enemySpriteControl.begin(); iter2 != enemySpriteControl.end(); iter2++)        
+        {
+            
+            if (bulletSprites[counter].getGlobalBounds().intersects(enemySpriteControl[counter2].getGlobalBounds()))
+            {
+                std::cout << "ENEMY "<< counter2 << "collision" << std::endl;
+                _bullets[counter].setBulletDead();
+                enemyStack[counter2].setDead();
+                
+            }
+            
+           
+            counter2++;
+        }
+        
+        counter3 = 0;
+        for (auto iter3 = satSpriteControl.begin(); iter3 != satSpriteControl.end(); iter3++)
+        {
+            if (bulletSprites[counter].getGlobalBounds().intersects(satSpriteControl[counter3].getGlobalBounds()))
+            {
+                std::cout << "SATELLITE "<< counter3 << "collision" << std::endl;
+                _bullets[counter].setBulletDead();
+                satStack[counter3].setDead();
+            }
+            
+            counter3++;
+        }
+        
+        
+        
+        counter++;
+    }
+    
+    
+    
+    
 }
