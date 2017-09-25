@@ -11,7 +11,7 @@ class Satellites
 {
 	public:
 		Satellites();
-		Satellites(GameWindowProperties gameWindowProperties);
+		Satellites(GameWindowProperties gameWindowProperties, int inDirection, int numShip);
         bool& isAlive(){return _aliveStatus;};
         void setDead(){_aliveStatus = false;};
         void setAlive(){_aliveStatus = true;};

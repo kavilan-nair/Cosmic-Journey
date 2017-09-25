@@ -15,7 +15,7 @@ Enemy::Enemy()
 Enemy::Enemy(GameWindowProperties gameWindowProperties)
 {
 	setAlive();
-	int randomStart = rand()%360;
+	int randomStart = 0;//rand()%361;
 	_enemyPosition.setAngle(randomStart);
 	_enemyPosition.setRadius(gameWindowProperties.getRadius());
 	_enemyPosition.setoriginX(gameWindowProperties.getXOrigin());

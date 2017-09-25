@@ -23,12 +23,12 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		_gameWindowProperties = GameWindowProperties(_window.getSize().x, _window.getSize().y);
         _player = Player(_gameWindowProperties); 
 		
-		_textureBackground.loadFromFile("Resources/Space.png");
-        _texturePlayer.loadFromFile("Resources/spaceship.png");
-		_textureEnemy.loadFromFile("Resources/Enemy.png");
+		_textureBackground.loadFromFile("Resources/space.png");
+        _texturePlayer.loadFromFile("Resources/player.png");
+		_textureEnemy.loadFromFile("Resources/enemy.png");
         _textureBullet.loadFromFile("Resources/laser.png");
         _textureEnemyBullet.loadFromFile("Resources/laser.png");
-		_textureSatellite.loadFromFile("Resources/Sat.png");
+		_textureSatellite.loadFromFile("Resources/satellite.png");
 		
 		_background.setTexture(_textureBackground);
 
@@ -36,7 +36,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
 		setTextureOrigin(_textureBullet,_bulletSprite, 0.05f);
 		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.05f);
-		setTextureOrigin(_textureSatellite,_satellite,0.10f);
+		setTextureOrigin(_textureSatellite,_satellite,0.125f);
 
 		_playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
@@ -46,6 +46,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 void Game::setTextureOrigin(sf::Texture& spriteTexture, sf::Sprite& currSprite, float sizeScale)
 {
 	float halfScale = 0.5f; 
+	spriteTexture.setSmooth(true);
 	currSprite.setTexture(spriteTexture);
 	auto oriXSprite = spriteTexture.getSize().x*halfScale;
 	auto oriYSprite = spriteTexture.getSize().y*halfScale;
@@ -63,6 +64,7 @@ void Game::run()
 	while (_window.isOpen())
 	{
 		processInputEvents();
+		spawnEnemyNormal();
 		processAI();
         collisions();
 		timeSinceLastUpdate += clock.restart();
@@ -76,8 +78,23 @@ void Game::run()
 	}
 }
 
-void Game::processAI()
+void Game::spawnEnemyNormal()
 {
+//	int spawnFactor = rand()%25+1;
+//	if(spawnFactor == 5)
+//	{
+//		Enemy spawn = Enemy(_gameWindowProperties);        
+//        enemyStack.push_back(spawn);
+//		std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
+//        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+//		//_enemyShipSprite.setRotation();
+//        enemySpriteControl.push_back(_enemyShipSprite);
+//	}
+
+}
+
+void Game::processAI()
+{	
 	int indexEnemy = 0;
 	for (auto& i : enemyStack)
 	{   
@@ -262,10 +279,26 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
         Enemy spawn = Enemy(_gameWindowProperties);        
         enemyStack.push_back(spawn);
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        enemySpriteControl.push_back(_enemyShipSprite);
+		std::cout << "Angle sprite: " << spawn.getPosition().getAngle() << std::endl;
 		
-		Satellites satSpawn(_gameWindowProperties);
-		satStack.push_back(satSpawn);
+		_enemyShipSprite.setRotation(spawn.getPosition().getAngle()-90);
+		std::cout << "Angle texture: " << _enemyShipSprite.getRotation() << std::endl;
+        enemySpriteControl.push_back(_enemyShipSprite);
+		_enemyShipSprite.setRotation(0);
+		
+		int randomStart = rand()%360;
+		Satellites satSpawn1(_gameWindowProperties,randomStart,1);
+		satStack.push_back(satSpawn1);
+        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        satSpriteControl.push_back(_satellite);
+		
+		Satellites satSpawn2(_gameWindowProperties,randomStart,2);
+		satStack.push_back(satSpawn2);
+        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        satSpriteControl.push_back(_satellite);
+		
+		Satellites satSpawn3(_gameWindowProperties,randomStart,3);
+		satStack.push_back(satSpawn3);
         _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
         satSpriteControl.push_back(_satellite);
     }
@@ -285,7 +318,7 @@ void Game::collisions()
             
             if (bulletSprites[counter].getGlobalBounds().intersects(enemySpriteControl[counter2].getGlobalBounds()))
             {
-                std::cout << "ENEMY "<< counter2 << "collision" << std::endl;
+                std::cout << "ENEMY "<< counter2 << " collision" << std::endl;
                 _bullets[counter].setBulletDead();
                 enemyStack[counter2].setDead();
                 
@@ -300,7 +333,7 @@ void Game::collisions()
         {
             if (bulletSprites[counter].getGlobalBounds().intersects(satSpriteControl[counter3].getGlobalBounds()))
             {
-                std::cout << "SATELLITE "<< counter3 << "collision" << std::endl;
+                std::cout << "SATELLITE "<< counter3 << " collision" << std::endl;
                 _bullets[counter].setBulletDead();
                 satStack[counter3].setDead();
             }

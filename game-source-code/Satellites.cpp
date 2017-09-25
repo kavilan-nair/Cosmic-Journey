@@ -11,10 +11,23 @@ Satellites::Satellites()
 	
 }
 
-Satellites::Satellites(GameWindowProperties gameWindowProperties)
+Satellites::Satellites(GameWindowProperties gameWindowProperties, int inDirection, int numShip)
 {
 	setAlive();
-	int randomStart = rand()%360;
+	int randomStart = 0;
+	if(numShip == 1)
+	{
+		 randomStart = inDirection;
+	}
+	else if(numShip == 2)
+	{
+		 randomStart = inDirection+5;
+	}
+	else
+	{
+		 randomStart = inDirection-5;
+	}
+	
 	_satellitesPosition.setAngle(randomStart);
 	_satellitesPosition.setRadius(gameWindowProperties.getRadius());
 	_satellitesPosition.setoriginX(gameWindowProperties.getXOrigin());
@@ -27,7 +40,7 @@ Satellites::Satellites(GameWindowProperties gameWindowProperties)
 
 void Satellites::move()
 {	
-	if(times <= 12)
+	if(times <= 10)
 	{
 		auto rad = (_satellitesPosition.getAngle() * PI/180)*3;
 		_satellitesPosition.setX(_satellitesPosition.getoriginX() + factor*_satellitesPosition.getRadius()*cos(rad));
@@ -36,7 +49,7 @@ void Satellites::move()
 		times++;
 	}
 	
-	if(times == 13)
+	if(times == 11)
 	{	
 		_satellitesPosition.setoriginX(_satellitesPosition.getX());
 		_satellitesPosition.setoriginY(_satellitesPosition.getY());
@@ -45,7 +58,7 @@ void Satellites::move()
 		times++;
 	}
 	
-	if(times > 13)
+	if(times > 11)
 	{	
 		float rad = (_satellitesPosition.getAngle() * PI/180)*3;
 		auto X = gyrateRadius*cos(rad);

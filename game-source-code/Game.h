@@ -26,6 +26,7 @@ class Game
         void update(sf::Time deltaTime);	
         void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
         void collisions();
+		void spawnEnemyNormal();
 
 	public:
 		sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
