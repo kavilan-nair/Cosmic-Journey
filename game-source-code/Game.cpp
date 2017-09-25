@@ -35,8 +35,8 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 
 		setTextureOrigin(_texturePlayer,_playerShipSprite, 0.10f);
 		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
-		setTextureOrigin(_textureBullet,_bulletSprite, 0.05f);
-		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.05f);
+		setTextureOrigin(_textureBullet,_bulletSprite, 0.04f); //0.05f
+		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.03f); //0.05f
 		setTextureOrigin(_textureSatellite,_satellite,0.125f);
 
 		_playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
@@ -66,6 +66,7 @@ void Game::run()
 	{
 		processInputEvents();
 		spawnEnemyNormal();
+		spawnEnemyElite();
 		processAI();
         collisions();
 		timeSinceLastUpdate += clock.restart();
@@ -100,6 +101,32 @@ void Game::spawnEnemyNormal()
 		}
 	}
 }
+
+void Game::spawnEnemyElite()
+{
+	int satSpawnFactor = rand()%50+1;
+	if(satSpawnFactor == 1 && satSpriteControl.size() == 0 && _enemiesSpawned > 24)
+	{
+		float randomStart = -(_player.getPosition().getAngle()*5)+90;
+		std::cout << "Satellite: " << randomStart << std::endl;
+		std::cout << "Player: " << _player.getPosition().getAngle() << std::endl;
+		Satellites satSpawn1(_gameWindowProperties,randomStart,1);
+		satStack.push_back(satSpawn1);
+        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        satSpriteControl.push_back(_satellite);
+		
+		Satellites satSpawn2(_gameWindowProperties,randomStart,2);
+		satStack.push_back(satSpawn2);
+        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        satSpriteControl.push_back(_satellite);
+		
+		Satellites satSpawn3(_gameWindowProperties,randomStart,3);
+		satStack.push_back(satSpawn3);
+        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+        satSpriteControl.push_back(_satellite);
+	}
+}
+
 
 void Game::processAI()
 {	
@@ -400,9 +427,4 @@ void Game::collisions()
         }   
         counter5++;
     }
-        
-    
-    
-    
-    
 }

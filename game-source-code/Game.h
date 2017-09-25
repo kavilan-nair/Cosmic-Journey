@@ -27,6 +27,7 @@ class Game
         void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
         void collisions();
 		void spawnEnemyNormal();
+		void spawnEnemyElite();
 
 	public:
 		sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
@@ -59,6 +60,9 @@ class Game
 		
 		std::vector<Satellites> satStack;
 		std::vector<sf::Sprite> satSpriteControl;
+		std::vector<Satellites> satGroup;
+		std::vector<std::vector<Satellites>> satChain;
+		int satGroupNum = 0;
         
         std::vector<EnemyBullet> _enemyBullets;
         std::vector<sf::Sprite> enemyBulletSprites;

@@ -21,11 +21,11 @@ Satellites::Satellites(GameWindowProperties gameWindowProperties, int inDirectio
 	}
 	else if(numShip == 2)
 	{
-		 randomStart = inDirection+5;
+		 randomStart = inDirection+17;
 	}
 	else
 	{
-		 randomStart = inDirection-5;
+		 randomStart = inDirection-17;
 	}
 	
 	_satellitesPosition.setAngle(randomStart);
@@ -42,7 +42,7 @@ void Satellites::move()
 {	
 	if(times <= 10)
 	{
-		auto rad = (_satellitesPosition.getAngle() * PI/180)*3;
+		auto rad = (_satellitesPosition.getAngle() * PI/180);
 		_satellitesPosition.setX(_satellitesPosition.getoriginX() + factor*_satellitesPosition.getRadius()*cos(rad));
 		_satellitesPosition.setY(_satellitesPosition.getoriginY() + factor*_satellitesPosition.getRadius()*sin(rad));
 		factor += 0.05;

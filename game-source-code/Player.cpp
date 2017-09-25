@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameWindowProperties.h"
 #include <cmath>
+#include <iostream>
 
 
 Player::Player()
