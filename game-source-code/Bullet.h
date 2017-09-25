@@ -8,7 +8,7 @@ class Bullet
 {
 	public:
 		Bullet();
-		Bullet(Position position, GameWindowProperties gameWindowProperties);
+		Bullet(Position position, GameWindowProperties gameWindowProperties, int bulletNumber);
 		Position getPosition() {return _positionSpawn;};
 		bool isBulletAlive() {return _isAlive;};
         void setBulletDead() {_isAlive = false;};

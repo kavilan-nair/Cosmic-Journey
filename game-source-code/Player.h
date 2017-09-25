@@ -3,6 +3,7 @@
 #include "Position.h"
 #include "GameWindowProperties.h"
 #include <cmath>
+#include "WeaponType.h"
 
 class Player
 {
@@ -18,6 +19,9 @@ class Player
         int getLives(){return _lives;};
         bool isDead(){return (!_isAlive);};
         void respawn();
+        void upgradeWeaponDouble(){_weaponType = WeaponType::Double;};
+        void upgradeWeaponTriple(){_weaponType = WeaponType::Triple;};
+        WeaponType getWeaponType(){return _weaponType;};
 		~Player();
         
 	public:
@@ -29,7 +33,7 @@ class Player
         GameWindowProperties _gameWindowProperties;
         int _lives;
         bool _isAlive;
-       
+        WeaponType _weaponType;
 };
 
 #endif // PLAYER_H

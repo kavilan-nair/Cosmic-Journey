@@ -104,6 +104,7 @@ void Game::spawnEnemyNormal()
 
 void Game::spawnEnemyElite()
 {
+    
 	int satSpawnFactor = rand()%50+1;
 	if(satSpawnFactor == 1 && satSpriteControl.size() == 0 && _enemiesSpawned > 24)
 	{
@@ -124,6 +125,7 @@ void Game::spawnEnemyElite()
 		satStack.push_back(satSpawn3);
         _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
         satSpriteControl.push_back(_satellite);
+         _isSatGroupCreated = true;
 	}
 }
 
@@ -185,6 +187,24 @@ void Game::processAI()
 			indexSat++;
 		}
 	}
+    
+    if (satStack.size() == 0 && _isSatGroupCreated == true)
+    {
+        _numberOfSatGroupsDestroyed++;
+        _isSatGroupCreated = false;
+    }
+    
+    if (_numberOfSatGroupsDestroyed == 1)
+    {
+        _player.upgradeWeaponDouble();
+    }
+    
+    if (_numberOfSatGroupsDestroyed == 2)
+    {
+        _player.upgradeWeaponTriple();
+    }
+    
+    
 	
 	int indexBullets = 0;
     for (auto& i : _bullets)
@@ -326,10 +346,45 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 		_isMovingAntiClockwise = isPressed;
 	else if (key == sf::Keyboard::Space && isPressed == true)
     {
-        Bullet bullet(_player.getPosition(), _gameWindowProperties);
+         if (_player.getWeaponType() == WeaponType::Single)
+        {
+            Bullet bullet(_player.getPosition(), _gameWindowProperties, 1);
         _bullets.push_back(bullet);
 		_bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
         bulletSprites.push_back(_bulletSprite);
+        }
+        
+        if (_player.getWeaponType() == WeaponType::Triple)
+        {
+            Bullet bullet1(_player.getPosition(), _gameWindowProperties, 1);
+            _bullets.push_back(bullet1);
+            _bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+            bulletSprites.push_back(_bulletSprite);
+            
+            Bullet bullet2(_player.getPosition(), _gameWindowProperties, 2);
+            _bullets.push_back(bullet2);
+            _bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+            bulletSprites.push_back(_bulletSprite);
+            
+             Bullet bullet3(_player.getPosition(), _gameWindowProperties, 3);
+            _bullets.push_back(bullet3);
+            _bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+            bulletSprites.push_back(_bulletSprite);
+            
+        }
+        
+        if (_player.getWeaponType() == WeaponType::Double)
+        {
+            Bullet bullet4(_player.getPosition(), _gameWindowProperties, 2);
+            _bullets.push_back(bullet4);
+            _bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+            bulletSprites.push_back(_bulletSprite);
+            
+             Bullet bullet5(_player.getPosition(), _gameWindowProperties, 3);
+            _bullets.push_back(bullet5);
+            _bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
+            bulletSprites.push_back(_bulletSprite);
+        }
     }
     else if (key == sf::Keyboard::BackSpace && isPressed == true)
     {
@@ -358,6 +413,12 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 		satStack.push_back(satSpawn3);
         _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
         satSpriteControl.push_back(_satellite);
+        
+        satGroup.push_back(satSpawn1);
+        satGroup.push_back(satSpawn2);
+        satGroup.push_back(satSpawn3);
+        
+        satChain.push_back(satGroup);
     }
 }
 
@@ -390,6 +451,9 @@ void Game::collisions()
                 std::cout << "SATELLITE "<< counter3 << " collision" << std::endl;
                 _bullets[counter].setBulletDead();
                 satStack[counter3].setDead();
+                
+                
+                
             }
             counter3++;
         }
@@ -427,4 +491,7 @@ void Game::collisions()
         }   
         counter5++;
     }
+    
+    //Check if vector size is zero
+    
 }

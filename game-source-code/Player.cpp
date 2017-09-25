@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "GameWindowProperties.h"
 #include <cmath>
-#include <iostream>
 
 
 Player::Player()
@@ -16,7 +15,8 @@ Player::Player(GameWindowProperties gameWindowProperties)
     _position.setX(_gameWindowProperties.getXOrigin());
     _position.setY(_gameWindowProperties.getYOrigin() + _gameWindowProperties.getRadius());
     _isAlive = true;
-    _lives = 3;
+    _lives = 100;
+    _weaponType = WeaponType::Single;
 }
 
 void Player::moveClockwise()

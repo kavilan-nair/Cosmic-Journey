@@ -40,6 +40,8 @@ class Game
 		Player _player;
         bool _isMovingClockwise, _isMovingAntiClockwise;
 		int _enemiesSpawned = 0;
+        bool _isSatGroupCreated = false;
+        int _numberOfSatGroupsDestroyed = 0;
         
 		sf::Texture _textureBackground;
 		sf::Texture _texturePlayer;
