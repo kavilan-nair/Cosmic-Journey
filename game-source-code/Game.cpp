@@ -25,7 +25,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		
 		_textureBackground.loadFromFile("Resources/space.png");
         _texturePlayer.loadFromFile("Resources/player.png");
-		_textureEnemy.loadFromFile("Resources/enemy.png");
+		_textureEnemy.loadFromFile("Resources/enemy1.png");
         _textureBullet.loadFromFile("Resources/laser.png");
         _textureEnemyBullet.loadFromFile("Resources/laser.png");
 		_textureSatellite.loadFromFile("Resources/satellite.png");
@@ -33,7 +33,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		_background.setTexture(_textureBackground);
 
 		setTextureOrigin(_texturePlayer,_playerShipSprite, 0.10f);
-		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
+		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.125f);
 		setTextureOrigin(_textureBullet,_bulletSprite, 0.05f);
 		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.05f);
 		setTextureOrigin(_textureSatellite,_satellite,0.125f);
@@ -80,17 +80,25 @@ void Game::run()
 
 void Game::spawnEnemyNormal()
 {
-//	int spawnFactor = rand()%25+1;
-//	if(spawnFactor == 5)
-//	{
-//		Enemy spawn = Enemy(_gameWindowProperties);        
-//        enemyStack.push_back(spawn);
-//		std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
-//        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-//		//_enemyShipSprite.setRotation();
-//        enemySpriteControl.push_back(_enemyShipSprite);
-//	}
+	
+	if(_enemiesSpawned == 50)
+	{
+		std::cout << "max number of enemies spawned." << std::endl;
+	}
+	else
+	{
+		int spawnFactor = rand()%25+1;
+		if(spawnFactor == 5)
+		{	_enemiesSpawned++;
+			Enemy spawn = Enemy(_gameWindowProperties);        
+			enemyStack.push_back(spawn);
+		//std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
+			_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+			_enemyShipSprite.setRotation(rand()%360);
+			enemySpriteControl.push_back(_enemyShipSprite);
+		}
 
+	}
 }
 
 void Game::processAI()
@@ -101,8 +109,22 @@ void Game::processAI()
 		{
 			if(i.isAlive() == false)
 			{
-				enemyStack.erase(enemyStack.begin() + indexEnemy);
-				enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+				if(i.isRespawn() == true)
+				{
+					enemyStack.erase(enemyStack.begin() + indexEnemy);
+					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+					
+					Enemy spawn = Enemy(_gameWindowProperties);        
+					enemyStack.push_back(spawn);
+					_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+					_enemyShipSprite.setRotation(rand()%360);
+					enemySpriteControl.push_back(_enemyShipSprite);
+				}
+				else
+				{
+					enemyStack.erase(enemyStack.begin() + indexEnemy);
+					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+				}
             }
 			else
 			{
@@ -152,21 +174,23 @@ void Game::processAI()
         
     }
     
-	int enemyFire = rand()%50 +1;
+	int enemyFire = rand()%50+1;
 	if(enemyFire == 1)
 	{
 		bool fired = false;
+		
 		for(auto i : enemyStack)
 		{
-
-			if(i.isAlive() == true && fired == false)
-			{
-				EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
-				_enemyBullets.push_back(enemyBullet);
-				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
-				enemyBulletSprites.push_back(_enemyBulletSprite);
-				fired = true;
-			}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				if(i.isAlive() == true && fired == false)
+				{
+					EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
+					_enemyBullets.push_back(enemyBullet);
+					_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
+					enemyBulletSprites.push_back(_enemyBulletSprite);
+					fired = true;
+				}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		}
 	}
 	
@@ -279,10 +303,10 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
         Enemy spawn = Enemy(_gameWindowProperties);        
         enemyStack.push_back(spawn);
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-		std::cout << "Angle sprite: " << spawn.getPosition().getAngle() << std::endl;
+		//std::cout << "Angle sprite: " << spawn.getPosition().getAngle() << std::endl;
 		
-		_enemyShipSprite.setRotation(spawn.getPosition().getAngle()-90);
-		std::cout << "Angle texture: " << _enemyShipSprite.getRotation() << std::endl;
+		_enemyShipSprite.setRotation(spawn.getPosition().getAngle()+90);
+		//std::cout << "Angle texture: " << _enemyShipSprite.getRotation() << std::endl;
         enemySpriteControl.push_back(_enemyShipSprite);
 		_enemyShipSprite.setRotation(0);
 		

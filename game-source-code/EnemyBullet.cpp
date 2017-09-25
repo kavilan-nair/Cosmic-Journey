@@ -29,6 +29,10 @@ EnemyBullet::EnemyBullet(Position position, GameWindowProperties gameWindowPrope
 	
 	if(_positionSpawn.getY() > _posPlayer.getY()){newY = -1;}
 	else if(_positionSpawn.getY() < _posPlayer.getY()){newY = 1;}
+	
+	std::cout << "Angle Up: " << _positionSpawn.getAngle()-30 << std::endl;
+	std::cout << "Angle: " << _positionSpawn.getAngle() << std::endl;
+	std::cout << "Angle Down: " << _positionSpawn.getAngle()+30 << std::endl;
 }
 
 void EnemyBullet::updateEnemyBullet()
@@ -39,16 +43,6 @@ void EnemyBullet::updateEnemyBullet()
 //	_factor += 0.01;
 	
 	_countX += 2.25;
-//	if(_positionSpawn.getX() > _posPlayer.getX())
-//		{_positionSpawn.setX(_positionSpawn.getoriginX() - _countX);}
-//	else if(_positionSpawn.getX() < _posPlayer.getX())
-//		{_positionSpawn.setX(_positionSpawn.getoriginX() + _countX);}
-//	
-//	if(_positionSpawn.getY() > _posPlayer.getY())
-//		{_positionSpawn.setY(_positionSpawn.getoriginY() - _countX);}
-//	else if(_positionSpawn.getY() < _posPlayer.getY())
-//		{_positionSpawn.setY(_positionSpawn.getoriginY() + _countX);}
-	
 	_positionSpawn.setX(_positionSpawn.getoriginX() + _countX*newX);
 	_positionSpawn.setY(_positionSpawn.getoriginY() + _countX*newY);
 	
