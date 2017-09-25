@@ -81,17 +81,24 @@ void Game::run()
 
 void Game::spawnEnemyNormal()
 {
-	int spawnFactor = rand()%25+1;
-	if(spawnFactor == 5)
+	if(_enemiesSpawned == 50)
 	{
-		Enemy spawn = Enemy(_gameWindowProperties);        
-        enemyStack.push_back(spawn);
-		std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
-        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-		//_enemyShipSprite.setRotation();
-        enemySpriteControl.push_back(_enemyShipSprite);
+		std::cout << "max number of enemies spawned." << std::endl;
 	}
-
+	else
+	{
+		int spawnFactor = rand()%25+1;
+		if(spawnFactor == 5)
+		{
+			Enemy spawn = Enemy(_gameWindowProperties);        
+			enemyStack.push_back(spawn);
+			std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
+			_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+			_enemyShipSprite.setRotation(rand()%360);
+			enemySpriteControl.push_back(_enemyShipSprite);
+			_enemiesSpawned++;
+		}
+	}
 }
 
 void Game::processAI()
@@ -107,9 +114,23 @@ void Game::processAI()
 	{   
 		{
 			if(i.isAlive() == false)
-			{
-				enemyStack.erase(enemyStack.begin() + indexEnemy);
-				enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+			{				
+				if(i.isRespawn() == true)
+				{
+					enemyStack.erase(enemyStack.begin() + indexEnemy);
+					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+					
+					Enemy spawn = Enemy(_gameWindowProperties);        
+					enemyStack.push_back(spawn);
+					_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+					_enemyShipSprite.setRotation(rand()%360);
+					enemySpriteControl.push_back(_enemyShipSprite);
+				}
+				else
+				{
+					enemyStack.erase(enemyStack.begin() + indexEnemy);
+					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+				}
             }
 			else
 			{
