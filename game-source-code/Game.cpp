@@ -69,7 +69,8 @@ void Game::run()
 		spawnEnemyElite();
 		processAI();
         collisions();
-		timeSinceLastUpdate += clock.restart();
+        isGameOver();
+		timeSinceLastUpdate += clock.restart();      
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
@@ -104,29 +105,32 @@ void Game::spawnEnemyNormal()
 
 void Game::spawnEnemyElite()
 {
-    
-	int satSpawnFactor = rand()%50+1;
-	if(satSpawnFactor == 1 && satSpriteControl.size() == 0 && _enemiesSpawned > 24)
+    if(_enemiesSpawned < 50)
 	{
-		float randomStart = -(_player.getPosition().getAngle()*5)+90;
-		std::cout << "Satellite: " << randomStart << std::endl;
-		std::cout << "Player: " << _player.getPosition().getAngle() << std::endl;
-		Satellites satSpawn1(_gameWindowProperties,randomStart,1);
-		satStack.push_back(satSpawn1);
-        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        satSpriteControl.push_back(_satellite);
-		
-		Satellites satSpawn2(_gameWindowProperties,randomStart,2);
-		satStack.push_back(satSpawn2);
-        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        satSpriteControl.push_back(_satellite);
-		
-		Satellites satSpawn3(_gameWindowProperties,randomStart,3);
-		satStack.push_back(satSpawn3);
-        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        satSpriteControl.push_back(_satellite);
-         _isSatGroupCreated = true;
+		int satSpawnFactor = rand()%50+1;
+        if(satSpawnFactor == 1 && satSpriteControl.size() == 0 && _enemiesSpawned > 24)
+        {
+            float randomStart = -(_player.getPosition().getAngle()*5)+90;
+            std::cout << "Satellite: " << randomStart << std::endl;
+            std::cout << "Player: " << _player.getPosition().getAngle() << std::endl;
+            Satellites satSpawn1(_gameWindowProperties,randomStart,1);
+            satStack.push_back(satSpawn1);
+            _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+            satSpriteControl.push_back(_satellite);
+            
+            Satellites satSpawn2(_gameWindowProperties,randomStart,2);
+            satStack.push_back(satSpawn2);
+            _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+            satSpriteControl.push_back(_satellite);
+            
+            Satellites satSpawn3(_gameWindowProperties,randomStart,3);
+            satStack.push_back(satSpawn3);
+            _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+            satSpriteControl.push_back(_satellite);
+             _isSatGroupCreated = true;
+        }
 	}
+	
 }
 
 
@@ -134,8 +138,12 @@ void Game::processAI()
 {	
     if (_player.isDead())
     {
-        GameOverScreen gameOverScreen;
-        gameOverScreen.show(_window);
+        _lose = true;
+    }
+    
+    if (enemyStack.size() == 0 && satStack.size() == 0 && _enemiesSpawned == 50) //&& satStack.size() == 0
+    {
+        _win = true;
     }
     
 	int indexEnemy = 0;
@@ -494,4 +502,20 @@ void Game::collisions()
     
     //Check if vector size is zero
     
+}
+
+void Game::isGameOver()
+{
+    if (_lose)
+    {
+        GameOverScreen gameOverScreen;
+        gameOverScreen.show(_window);
+        _lose = true;
+    }
+    if (_win)
+    {   
+        WinnerScreen winnerScreen;
+        winnerScreen.show(_window);
+        _win =  true;
+    }
 }

@@ -1,18 +1,18 @@
-#include "GameOverScreen.h"
+#include "WinnerScreen.h"
 #include <string>
 
-GameOverScreen::GameOverScreen()
+WinnerScreen::WinnerScreen()
 {
-    _gameOverTexture.loadFromFile("Resources/splash.png");
+    _winnerTexture.loadFromFile("Resources/splash.png");
 }
 
-void GameOverScreen::show(sf::RenderWindow& renderWindow)
+void WinnerScreen::show(sf::RenderWindow& renderWindow)
 {
 	sf::Sprite background;
-	background.setTexture(_gameOverTexture);
+	background.setTexture(_winnerTexture);
 	
 	font.loadFromFile("Resources/Agency_FB.ttf");
-	std::string gameOverTitle = "Game Over :(";
+	std::string gameOverTitle = "You won :)";
 	sf::Text title(gameOverTitle, font);
 	title.setCharacterSize(58);
 	title.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/4);
@@ -46,7 +46,7 @@ void GameOverScreen::show(sf::RenderWindow& renderWindow)
     }
 }
 
-GameOverScreen::~GameOverScreen()
+WinnerScreen::~WinnerScreen()
 {
 
 }

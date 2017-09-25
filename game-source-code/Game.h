@@ -8,6 +8,7 @@
 #include "EnemyBullet.h"
 #include <vector>
 #include "Satellites.h"
+#include "WinnerScreen.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ class Game
         void collisions();
 		void spawnEnemyNormal();
 		void spawnEnemyElite();
+        void isGameOver();
 
 	public:
 		sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
@@ -42,7 +44,8 @@ class Game
 		int _enemiesSpawned = 0;
         bool _isSatGroupCreated = false;
         int _numberOfSatGroupsDestroyed = 0;
-        
+        bool _win = false;
+        bool _lose = false;
 		sf::Texture _textureBackground;
 		sf::Texture _texturePlayer;
 		sf::Texture _textureEnemy;
