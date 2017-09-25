@@ -9,6 +9,7 @@
 #include "Position.h"
 #include "Player.h"
 #include "SplashScreen.h"
+#include "GameOverScreen.h"
 #include "Enemy.h"
 #include "EnemyBullet.h"
 #include "Bullet.h"
@@ -25,7 +26,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		
 		_textureBackground.loadFromFile("Resources/space.png");
         _texturePlayer.loadFromFile("Resources/player.png");
-		_textureEnemy.loadFromFile("Resources/enemy1.png");
+		_textureEnemy.loadFromFile("Resources/enemy.png");
         _textureBullet.loadFromFile("Resources/laser.png");
         _textureEnemyBullet.loadFromFile("Resources/laser.png");
 		_textureSatellite.loadFromFile("Resources/satellite.png");
@@ -33,7 +34,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		_background.setTexture(_textureBackground);
 
 		setTextureOrigin(_texturePlayer,_playerShipSprite, 0.10f);
-		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.125f);
+		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
 		setTextureOrigin(_textureBullet,_bulletSprite, 0.05f);
 		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.05f);
 		setTextureOrigin(_textureSatellite,_satellite,0.125f);
@@ -80,51 +81,35 @@ void Game::run()
 
 void Game::spawnEnemyNormal()
 {
-	
-	if(_enemiesSpawned == 50)
+	int spawnFactor = rand()%25+1;
+	if(spawnFactor == 5)
 	{
-		std::cout << "max number of enemies spawned." << std::endl;
+		Enemy spawn = Enemy(_gameWindowProperties);        
+        enemyStack.push_back(spawn);
+		std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
+        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+		//_enemyShipSprite.setRotation();
+        enemySpriteControl.push_back(_enemyShipSprite);
 	}
-	else
-	{
-		int spawnFactor = rand()%25+1;
-		if(spawnFactor == 5)
-		{	_enemiesSpawned++;
-			Enemy spawn = Enemy(_gameWindowProperties);        
-			enemyStack.push_back(spawn);
-		//std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
-			_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-			_enemyShipSprite.setRotation(rand()%360);
-			enemySpriteControl.push_back(_enemyShipSprite);
-		}
 
-	}
 }
 
 void Game::processAI()
 {	
+    if (_player.isDead())
+    {
+        GameOverScreen gameOverScreen;
+        gameOverScreen.show(_window);
+    }
+    
 	int indexEnemy = 0;
 	for (auto& i : enemyStack)
 	{   
 		{
 			if(i.isAlive() == false)
 			{
-				if(i.isRespawn() == true)
-				{
-					enemyStack.erase(enemyStack.begin() + indexEnemy);
-					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
-					
-					Enemy spawn = Enemy(_gameWindowProperties);        
-					enemyStack.push_back(spawn);
-					_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-					_enemyShipSprite.setRotation(rand()%360);
-					enemySpriteControl.push_back(_enemyShipSprite);
-				}
-				else
-				{
-					enemyStack.erase(enemyStack.begin() + indexEnemy);
-					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
-				}
+				enemyStack.erase(enemyStack.begin() + indexEnemy);
+				enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
             }
 			else
 			{
@@ -169,28 +154,23 @@ void Game::processAI()
         }
         
         indexBullets++;
-//        std::cout << "Size of the bullets: " << _bullets.size() << std::endl;
-//        std::cout << "Size of the bullet sprites: " << bulletSprites.size() << std::endl;
-        
     }
     
-	int enemyFire = rand()%50+1;
+	int enemyFire = rand()%50 +1;
 	if(enemyFire == 1)
 	{
 		bool fired = false;
-		
 		for(auto i : enemyStack)
 		{
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				if(i.isAlive() == true && fired == false)
-				{
-					EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
-					_enemyBullets.push_back(enemyBullet);
-					_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
-					enemyBulletSprites.push_back(_enemyBulletSprite);
-					fired = true;
-				}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if(i.isAlive() == true && fired == false)
+			{
+				EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
+				_enemyBullets.push_back(enemyBullet);
+				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
+				enemyBulletSprites.push_back(_enemyBulletSprite);
+				fired = true;
+			}
 		}
 	}
 	
@@ -202,6 +182,11 @@ void Game::processAI()
             i.updateEnemyBullet();
             enemyBulletSprites[indexEnemyBullets].setPosition(i.getPosition().getX(), i.getPosition().getY());
             indexEnemyBullets++;
+        }
+        else
+        {
+            enemyBulletSprites.erase(enemyBulletSprites.begin() + indexEnemyBullets);
+            _enemyBullets.erase(_enemyBullets.begin() + indexBullets);
         }
     }    
 }
@@ -303,10 +288,10 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
         Enemy spawn = Enemy(_gameWindowProperties);        
         enemyStack.push_back(spawn);
         _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-		//std::cout << "Angle sprite: " << spawn.getPosition().getAngle() << std::endl;
+		std::cout << "Angle sprite: " << spawn.getPosition().getAngle() << std::endl;
 		
-		_enemyShipSprite.setRotation(spawn.getPosition().getAngle()+90);
-		//std::cout << "Angle texture: " << _enemyShipSprite.getRotation() << std::endl;
+		_enemyShipSprite.setRotation(spawn.getPosition().getAngle()-90);
+		std::cout << "Angle texture: " << _enemyShipSprite.getRotation() << std::endl;
         enemySpriteControl.push_back(_enemyShipSprite);
 		_enemyShipSprite.setRotation(0);
 		
@@ -333,22 +318,19 @@ void Game::collisions()
     int counter = 0;
     int counter2 = 0;
     int counter3 = 0;
+    int counter4 = 0;
+    int counter5 = 0;
     for (auto iter = bulletSprites.begin(); iter != bulletSprites.end(); iter++)
     {
-        
         counter2 = 0;
         for (auto iter2 = enemySpriteControl.begin(); iter2 != enemySpriteControl.end(); iter2++)        
         {
-            
             if (bulletSprites[counter].getGlobalBounds().intersects(enemySpriteControl[counter2].getGlobalBounds()))
             {
                 std::cout << "ENEMY "<< counter2 << " collision" << std::endl;
                 _bullets[counter].setBulletDead();
                 enemyStack[counter2].setDead();
-                
             }
-            
-           
             counter2++;
         }
         
@@ -361,14 +343,43 @@ void Game::collisions()
                 _bullets[counter].setBulletDead();
                 satStack[counter3].setDead();
             }
-            
             counter3++;
         }
         
-        
-        
         counter++;
     }
+    
+    counter4 = 0;
+    for (auto iter = enemyBulletSprites.begin(); iter != enemyBulletSprites.end(); iter++)
+    {
+        
+        if (enemyBulletSprites[counter4].getGlobalBounds().intersects(_playerShipSprite.getGlobalBounds()))
+        {
+             
+             _enemyBullets[counter4].setEnemyBulletDead();
+             _player.decreaseLives();
+             _player.respawn();
+             std::cout << "Player has "<< _player.getLives()<< " lives" << std::endl;
+            
+        }
+    
+        counter4++;
+    }
+    
+   
+    counter5 = 0;
+    for (auto iter = enemySpriteControl.begin(); iter != enemySpriteControl.end(); iter++)
+    {
+        if (enemySpriteControl[counter5].getGlobalBounds().intersects(_playerShipSprite.getGlobalBounds()))
+        {
+            enemyStack[counter5].setDead();
+            _player.decreaseLives();
+            _player.respawn();
+             std::cout << "Player has "<< _player.getLives()<< " lives" << std::endl;
+        }   
+        counter5++;
+    }
+        
     
     
     

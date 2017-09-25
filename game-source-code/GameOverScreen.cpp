@@ -1,31 +1,27 @@
-#include "SplashScreen.h"
+#include "GameOverScreen.h"
 #include <string>
 
-SplashScreen::SplashScreen()
+GameOverScreen::GameOverScreen()
 {
-	_splashTexture.loadFromFile("Resources/splash.png");
+    _gameOverTexture.loadFromFile("Resources/splash.png");
 }
 
-void SplashScreen::show(sf::RenderWindow& renderWindow)
+void GameOverScreen::show(sf::RenderWindow& renderWindow)
 {
 	sf::Sprite background;
-	background.setTexture(_splashTexture);
+	background.setTexture(_gameOverTexture);
 	
 	font.loadFromFile("Resources/Agency_FB.ttf");
-	std::string splashTitle = "Shape Space Battle!";
-	sf::Text title(splashTitle, font);
+	std::string gameOverTitle = "Game Over :(";
+	sf::Text title(gameOverTitle, font);
 	title.setCharacterSize(58);
 	title.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/4);
 	title.setStyle(sf::Text::Bold);
 	title.setColor(sf::Color::Yellow);
 	
-	std::string splashControls = "Controls"
-								 "\n -Left arrow key moves clockwise"
-								 "\n -Right arrow key moves anticlockwise"
-								 "\n -Space key fires glorious cosmic energy"
-								 "\n \n Press Enter key to continue...";
+	std::string gameOverControls = "Press Enter key to play again";
 								 
-	sf::Text controls(splashControls,font);
+	sf::Text controls(gameOverControls,font);
 	controls.setCharacterSize(25);
 	controls.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/2 - renderWindow.getSize().y/10);
 	controls.setStyle(sf::Text::Bold);
@@ -46,7 +42,7 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
     }
 }
 
-SplashScreen::~SplashScreen()
+GameOverScreen::~GameOverScreen()
 {
 
 }
