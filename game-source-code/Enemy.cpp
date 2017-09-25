@@ -15,7 +15,6 @@ Enemy::Enemy()
 Enemy::Enemy(GameWindowProperties gameWindowProperties)
 {
 	setAlive();
-	_reSpawn = false;
 	int randomStart = rand()%361;
 	_enemyPosition.setAngle(randomStart);
 	_enemyPosition.setRadius(gameWindowProperties.getRadius());
@@ -42,12 +41,10 @@ void Enemy::move()
     if(xLimit > _enemyPosition.getoriginX() + _enemyPosition.getRadius() || yLimit > _enemyPosition.getoriginY() + _enemyPosition.getRadius())
     {
         setDead();
-		_reSpawn = true;
     }
     
     if(xLimit < _enemyPosition.getoriginX() - _enemyPosition.getRadius() || yLimit < _enemyPosition.getoriginY() - _enemyPosition.getRadius())
     {
         setDead();
-		_reSpawn = true;
     }
 }

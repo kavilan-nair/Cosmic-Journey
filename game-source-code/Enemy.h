@@ -14,8 +14,6 @@ class Enemy
         bool& isAlive(){return _aliveStatus;};
         void setDead(){_aliveStatus = false;};
         void setAlive(){_aliveStatus = true;};
-		bool& isRespawn(){return _reSpawn;};
-		
 		void move();
 		Position& getPosition(){return _enemyPosition;};
 	public:
@@ -26,7 +24,7 @@ class Enemy
 		Position _enemyPosition;
         GameWindowProperties _gameWindowProperties;
         bool _aliveStatus;
-		bool _reSpawn;
+
        
 };
 

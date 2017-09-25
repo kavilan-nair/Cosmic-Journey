@@ -11,12 +11,13 @@ class EnemyBullet
         EnemyBullet(Position position, GameWindowProperties gameWindowProperties, Position posPlayer);
         Position getPosition() {return _positionSpawn;};
         bool isEnemyBulletAlive() {return _isAlive;};
+        void setEnemyBulletDead() {_isAlive = false;};
         void updateEnemyBullet();
         void setEnemyBulletPosition(Position position) {_positionSpawn = position;};
         void setEnemyBulletGameWindowProperties(GameWindowProperties gameWindowProperties) {_gameWindowProperties = gameWindowProperties;};
         ~EnemyBullet();        
     public:
-        const float PI = 3.14159265358979323846;
+        static constexpr float PI = 3.14159265358979323846;
 		float originFix = PI/2;
 int newX;
 int newY;

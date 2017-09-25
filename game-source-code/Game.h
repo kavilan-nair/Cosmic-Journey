@@ -38,7 +38,6 @@ class Game
 		GameWindowProperties _gameWindowProperties;
 		Player _player;
         bool _isMovingClockwise, _isMovingAntiClockwise;
-		int _enemiesSpawned = 0;
         
 		sf::Texture _textureBackground;
 		sf::Texture _texturePlayer;
