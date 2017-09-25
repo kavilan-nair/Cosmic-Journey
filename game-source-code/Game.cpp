@@ -28,7 +28,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
         _texturePlayer.loadFromFile("Resources/player.png");
 		_textureEnemy.loadFromFile("Resources/enemy.png");
         _textureBullet.loadFromFile("Resources/laser.png");
-        _textureEnemyBullet.loadFromFile("Resources/laser.png");
+        _textureEnemyBullet.loadFromFile("Resources/enemylaser.png");
 		_textureSatellite.loadFromFile("Resources/satellite.png");
 		
 		_background.setTexture(_textureBackground);
@@ -36,7 +36,7 @@ Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software I
 		setTextureOrigin(_texturePlayer,_playerShipSprite, 0.10f);
 		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
 		setTextureOrigin(_textureBullet,_bulletSprite, 0.04f); //0.05f
-		setTextureOrigin(_textureBullet,_enemyBulletSprite, 0.03f); //0.05f
+		setTextureOrigin(_textureEnemyBullet,_enemyBulletSprite, 0.03f); //0.05f
 		setTextureOrigin(_textureSatellite,_satellite,0.125f);
 
 		_playerShipSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getX());
@@ -232,23 +232,56 @@ void Game::processAI()
         indexBullets++;
     }
     
-	int enemyFire = rand()%50 +1;
-	if(enemyFire == 1)
+//	int enemyFire = rand()%50 +1;
+//	if(enemyFire == 1)
+//	{
+//		bool fired = false;
+//		for(auto i : enemyStack)
+//		{
+//
+//			if(i.isAlive() == true && fired == false)
+//			{
+//				EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
+//				_enemyBullets.push_back(enemyBullet);
+//				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
+//				enemyBulletSprites.push_back(_enemyBulletSprite);
+//				fired = true;
+//			}
+//		}
+//	}
+	
+	int enemyFire = rand()%10 +1;
+	if(enemyFire <= 9)
 	{
 		bool fired = false;
 		for(auto i : enemyStack)
 		{
-
-			if(i.isAlive() == true && fired == false)
+			
+			int enemyPos = (360 - (i.getPosition().getAngle()) + 90)%360;
+			int playerPos = _player.getPosition().getAngle()*5;
+			if(abs(playerPos) > 360){playerPos = playerPos%360;}
+			if(playerPos < 0){playerPos = 360 + playerPos;}
+			
+			std::cout << "Enemy angle min: " << (enemyPos - 15)%360 << std::endl;
+			std::cout << "Enemy angle: " << enemyPos << std::endl;
+			std::cout << "Enemy angle max: " << (enemyPos + 15)%360<< std::endl;
+			std::cout << "Player angle: " << playerPos << std::endl;
+			
+			if((playerPos >= enemyPos - 15) && (playerPos <= (enemyPos + 15)%360 ))
 			{
+				if(i.isAlive() == true && fired == false)
+				{
 				EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
 				_enemyBullets.push_back(enemyBullet);
 				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
 				enemyBulletSprites.push_back(_enemyBulletSprite);
 				fired = true;
+				}
 			}
 		}
 	}
+	
+	
 	
     int indexEnemyBullets = 0;
     for (auto& i : _enemyBullets)

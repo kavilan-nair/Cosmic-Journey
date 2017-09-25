@@ -29,7 +29,7 @@ Enemy::Enemy(GameWindowProperties gameWindowProperties)
 
 void Enemy::move()
 {	
-	auto rad = (_enemyPosition.getAngle() * PI/180)*3;
+	auto rad = (_enemyPosition.getAngle() * PI/180);//*3;
 	_enemyPosition.setX(_enemyPosition.getoriginX() + factor*_enemyPosition.getRadius()*cos(rad));
 	_enemyPosition.setY(_enemyPosition.getoriginY() + factor*_enemyPosition.getRadius()*sin(rad));
 	//_enemyPosition.setAngle(_enemyPosition.getAngle() + 1);  //this is for spiralling
