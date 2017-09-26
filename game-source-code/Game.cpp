@@ -86,7 +86,7 @@ void Game::spawnEnemyNormal()
 {
 	if(_enemiesSpawned == 50)
 	{
-		std::cout << "max number of enemies spawned." << std::endl;
+		//std::cout << "max number of enemies spawned." << std::endl;
 	}
 	else
 	{
@@ -106,10 +106,9 @@ void Game::spawnEnemyNormal()
 
 void Game::spawnEnemyElite()
 {
-    if(_enemiesSpawned < 50)
+    if(_enemiesKilled == 20 || _enemiesKilled == 40)
 	{
-		int satSpawnFactor = rand()%50+1;
-        if(satSpawnFactor == 1 && satSpriteControl.size() == 0 && _enemiesSpawned > 24)
+        if(satSpriteControl.size() == 0)
         {
             float randomStart = -(_player.getPosition().getAngle()*5)+90;
             Satellites satSpawn1(_gameWindowProperties,randomStart,1);
@@ -155,6 +154,7 @@ void Game::processAI()
 				{
 					enemyStack.erase(enemyStack.begin() + indexEnemy);
 					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+                   
 					
 					Enemy spawn = Enemy(_gameWindowProperties);        
 					enemyStack.push_back(spawn);
@@ -166,6 +166,8 @@ void Game::processAI()
 				{
 					enemyStack.erase(enemyStack.begin() + indexEnemy);
 					enemySpriteControl.erase(enemySpriteControl.begin() + indexEnemy);
+                     _enemiesKilled++;
+                    
 				}
             }
 			else
@@ -185,6 +187,7 @@ void Game::processAI()
 			{
 				satStack.erase(satStack.begin() + indexSat);
 				satSpriteControl.erase(satSpriteControl.begin() + indexSat);
+                 _enemiesKilled++;
 			}
 			else
 			{
@@ -512,6 +515,7 @@ void Game::collisions()
               //  std::cout << "ENEMY "<< counter2 << " collision" << std::endl;
                 _bullets[counter].setBulletDead();
                 enemyStack[counter2].setDead();
+
             }
             counter2++;
         }
@@ -524,6 +528,7 @@ void Game::collisions()
                 //std::cout << "SATELLITE "<< counter3 << " collision" << std::endl;
                 _bullets[counter].setBulletDead();
                 satStack[counter3].setDead();
+
                 
                 
                 
@@ -558,15 +563,16 @@ void Game::collisions()
         if (enemySpriteControl[counter5].getGlobalBounds().intersects(_playerShipSprite.getGlobalBounds()))
         {
             enemyStack[counter5].setDead();
+         //   _enemiesKilled++;
             _player.decreaseLives();
             _player.respawn();
-            // std::cout << "Player has "<< _player.getLives()<< " lives" << std::endl;
+           
         }   
         counter5++;
     }
     
     //Check if vector size is zero
-    
+   // std::cout << "kill count:  "<< _enemiesKilled << std::endl;
 }
 
 void Game::isGameOver()
@@ -592,8 +598,18 @@ void Game::showLivesRemaining(int lives, sf::RenderWindow& renderWindow)
     sf::Text sfLives(numberOfLives, _font);
     sfLives.setCharacterSize(24);
     sfLives.setPosition(20, 20);
-	sfLives.setColor(sf::Color::Yellow);
+    sfLives.setColor(sf::Color::Yellow);
+    
+    std::string numberOfenemiesKilled = std::to_string(56-_enemiesKilled) +" enemies remaining"; 
+    sf::Text sfEnemiesKilled(numberOfenemiesKilled, _font);
+    sfEnemiesKilled.setCharacterSize(24);
+    sfEnemiesKilled.setPosition(600, 20);
+    sfEnemiesKilled.setColor(sf::Color::Yellow);
+
     renderWindow.draw(sfLives);
+    renderWindow.draw(sfEnemiesKilled);
+    
+    
     //renderWindow.display();
     
 }

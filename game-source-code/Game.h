@@ -30,6 +30,7 @@ class Game
 		void spawnEnemyNormal();
 		void spawnEnemyElite();
         void isGameOver();
+        void showLivesRemaining(int lives, sf::RenderWindow& renderWindow);
 
 	public:
 		sf::VideoMode _screenDimensions = sf::VideoMode::getDesktopMode();
@@ -46,7 +47,8 @@ class Game
         int _numberOfSatGroupsDestroyed = 0;
         bool _win = false;
         bool _lose = false;
-        void showLivesRemaining(int lives, sf::RenderWindow& renderWindow);
+        int _enemiesKilled = 0;
+       
         
         sf::Font _font;
 		sf::Texture _textureBackground;
