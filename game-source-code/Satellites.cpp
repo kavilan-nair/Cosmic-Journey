@@ -21,11 +21,11 @@ Satellites::Satellites(GameWindowProperties gameWindowProperties, int inDirectio
 	}
 	else if(numShip == 2)
 	{
-		 randomStart = inDirection+17;
+		 randomStart = inDirection+20;
 	}
 	else
 	{
-		 randomStart = inDirection-17;
+		 randomStart = inDirection-20;
 	}
 	
 	_satellitesPosition.setAngle(randomStart);

@@ -22,7 +22,7 @@ Bullet::Bullet(Position position, GameWindowProperties gameWindowProperties, int
 
 void Bullet::updateBullet()
 {
-	if (_bulletRadius > 0)
+	if (_bulletRadius > _gameWindowProperties.getRadius()*0.075)
 	{
 		int bulletSpeed = _gameWindowProperties.getRadius()*0.04;
 		_bulletRadius -= bulletSpeed;

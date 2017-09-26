@@ -90,7 +90,7 @@ void Game::spawnEnemyNormal()
 	}
 	else
 	{
-		int spawnFactor = rand()%25+1;
+		int spawnFactor = rand()%50+1;
 		if(spawnFactor == 5)
 		{
 			Enemy spawn = Enemy(_gameWindowProperties);        
@@ -252,8 +252,8 @@ void Game::processAI()
 //		}
 //	}
 	
-	int enemyFire = rand()%500 +1;         //rate of fire of enemies when within cone
-	if(enemyFire <= 9)
+	int enemyFire = rand()%40 +1;         //rate of fire of enemies when within cone
+	if(enemyFire == 1)
 	{
 		bool fired = false;
 		for(auto i : enemyStack)
@@ -461,40 +461,6 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
             _bulletSprite.setPosition(_player.getPosition().getX(), _player.getPosition().getY());
             bulletSprites.push_back(_bulletSprite);
         }
-    }
-    else if (key == sf::Keyboard::BackSpace && isPressed == true)
-    {
-        Enemy spawn = Enemy(_gameWindowProperties);        
-        enemyStack.push_back(spawn);
-        _enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-	//	std::cout << "Angle sprite: " << spawn.getPosition().getAngle() << std::endl;
-		
-		_enemyShipSprite.setRotation(spawn.getPosition().getAngle()-90);
-		//std::cout << "Angle texture: " << _enemyShipSprite.getRotation() << std::endl;
-        enemySpriteControl.push_back(_enemyShipSprite);
-		_enemyShipSprite.setRotation(0);
-		
-		int randomStart = rand()%360;
-		Satellites satSpawn1(_gameWindowProperties,randomStart,1);
-		satStack.push_back(satSpawn1);
-        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        satSpriteControl.push_back(_satellite);
-		
-		Satellites satSpawn2(_gameWindowProperties,randomStart,2);
-		satStack.push_back(satSpawn2);
-        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        satSpriteControl.push_back(_satellite);
-		
-		Satellites satSpawn3(_gameWindowProperties,randomStart,3);
-		satStack.push_back(satSpawn3);
-        _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-        satSpriteControl.push_back(_satellite);
-        
-        satGroup.push_back(satSpawn1);
-        satGroup.push_back(satSpawn2);
-        satGroup.push_back(satSpawn3);
-        
-        satChain.push_back(satGroup);
     }
 }
 
