@@ -31,7 +31,7 @@ private:
         int _enemyBulletRadius;
         int _enemyBulletSpeed;
 		int _playerPosition;
-        float _factor = 0.1;
+        float _factor = 0.01;
 		int _countX = 0;
 };
 
