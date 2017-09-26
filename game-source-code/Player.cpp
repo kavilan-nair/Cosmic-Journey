@@ -15,7 +15,7 @@ Player::Player(GameWindowProperties gameWindowProperties)
     _position.setX(_gameWindowProperties.getXOrigin());
     _position.setY(_gameWindowProperties.getYOrigin() + _gameWindowProperties.getRadius());
     _isAlive = true;
-    _lives = 100;
+    _lives = 5;
     _weaponType = WeaponType::Single;
 }
 

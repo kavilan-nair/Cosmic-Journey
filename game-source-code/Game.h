@@ -46,6 +46,9 @@ class Game
         int _numberOfSatGroupsDestroyed = 0;
         bool _win = false;
         bool _lose = false;
+        void showLivesRemaining(int lives, sf::RenderWindow& renderWindow);
+        
+        sf::Font _font;
 		sf::Texture _textureBackground;
 		sf::Texture _texturePlayer;
 		sf::Texture _textureEnemy;
