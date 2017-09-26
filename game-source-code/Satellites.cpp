@@ -36,6 +36,7 @@ Satellites::Satellites(GameWindowProperties gameWindowProperties, int inDirectio
     _satellitesPosition.setY(gameWindowProperties.getYOrigin());
     _gameWindowProperties = gameWindowProperties;
 	gyrateRadius = 0.05*_satellitesPosition.getRadius();
+    _initialAngle = _satellitesPosition.getAngle();
 }
 
 void Satellites::move()

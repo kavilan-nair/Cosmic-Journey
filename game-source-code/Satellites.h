@@ -3,7 +3,6 @@
 
 #include "Position.h"
 #include "GameWindowProperties.h"
-#include "EnemyBullet.h"
 #include <vector>
 #include <SFML/system.hpp>
 
@@ -16,7 +15,8 @@ class Satellites
         void setDead(){_aliveStatus = false;};
         void setAlive(){_aliveStatus = true;};
 		void move();
-		Position& getPosition(){return _satellitesPosition;};
+		Position getPosition(){return _satellitesPosition;}; //took out position&
+        int getInitialAngle(){return _initialAngle;};
 public:
 		int times = 1;
 		bool setGyrate = false;
@@ -29,6 +29,7 @@ public:
 		Position _satellitesPosition;
         GameWindowProperties _gameWindowProperties;
         bool _aliveStatus;
+        int _initialAngle;
 
        
 };

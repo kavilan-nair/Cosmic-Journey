@@ -15,6 +15,7 @@ class EnemyBullet
         void updateEnemyBullet();
         void setEnemyBulletPosition(Position position) {_positionSpawn = position;};
         void setEnemyBulletGameWindowProperties(GameWindowProperties gameWindowProperties) {_gameWindowProperties = gameWindowProperties;};
+        void setEnemyBulletAngle(int angle){_positionSpawn.setAngle(angle);};
         ~EnemyBullet();        
     public:
         static constexpr float PI = 3.14159265358979323846;

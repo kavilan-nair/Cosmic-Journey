@@ -17,7 +17,7 @@ class Position
         
 		void setX(int x) {_x = x;};
 		void setY(int y) {_y = y;};
-		void setAngle(float angle){ _angle = angle;};
+		void setAngle(int angle){ _angle = angle;};
 		void setRadius(int radius){_radius = radius;};
 		void setoriginX(int originX){_originX = originX;};
 		void setoriginY(int originY){_originY = originY;};

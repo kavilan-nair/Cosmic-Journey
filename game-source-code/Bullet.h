@@ -23,7 +23,6 @@ class Bullet
 		GameWindowProperties _gameWindowProperties;
 		bool _isAlive;
 		int _bulletRadius;
-		int _bulletSpeed;
 		
 };
 

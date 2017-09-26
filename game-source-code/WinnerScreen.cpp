@@ -3,7 +3,7 @@
 
 WinnerScreen::WinnerScreen()
 {
-    _winnerTexture.loadFromFile("Resources/splash.png");
+    _winnerTexture.loadFromFile("Resources/space.png");
 }
 
 void WinnerScreen::show(sf::RenderWindow& renderWindow)

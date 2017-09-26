@@ -3,7 +3,7 @@
 
 GameOverScreen::GameOverScreen()
 {
-    _gameOverTexture.loadFromFile("Resources/splash.png");
+    _gameOverTexture.loadFromFile("Resources/space.png");
 }
 
 void GameOverScreen::show(sf::RenderWindow& renderWindow)

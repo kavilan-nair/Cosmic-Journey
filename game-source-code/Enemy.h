@@ -2,7 +2,6 @@
 #define ENEMY_H
 #include "Position.h"
 #include "GameWindowProperties.h"
-#include "EnemyBullet.h"
 #include <vector>
 #include <SFML/system.hpp>
 

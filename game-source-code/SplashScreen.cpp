@@ -3,7 +3,7 @@
 
 SplashScreen::SplashScreen()
 {
-	_splashTexture.loadFromFile("Resources/splash.png");
+	_splashTexture.loadFromFile("Resources/space.png");
 }
 
 void SplashScreen::show(sf::RenderWindow& renderWindow)

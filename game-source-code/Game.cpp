@@ -16,7 +16,7 @@
 #include "Satellites.h"
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
-Game::Game() : _window(sf::VideoMode(800,600 /*_screenDimensions*/), "Software II Project",sf::Style::Default /*sf::Style::Fullscreen*/), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
+Game::Game() : _window(sf::VideoMode(1920,1080 /*_screenDimensions*/), "Software II Project",sf::Style::Default /*sf::Style::Fullscreen*/), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
         srand(time(0));
 		_window.setKeyRepeatEnabled(false);
@@ -250,7 +250,7 @@ void Game::processAI()
 //		}
 //	}
 	
-	int enemyFire = rand()%10 +1;
+	int enemyFire = rand()%500 +1;         //rate of fire of enemies when within cone
 	if(enemyFire <= 9)
 	{
 		bool fired = false;
@@ -280,7 +280,83 @@ void Game::processAI()
 			}
 		}
 	}
-	
+    
+    //satellite shooting
+    
+    
+    
+    
+    
+    int satFire = rand()%100 +1;  //rate of fire of satelliteswhen within cone
+	if(satFire <= 9)
+	{
+		bool fired = false;
+		for(auto i : satStack)
+		{
+			int enemyPos = (360 - (i.getPosition().getAngle()) + 90)%360;
+			int playerPos = _player.getPosition().getAngle()*5;
+			if(abs(playerPos) > 360){playerPos = playerPos%360;}
+			if(playerPos < 0){playerPos = 360 + playerPos;}
+			
+			if((playerPos >= enemyPos - 15) && (playerPos <= (enemyPos + 15)%360 ))
+			{
+				if(i.isAlive() == true && fired == false)
+				{
+				EnemyBullet satEnemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
+                satEnemyBullet.setEnemyBulletAngle(i.getInitialAngle());
+				_enemyBullets.push_back(satEnemyBullet);
+				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
+				enemyBulletSprites.push_back(_enemyBulletSprite);
+				fired = true;
+				}
+			}
+		}
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    bool fired = false;
+//    for (auto i : satStack)
+//    {
+//        
+//        if(i.isAlive() == true && fired == false)
+//				{
+//        EnemyBullet satEnemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
+//				_enemyBullets.push_back(satEnemyBullet);
+//				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
+//				enemyBulletSprites.push_back(_enemyBulletSprite);
+//				fired = true;
+//                }
+//    }
+//	
 	
 	
     int indexEnemyBullets = 0;
