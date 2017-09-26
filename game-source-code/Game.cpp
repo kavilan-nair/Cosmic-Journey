@@ -16,7 +16,7 @@
 #include "Satellites.h"
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
-Game::Game() : _window(sf::VideoMode(1920,1080 /*_screenDimensions*/), "Software II Project",sf::Style::Default /*sf::Style::Fullscreen*/), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
+Game::Game() : _window(sf::VideoMode(1000,750/*_screenDimensions*/), "Software II Project",sf::Style::Default /*sf::Style::Fullscreen*/), _gameWindowProperties(), _player(),  _isMovingClockwise(false), _isMovingAntiClockwise(false)
 {    
         srand(time(0));
 		_window.setKeyRepeatEnabled(false);
@@ -35,7 +35,7 @@ Game::Game() : _window(sf::VideoMode(1920,1080 /*_screenDimensions*/), "Software
 
 		setTextureOrigin(_texturePlayer,_playerShipSprite, 0.10f);
 		setTextureOrigin(_textureEnemy,_enemyShipSprite, 0.10f);
-		setTextureOrigin(_textureBullet,_bulletSprite, 0.04f); //0.05f
+		setTextureOrigin(_textureBullet,_bulletSprite, 0.03f); //0.05f
 		setTextureOrigin(_textureEnemyBullet,_enemyBulletSprite, 0.03f); //0.05f
 		setTextureOrigin(_textureSatellite,_satellite,0.125f);
 
@@ -94,7 +94,6 @@ void Game::spawnEnemyNormal()
 		{
 			Enemy spawn = Enemy(_gameWindowProperties);        
 			enemyStack.push_back(spawn);
-			std::cout << "Angle: " << spawn.getPosition().getAngle() << std::endl;
 			_enemyShipSprite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
 			_enemyShipSprite.setRotation(rand()%360);
 			enemySpriteControl.push_back(_enemyShipSprite);
@@ -111,40 +110,23 @@ void Game::spawnEnemyElite()
         if(satSpawnFactor == 1 && satSpriteControl.size() == 0 && _enemiesSpawned > 24)
         {
             float randomStart = -(_player.getPosition().getAngle()*5)+90;
-            std::cout << "Satellite: " << randomStart << std::endl;
-            std::cout << "Player: " << _player.getPosition().getAngle() << std::endl;
-            Satellites satSpawn1(_gameWindowProperties,randomStart,1);
-            satStack.push_back(satSpawn1);
-            _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-            satSpriteControl.push_back(_satellite);
-            
-            Satellites satSpawn2(_gameWindowProperties,randomStart,2);
-            satStack.push_back(satSpawn2);
-            _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-            satSpriteControl.push_back(_satellite);
-            
-            Satellites satSpawn3(_gameWindowProperties,randomStart,3);
-            satStack.push_back(satSpawn3);
-            _satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
-            satSpriteControl.push_back(_satellite);
-             _isSatGroupCreated = true;
+			for(int i = 1; i <= 3; i++)
+			{
+				 Satellites satSpawn(_gameWindowProperties,randomStart,i);
+				satStack.push_back(satSpawn);
+				_satellite.setPosition(_gameWindowProperties.getXOrigin(),_gameWindowProperties.getYOrigin());
+				satSpriteControl.push_back(_satellite);
+			}
+			_isSatGroupCreated = true;
         }
 	}
-	
 }
 
 
 void Game::processAI()
 {	
-    if (_player.isDead())
-    {
-        _lose = true;
-    }
-    
-    if (enemyStack.size() == 0 && satStack.size() == 0 && _enemiesSpawned == 50) //&& satStack.size() == 0
-    {
-        _win = true;
-    }
+    if (_player.isDead()) _lose = true;
+    if (enemyStack.size() == 0 && satStack.size() == 0 && _enemiesSpawned == 50) _win = true;
     
 	int indexEnemy = 0;
 	for (auto& i : enemyStack)
@@ -212,8 +194,6 @@ void Game::processAI()
         _player.upgradeWeaponTriple();
     }
     
-    
-	
 	int indexBullets = 0;
     for (auto& i : _bullets)
     {   
@@ -221,34 +201,14 @@ void Game::processAI()
         {
 			i.updateBullet();
             bulletSprites[indexBullets].setPosition(i.getPosition().getX(), i.getPosition().getY());
-            
         }
         else
         {
             _bullets.erase(_bullets.begin() + indexBullets);
             bulletSprites.erase(bulletSprites.begin() + indexBullets);
         }
-        
         indexBullets++;
     }
-    
-//	int enemyFire = rand()%50 +1;
-//	if(enemyFire == 1)
-//	{
-//		bool fired = false;
-//		for(auto i : enemyStack)
-//		{
-//
-//			if(i.isAlive() == true && fired == false)
-//			{
-//				EnemyBullet enemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
-//				_enemyBullets.push_back(enemyBullet);
-//				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
-//				enemyBulletSprites.push_back(_enemyBulletSprite);
-//				fired = true;
-//			}
-//		}
-//	}
 	
 	int enemyFire = rand()%500 +1;         //rate of fire of enemies when within cone
 	if(enemyFire <= 9)
@@ -262,12 +222,7 @@ void Game::processAI()
 			if(abs(playerPos) > 360){playerPos = playerPos%360;}
 			if(playerPos < 0){playerPos = 360 + playerPos;}
 			
-			std::cout << "Enemy angle min: " << (enemyPos - 15)%360 << std::endl;
-			std::cout << "Enemy angle: " << enemyPos << std::endl;
-			std::cout << "Enemy angle max: " << (enemyPos + 15)%360<< std::endl;
-			std::cout << "Player angle: " << playerPos << std::endl;
-			
-			if((playerPos >= enemyPos - 15) && (playerPos <= (enemyPos + 15)%360 ))
+			if((playerPos >= enemyPos - 15) && (playerPos <= (enemyPos + 15)%360))
 			{
 				if(i.isAlive() == true && fired == false)
 				{
@@ -281,13 +236,7 @@ void Game::processAI()
 		}
 	}
     
-    //satellite shooting
-    
-    
-    
-    
-    
-    int satFire = rand()%100 +1;  //rate of fire of satelliteswhen within cone
+    int satFire = rand()%100 +1;  //rate of fire of satellites when within cone
 	if(satFire <= 9)
 	{
 		bool fired = false;
@@ -311,53 +260,7 @@ void Game::processAI()
 				}
 			}
 		}
-	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    bool fired = false;
-//    for (auto i : satStack)
-//    {
-//        
-//        if(i.isAlive() == true && fired == false)
-//				{
-//        EnemyBullet satEnemyBullet = EnemyBullet(i.getPosition(), _gameWindowProperties, getPlayer().getPosition());
-//				_enemyBullets.push_back(satEnemyBullet);
-//				_enemyBulletSprite.setPosition(i.getPosition().getX(), i.getPosition().getY());
-//				enemyBulletSprites.push_back(_enemyBulletSprite);
-//				fired = true;
-//                }
-//    }
-//	
-	
+	}	
 	
     int indexEnemyBullets = 0;
     for (auto& i : _enemyBullets)
@@ -440,7 +343,6 @@ void Game::render()
         }
         
         int indexEnemyBulletSprites = 0;
-        
         for(auto enemyBullet : _enemyBullets)
         {
             if (enemyBullet.isEnemyBulletAlive())
@@ -449,9 +351,6 @@ void Game::render()
                 indexEnemyBulletSprites++;
             }
         }
-
-
-
         _window.display();
 }
 
