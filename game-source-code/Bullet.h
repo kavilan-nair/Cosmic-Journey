@@ -7,21 +7,19 @@
 class Bullet
 {
 	public:
-		Bullet();
 		Bullet(Position position, GameWindowProperties gameWindowProperties, int bulletNumber);
-		Position getPosition() {return _positionSpawn;};
-		bool isBulletAlive() {return _isAlive;};
-        void setBulletDead() {_isAlive = false;};
-		void updateBullet();
 		~Bullet();
+		Position getPosition() {return _positionBullet;};
+		bool isBulletAlive() {return _aliveStatus;};
+        void setBulletDead() {_aliveStatus = false;};
+		void updateBullet();
 	public:
 		static constexpr float PI = 3.14159265358979323846;
 		float originFix = PI/2;
-	
 	private:
-		Position _positionSpawn;
+		Position _positionBullet;
 		GameWindowProperties _gameWindowProperties;
-		bool _isAlive;
+		bool _aliveStatus;
 		int _bulletRadius;
 		
 };

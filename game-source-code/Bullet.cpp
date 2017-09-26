@@ -1,46 +1,23 @@
 #include "Bullet.h"
 #include <cmath>
-#include <iostream>
 
-
-Bullet::Bullet()
+Bullet::Bullet(Position position, GameWindowProperties gameWindowProperties, int bulletNumber) //hookup an enum as the parameter instead of an int
 {
-	
-}
-
-Bullet::Bullet(Position position, GameWindowProperties gameWindowProperties, int bulletNumber)
-{
-    if (bulletNumber == 1)
-    {
-        _positionSpawn = position;
-    }
-    
-    if (bulletNumber == 2)
-    {
-        _positionSpawn = position;
-        
-        _positionSpawn.setAngle(_positionSpawn.getAngle() + 1);
-        auto rad = (_positionSpawn.getAngle() * PI/180)*5;
-        int xPosition = _gameWindowProperties.getXOrigin() + _gameWindowProperties.getRadius()*cos(rad-originFix);
-		int yPosition = _gameWindowProperties.getYOrigin() - _gameWindowProperties.getRadius()*sin(rad-originFix);
-        _positionSpawn.setX(xPosition);
-        _positionSpawn.setY(yPosition);
-    }
-    
-    if (bulletNumber == 3)
-    {
-        _positionSpawn = position;
-        _positionSpawn.setAngle(_positionSpawn.getAngle() - 1);
-        auto rad = (_positionSpawn.getAngle() * PI/180)*5;
-        int xPosition = _gameWindowProperties.getXOrigin() + _gameWindowProperties.getRadius()*cos(rad-originFix);
-		int yPosition = _gameWindowProperties.getYOrigin() - _gameWindowProperties.getRadius()*sin(rad-originFix);
-        _positionSpawn.setX(xPosition);
-        _positionSpawn.setY(yPosition);
-    }
+	_positionBullet = position;
+	if(bulletNumber > 1)
+	{
+		int bulletUpgradeInteger = pow(-1,bulletNumber);
+		_positionBullet.setAngle(_positionBullet.getAngle() + bulletUpgradeInteger);
+        auto radians = (_positionBullet.getAngle() * PI/180)*5;
+        int xPosBullet = _gameWindowProperties.getXOrigin() + _gameWindowProperties.getRadius()*cos(radians-originFix);
+		int yPosBullet = _gameWindowProperties.getYOrigin() - _gameWindowProperties.getRadius()*sin(radians-originFix);
+        _positionBullet.setX(xPosBullet);
+        _positionBullet.setY(yPosBullet);
+	}
 	
 	_gameWindowProperties = gameWindowProperties;
 	_bulletRadius = gameWindowProperties.getRadius();
-	_isAlive = true;
+	_aliveStatus = true;
 }
 
 void Bullet::updateBullet()
@@ -49,15 +26,15 @@ void Bullet::updateBullet()
 	{
 		int bulletSpeed = _gameWindowProperties.getRadius()*0.04;
 		_bulletRadius -= bulletSpeed;
-		auto rad = (_positionSpawn.getAngle() * PI/180)*5;
-		int xPosition = _gameWindowProperties.getXOrigin() + _bulletRadius*cos(rad-originFix);
-		int yPosition = _gameWindowProperties.getYOrigin() - _bulletRadius*sin(rad-originFix);
-		_positionSpawn.setX(xPosition);
-		_positionSpawn.setY(yPosition);
+		auto radians = (_positionBullet.getAngle() * PI/180)*5;
+		int xPosBullet = _gameWindowProperties.getXOrigin() + _bulletRadius*cos(radians-originFix);
+		int yPosBullet = _gameWindowProperties.getYOrigin() - _bulletRadius*sin(radians-originFix);
+		_positionBullet.setX(xPosBullet);
+		_positionBullet.setY(yPosBullet);
 	}
 	else 
 	{
-		_isAlive = false;
+		_aliveStatus = false;
 	}	
 	
 }
