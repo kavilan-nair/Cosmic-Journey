@@ -80,32 +80,6 @@ TEST_CASE("Enemy Bullet status is alive after bullet update")
     CHECK(isEnemyBulletAlive == aliveStatus);
 }
     
-TEST_CASE("Enemy Bullet moves from initial position")  
-{
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
-    
-    
-    for (int i = 0; i != 100; i++){enemyBullet.updateEnemyBullet();}
-    
-    bool enemyXMove = false;
-    bool enemyYMove = false;
-    
-    bool xMove = false;
-    bool yMove = false;
-    
-    if (enemyBullet.getPosition().getX() != enemy.getPosition().getX())
-        xMove = true;
-    
-    if (enemyBullet.getPosition().getY() != enemy.getPosition().getY())
-        yMove = true;
-
-    CHECK(xMove != enemyXMove);
-    CHECK(yMove != enemyYMove);
-    
-}
 
 TEST_CASE("Enemy Bullet is fired at correct angle")
 {
@@ -119,3 +93,4 @@ TEST_CASE("Enemy Bullet is fired at correct angle")
     
     CHECK(enemyBullet1Angle == correctAngle);   
 }
+
