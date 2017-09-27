@@ -13,6 +13,7 @@ class Bullet
 		bool isBulletAlive() {return _aliveStatus;};
         void setBulletDead() {_aliveStatus = false;};
 		void updateBullet();
+        int getBulletRadius(){return _bulletRadius;}; //this should be moved to the radius in the position data member
 	public:
 		static constexpr float PI = 3.14159265358979323846;
 		float originFix = PI/2;
