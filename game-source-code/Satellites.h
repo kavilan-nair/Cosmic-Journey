@@ -30,8 +30,6 @@ public:
         GameWindowProperties _gameWindowProperties;
         bool _aliveStatus;
         int _initialAngle;
-
-       
 };
 
 #endif // ENEMY_H
