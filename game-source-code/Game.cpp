@@ -311,10 +311,6 @@ void Game::processInputEvents()
 			case sf::Event::KeyReleased:
 				handlePlayerInput(event.key.code, false);
 				break;
-
-			case sf::Event::Closed:
-				_window.close();
-				break;
                 
             default:
                 break;

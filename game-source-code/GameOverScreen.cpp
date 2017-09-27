@@ -43,12 +43,7 @@ void GameOverScreen::show(sf::RenderWindow& renderWindow)
                 return;
             }
             
-             if (event.key.code == sf::Event::Closed)
-            {
-                std::exit(1);
-                renderWindow.close();
-                return;
-            }
+
         }
     }
 }

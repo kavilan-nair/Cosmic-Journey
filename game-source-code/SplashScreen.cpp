@@ -42,13 +42,6 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
         while (renderWindow.pollEvent(event))              
         {
 			if(event.key.code == sf::Keyboard::Return){return;}
-             if (event.key.code == sf::Event::Closed)
-            {
-                std::exit(1);
-                renderWindow.close();
-              
-                return;
-            }
         }
     }
 }
