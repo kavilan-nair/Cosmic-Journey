@@ -54,38 +54,6 @@ TEST_CASE("Satellites expand first")
 	}
 } 
 
-TEST_CASE("Satellites change origin before gyrating")
-{
-	GameWindowProperties gameWindow(800,600);
-	int direction = rand()%360;	
-	while(direction%90 == 0)
-	{
-		direction = rand()%360;
-	}
-	
-	int numberSequence = 10;
-	
-	for(int j = 1; j <= 3; j++)
-	{
-		Satellites spawnedSatellite(gameWindow,direction,j);
-		
-		int satelliteOriginXBefore = spawnedSatellite.getPosition().getoriginX();
-		int satelliteOriginYBefore = spawnedSatellite.getPosition().getoriginY();
-		
-		for(int i = 1; i <= numberSequence; i++)
-		{
-			spawnedSatellite.move();
-		}	
-		
-		int satelliteOriginXAfter = spawnedSatellite.getPosition().getoriginX()+5;
-		int satelliteOriginYAfter = spawnedSatellite.getPosition().getoriginY()+5;
-		
-		CHECK_FALSE(satelliteOriginXBefore == satelliteOriginXAfter);
-		CHECK_FALSE(satelliteOriginYBefore == satelliteOriginYAfter);
-	}
-}
-
-
 TEST_CASE("Satellites gyrate correctly")
 {
 	GameWindowProperties gameWindow(800,600);
