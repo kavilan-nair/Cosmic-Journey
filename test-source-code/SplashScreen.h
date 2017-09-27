@@ -9,7 +9,9 @@ class SplashScreen
         SplashScreen();
         void show(sf::RenderWindow& renderWindow);
         ~SplashScreen();
-    
+private:
+	sf::Texture _splashTexture;
+	sf::Font font;
 };
 
 
