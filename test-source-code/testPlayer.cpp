@@ -149,7 +149,7 @@ TEST_CASE("Random Clockwise + identical random anticlockwise movements returns t
 	
 	
 	srand(time(0));
-	int randMovements = rand()%10000+1;
+	int randMovements = rand()%71;
 	for(int i = 1; i <= randMovements; i++)
 	{
 		player.moveClockwise();
