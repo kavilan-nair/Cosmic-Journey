@@ -501,14 +501,15 @@ TEST_CASE("Enemy Bullet status is alive after bullet update")
     CHECK(isEnemyBulletAlive == aliveStatus);
 }
     
-TEST_CASE("Bullet status is dead after bullet reaches near the center ")  
+TEST_CASE("Enemy Bullet moves from initial position ")  
 {
 	GameWindowProperties gameWindow(800,600);
     Player player(gameWindow);
     Enemy enemy(gameWindow);
     EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
     
-    enemyBullet.updateEnemyBullet();
+    
+    for (int i = 0; i != 100; i++){enemyBullet.updateEnemyBullet();}
     
     bool enemyXMove = false;
     bool enemyYMove = false;
