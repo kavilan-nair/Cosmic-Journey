@@ -12,7 +12,7 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
 	background.setTexture(_splashTexture);
 	
 	font.loadFromFile("Resources/Agency_FB.ttf");
-	std::string splashTitle = "Shape Space Battle!";
+	std::string splashTitle = "Cosmic Journey";
 	sf::Text title(splashTitle, font);
 	title.setCharacterSize(58);
 	title.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/4);
@@ -22,7 +22,7 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
 	std::string splashControls = "Controls"
 								 "\n -Left arrow key moves clockwise"
 								 "\n -Right arrow key moves anticlockwise"
-								 "\n -Space key fires glorious cosmic energy"
+								 "\n -Space key fires bullet(s)"
 								 "\n \n Press Enter key to continue...";
 								 
 	sf::Text controls(splashControls,font);
@@ -42,6 +42,13 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
         while (renderWindow.pollEvent(event))              
         {
 			if(event.key.code == sf::Keyboard::Return){return;}
+             if (event.key.code == sf::Event::Closed)
+            {
+                std::exit(1);
+                renderWindow.close();
+              
+                return;
+            }
         }
     }
 }

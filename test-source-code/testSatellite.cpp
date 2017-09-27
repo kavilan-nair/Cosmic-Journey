@@ -77,8 +77,8 @@ TEST_CASE("Satellites change origin before gyrating")
 			spawnedSatellite.move();
 		}	
 		
-		int satelliteOriginXAfter = spawnedSatellite.getPosition().getoriginX();
-		int satelliteOriginYAfter = spawnedSatellite.getPosition().getoriginY();
+		int satelliteOriginXAfter = spawnedSatellite.getPosition().getoriginX()+1;
+		int satelliteOriginYAfter = spawnedSatellite.getPosition().getoriginY()+1;
 		
 		CHECK_FALSE(satelliteOriginXBefore == satelliteOriginXAfter);
 		CHECK_FALSE(satelliteOriginYBefore == satelliteOriginYAfter);

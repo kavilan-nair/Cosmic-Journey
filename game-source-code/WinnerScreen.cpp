@@ -42,6 +42,13 @@ void WinnerScreen::show(sf::RenderWindow& renderWindow)
                 renderWindow.close();
                 return;
             }
+            
+            if (event.key.code == sf::Event::Closed)
+            {
+                std::exit(1);
+                renderWindow.close();
+                return;
+            }
         }
     }
 }
