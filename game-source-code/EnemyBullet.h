@@ -1,45 +1,30 @@
 #ifndef ENEMYBULLET_H
 #define ENEMYBULLET_H
 
-#include "Position.h"
-#include "GameWindowProperties.h"
+#include "IMovingEntity.h"
+#include "Grid.h"
 
-class EnemyBullet
+class EnemyBullet : public IMovingEntity
 {
-    public:
-        EnemyBullet();
-        EnemyBullet(Position position, GameWindowProperties gameWindowProperties, Position posPlayer);
-        Position getPosition() {return _positionSpawn;};
-        bool isEnemyBulletAlive() {return _isAlive;};
-        void setEnemyBulletDead() {_isAlive = false;};
-        void updateEnemyBullet();
-        void setEnemyBulletPosition(Position position) {_positionSpawn = position;};
-        void setEnemyBulletGameWindowProperties(GameWindowProperties gameWindowProperties) {_gameWindowProperties = gameWindowProperties;};
-        void setEnemyBulletAngle(int angle){_positionSpawn.setAngle(angle);};
-        ~EnemyBullet();        
-    public:
-        static constexpr float PI = 3.14159265358979323846;
-		float originFix = PI/2;
-int newX;
-int newY;
-int newRadius;
-float newAngle;
+public:
+    EnemyBullet(const Position& enemyPos, const Grid& grid);
+    ~EnemyBullet();
+    virtual Position getPosition() override;
+    virtual EntityType getEntityType() override;
+    virtual void move() override;
+	virtual bool isAlive() override;
+	virtual bool getRespawn() override;
+    virtual void setDead() override;
+    virtual float getHitRadius() override;
+    
 private:
-	Position _posPlayer;
-        Position _positionSpawn;
-        GameWindowProperties _gameWindowProperties;
-        bool _isAlive;
-        int _enemyBulletRadius;
-        int _enemyBulletSpeed;
-		int _playerPosition;
-        float _factor = 0.01;
-		int _countX = 0;
+    Position _enemyBulletPos;
+	const Grid _grid;
+    
+    bool _aliveStatus;
+	bool _reSpawn;
+    float _factor = 0.00001;
+    const float _hitRadius = 6;
 };
 
-
-
-
-
-
-
-#endif
+#endif // ENEMYBULLET_H

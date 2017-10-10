@@ -2,19 +2,17 @@
 #define WINNERSCREEN_H
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class WinnerScreen
 {
     public:
         WinnerScreen();
-        void show(sf::RenderWindow& renderWindow);
+        void show(sf::RenderWindow& renderWindow, const int& score, const& highscore);
         ~WinnerScreen();
 private:
 	sf::Texture _winnerTexture;
 	sf::Font font;
 };
 
-
-
-
-#endif
+#endif //WINNERSCREEN_H

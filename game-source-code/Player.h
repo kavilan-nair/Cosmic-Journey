@@ -1,39 +1,50 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "Position.h"
-#include "GameWindowProperties.h"
-#include <cmath>
+
+#include "IShootingMovingEntity.h"
+#include "Grid.h"
+#include "Direction.h"
+#include "PlayerBullet.h"
 #include "WeaponType.h"
 
-class Player
+class Player : public IShootingMovingEntity
 {
-	public:
-        Player();
-        Player(GameWindowProperties gameWindowProperties);
-        void setPosition(Position position) { _position = position;};
-        Position getPosition() { return _position;};
-        void moveClockwise();
-        void moveAntiClockwise();
-        GameWindowProperties getWindowProperties(){return _gameWindowProperties;};
-        void decreaseLives();
-        int getLives(){return _lives;};
-        bool isDead(){return (!_isAlive);};
-        void respawn();
-        void upgradeWeaponDouble(){_weaponType = WeaponType::Double;};
-        void upgradeWeaponTriple(){_weaponType = WeaponType::Triple;};
-        WeaponType getWeaponType(){return _weaponType;};
-		~Player();
-        
-	public:
-		float PI = atan(1)*4;  //same issue with making this const, breaks like a hoe
-		float originFix = PI/2;
-
-    private:
-        Position _position;
-        GameWindowProperties _gameWindowProperties;
-        int _lives;
-        bool _isAlive;
-        WeaponType _weaponType;
+public:
+    Player(const Grid& grid);
+    ~Player();
+    virtual Position getPosition() override;
+    virtual EntityType getEntityType() override;
+    virtual void move() override;
+	virtual bool isAlive() override;
+    virtual vector<shared_ptr<IMovingEntity>>  shoot() override;    
+    virtual bool getRespawn() override;
+    virtual void setDead() override;
+    virtual float getHitRadius() override;
+	
+    Direction getDirection(); 
+    WeaponType getWeaponType(); 
+	
+    void setDirection(const Direction& direction); 
+    void upgradeWeaponDouble();
+    void upgradeWeaponTriple();
+    bool isGameOver();
+    int getLives();
+    int addScore(const int& points);
+    int getScore();
+    
+private:
+    
+    void respawn();
+    Position _playerPos;
+	bool _aliveStatus;
+	Direction _direction;
+	Grid _grid;
+	PlayerBullet _playerBullet;
+    WeaponType _weaponType = WeaponType::SINGLE;
+	bool _reSpawn;
+    const float _hitRadius = 24;
+    int _lives = 3;
+    int _score = 0;
 };
 
 #endif // PLAYER_H

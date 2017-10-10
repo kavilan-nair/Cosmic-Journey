@@ -1,0 +1,16 @@
+#ifndef ENTITYTYPES_H
+#define ENTITYTYPES_H
+
+enum class EntityType
+{
+	PLAYER = 0,
+	ENEMY,
+	SATELLITE,
+	LASER_GENERATOR,
+	PLAYER_BULLET,
+	ENEMY_BULLET,
+	LASER_FIELD,
+    ASTEROID
+};
+
+#endif // ENTITYTYPES_H

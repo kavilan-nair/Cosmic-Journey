@@ -14,7 +14,4 @@ private:
 	sf::Font font;
 };
 
-
-
-
-#endif
+#endif //SPLASHSCREEN_H

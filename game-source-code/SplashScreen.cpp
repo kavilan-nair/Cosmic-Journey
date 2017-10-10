@@ -3,7 +3,7 @@
 
 SplashScreen::SplashScreen()
 {
-	_splashTexture.loadFromFile("Resources/space.png");
+	_splashTexture.loadFromFile("Resources/Background.png");
 }
 
 void SplashScreen::show(sf::RenderWindow& renderWindow)
@@ -11,7 +11,7 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
 	sf::Sprite background;
 	background.setTexture(_splashTexture);
 	
-	font.loadFromFile("Resources/Agency_FB.ttf");
+	font.loadFromFile("Resources/Font.ttf");
 	std::string splashTitle = "Cosmic Journey";
 	sf::Text title(splashTitle, font);
 	title.setCharacterSize(58);
@@ -23,7 +23,7 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
 								 "\n -Left arrow key moves clockwise"
 								 "\n -Right arrow key moves anticlockwise"
 								 "\n -Space key fires bullet(s)"
-								 "\n \n Press Enter key to continue...";
+								 "\n \n Press Space key to continue...";
 								 
 	sf::Text controls(splashControls,font);
 	controls.setCharacterSize(25);
@@ -41,12 +41,11 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
     {
         while (renderWindow.pollEvent(event))              
         {
-			if(event.key.code == sf::Keyboard::Return){return;}
+			if(event.key.code == sf::Keyboard::Space){return;}
         }
     }
 }
 
 SplashScreen::~SplashScreen()
 {
-
 }

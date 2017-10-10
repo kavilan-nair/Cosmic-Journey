@@ -1,53 +1,73 @@
 #include "Enemy.h"
-#include "GameWindowProperties.h"
-#include <cmath>
-#include <time.h>
 #include <stdlib.h>
-#include <SFML/system.hpp>
-#include <iostream>
 
-
-Enemy::Enemy()
+Enemy::Enemy(const Grid& grid) :_grid(grid), _enemyBullet(_enemyPos, grid)
 {
-	
-}
-
-Enemy::Enemy(GameWindowProperties gameWindowProperties)
-{
-	setAlive();
+	_aliveStatus = true;
 	_reSpawn = false;
-	int randomStart = rand()%361;
-	_enemyPosition.setAngle(randomStart);
-	_enemyPosition.setRadius(gameWindowProperties.getRadius());
-	_enemyPosition.setoriginX(gameWindowProperties.getXOrigin());
-	_enemyPosition.setoriginY(gameWindowProperties.getYOrigin());
-    _enemyPosition.setX(gameWindowProperties.getXOrigin());
-    _enemyPosition.setY(gameWindowProperties.getYOrigin());
-    _gameWindowProperties = gameWindowProperties;
-
+	int randomStartAngle = rand()%360;
+	_enemyPos.setAngle(randomStartAngle);
+	_enemyPos.setRadius(0);
+	_enemyPos.setXposInitial(grid.getCenterX()); 
+    _enemyPos.setYposInitial(grid.getCenterY());
+	_enemyPos.setXpos(grid.getCenterX());
+    _enemyPos.setYpos(grid.getCenterY());
 }
+
+Enemy::~Enemy()
+{
+}
+
+Position Enemy::getPosition()
+{
+	return _enemyPos;
+}
+
+EntityType Enemy::getEntityType()
+{
+	 return EntityType::ENEMY;
+} 
 
 void Enemy::move()
-{	
-	auto rad = (_enemyPosition.getAngle() * PI/180);//*3;
-	_enemyPosition.setX(_enemyPosition.getoriginX() + factor*_enemyPosition.getRadius()*cos(rad));
-	_enemyPosition.setY(_enemyPosition.getoriginY() + factor*_enemyPosition.getRadius()*sin(rad));
-	//_enemyPosition.setAngle(_enemyPosition.getAngle() + 1);  //this is for spiralling
-	//factor += 0.001;
-	factor += 0.005;
+{
+    if (_enemyPos.getRadius() < _grid.getRadius())
+	{
+        auto radianAngle = (_enemyPos.getAngle() * M_PI/180);
+        _enemyPos.setRadius(_enemyPos.getRadius()  + _factor);
+        _enemyPos.setXpos(_enemyPos.getXposInitial() + _factor * _grid.getRadius() * cos(radianAngle));
+        _enemyPos.setYpos(_enemyPos.getYposInitial() + _factor * _grid.getRadius() * sin(radianAngle));
+        _factor += 0.001;
+	}
+    else 
+	{
+		_aliveStatus = false;
+        _reSpawn = true;
+	}
+}
 
-    
-    int xLimit = abs(_enemyPosition.getX());
-    int yLimit = abs(_enemyPosition.getY());
-    if(xLimit > _enemyPosition.getoriginX() + _enemyPosition.getRadius() || yLimit > _enemyPosition.getoriginY() + _enemyPosition.getRadius())
-    {
-        setDead();
-		_reSpawn = true;
-    }
-    
-    if(xLimit < _enemyPosition.getoriginX() - _enemyPosition.getRadius() || yLimit < _enemyPosition.getoriginY() - _enemyPosition.getRadius())
-    {
-		setDead();
-		_reSpawn = true;
-    }
+bool Enemy::isAlive()
+{
+	return _aliveStatus;
+}
+
+vector<shared_ptr<IMovingEntity>> Enemy::shoot()
+{
+    vector<shared_ptr<IMovingEntity>> enemyBulletVector; 
+    enemyBulletVector.push_back(std::make_shared<EnemyBullet>(_enemyPos, _grid));
+    return enemyBulletVector;
+}
+
+bool Enemy::getRespawn()
+{
+	return _reSpawn;
+}
+
+void Enemy::setDead()
+{   
+    _aliveStatus = false;
+}
+
+float Enemy::getHitRadius()
+{
+    return _hitRadius;
 }
