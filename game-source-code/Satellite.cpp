@@ -2,7 +2,14 @@
 
 Satellite::Satellite(const Grid& grid, int& inDirection,const int& numSatellite) 
 	: _grid(grid),
-	_aliveStatus(true)
+	_aliveStatus(true),
+	_hitRadius(24),
+	_radiusFactor(0.005),
+	_lifeCycle(1),
+	_phase1(10),
+	_phase2(11),
+	_phase3(11),
+	_radiusIncrease(0.05)
 {
 	int angleFactor = 20;
 	int startingPosition = 0;

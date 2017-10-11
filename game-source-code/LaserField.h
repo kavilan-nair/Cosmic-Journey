@@ -20,12 +20,12 @@ public:
 private:
 	Position _laserFieldPos;
     const Grid _grid;
-	float _radiusFactor = 0.005;
 	bool _aliveStatus;
 	int _phase;
+	float _radiusFactor;
 	int _oscillationFactor;
-    const int _hitRadius = 6;
-	const float _radiusIncrease = 0.001;
+    const int _hitRadius;
+	const float _radiusIncrease;
 };
 
 #endif // LASERFIELD_H

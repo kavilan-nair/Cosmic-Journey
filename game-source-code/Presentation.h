@@ -40,13 +40,13 @@ private:
 	sf::Sprite _backgroundSprite;
 	sf::Font font;
 	
-	const int _halveSize = 2;
-	const float _spriteRotationFactor = -0.5;
+	const int _halveSize;
+	const float _spriteRotationFactor;
 	
-    bool _debounceKey = false;
-	bool _isLeftPressed = false;  
-	bool _isRightPressed = false;
-	bool _isSpacePressed = false;
+    bool _debounceKey;
+	bool _isLeftPressed;  
+	bool _isRightPressed;
+	bool _isSpacePressed;
 	
 	struct textureIdentifier
 	{

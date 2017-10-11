@@ -22,9 +22,9 @@ private:
     const Grid _grid;
     bool _aliveStatus;
 	bool _reSpawn;
-    const float _hitRadius = 6;
-	const float _radiusIncrease = 0.0001f;
-	const int _movementCondition = 15;
+    const float _hitRadius;
+	const float _radiusIncrease;
+	const int _movementCondition;
 };
 
 #endif // PLAYERBULLET_H

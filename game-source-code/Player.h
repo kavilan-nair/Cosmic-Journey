@@ -41,9 +41,9 @@ private:
 	PlayerBullet _playerBullet;
     WeaponType _weaponType = WeaponType::SINGLE;
 	bool _reSpawn;
-    const float _hitRadius = 24;
-    int _lives = 3;
-    int _score = 0;
+    const float _hitRadius;
+    int _lives;
+    int _score;
 };
 
 #endif // PLAYER_H

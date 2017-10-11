@@ -8,7 +8,10 @@ LaserGenerator::LaserGenerator(const Grid& grid, int inDirection, const int& typ
 	: _grid(grid), 
 	_fieldLine(0),
 	_aliveStatus(true),
-	_originalAngle(inDirection)
+	_originalAngle(inDirection),
+	_radiusFactor(0.005),
+	_hitRadius(15),
+	_radiusIncrease(0.001)
 {
 	int angleFactor = 20;
 	if(typeSide == 1)

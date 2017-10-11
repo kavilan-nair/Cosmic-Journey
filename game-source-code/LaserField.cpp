@@ -1,7 +1,13 @@
 #include "LaserField.h"
 #include <stdlib.h>
 
-LaserField::LaserField(const Grid& grid, int Angle, const int& Location) : _grid(grid), _aliveStatus(true), _phase(0)
+LaserField::LaserField(const Grid& grid, int Angle, const int& Location) 
+	: _grid(grid), 
+	_aliveStatus(true), 
+	_phase(0),
+	_radiusFactor(0.005),
+	_hitRadius(6),
+	_radiusIncrease(0.001)	
 {	
     switch(Location)
     {

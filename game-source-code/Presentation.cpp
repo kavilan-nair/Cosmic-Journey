@@ -2,7 +2,14 @@
 
 using std::string;
 
-Presentation::Presentation() : _window(sf::VideoMode(800, 600),"Cosmic Journey", sf::Style::Default)
+Presentation::Presentation() 
+	: _window(sf::VideoMode(800, 600),"Cosmic Journey", sf::Style::Default),
+	_halveSize(2),
+	_spriteRotationFactor(-0.5),
+	_debounceKey(false),
+	_isLeftPressed(false),  
+	_isRightPressed(false),
+	_isSpacePressed(false)
 {
     loadTextures();
 	_backgroundTexture.loadFromFile("Resources/Background.png");

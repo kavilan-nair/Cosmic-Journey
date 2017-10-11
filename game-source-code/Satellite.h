@@ -23,16 +23,16 @@ public:
 private:
 	Position _satellitePos;
     const Grid _grid;
-    
-    const float _hitRadius = 24;
-	float _radiusFactor = 0.005;
-	float _gyrationRadius;
+	
     bool _aliveStatus;
-    int _lifeCycle = 1;
-	const int _phase1 = 10;
-	const int _phase2 = 11;
-	const int _phase3 = 11;
-	const float _radiusIncrease = 0.05;
+    const float _hitRadius;
+	float _radiusFactor;
+	float _gyrationRadius;
+    int _lifeCycle;
+	const int _phase1;
+	const int _phase2;
+	const int _phase3;
+	const float _radiusIncrease;
 };
 
 #endif // SATELLITE_H

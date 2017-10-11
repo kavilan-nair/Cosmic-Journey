@@ -1,6 +1,12 @@
 #include "PlayerBullet.h"
 
-PlayerBullet::PlayerBullet(const Position& playerPos, const Grid& grid, const int& bulletNumber) : _playerBulletPos(playerPos), _grid(grid), _aliveStatus(true)
+PlayerBullet::PlayerBullet(const Position& playerPos, const Grid& grid, const int& bulletNumber) 
+	: _playerBulletPos(playerPos), 
+	_grid(grid), 
+	_aliveStatus(true),
+	_hitRadius(6),
+	_radiusIncrease(0.0001f),
+	_movementCondition(15)
 {
     if (bulletNumber == 2)
     {

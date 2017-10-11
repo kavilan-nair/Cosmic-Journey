@@ -1,7 +1,12 @@
 #include "Player.h"
 #include <Functional>
 
-Player::Player(const Grid& grid) : _grid(grid), _playerBullet(_playerPos, _grid, 1) 
+Player::Player(const Grid& grid) 
+	: _grid(grid),
+	_playerBullet(_playerPos, _grid, 1), 
+	_hitRadius(24),
+    _lives(3),
+    _score(0)
 {
 	_aliveStatus = true;
 	_direction = Direction::HOVER;

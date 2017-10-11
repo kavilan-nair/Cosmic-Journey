@@ -22,12 +22,12 @@ public:
 private:
 	Position _laserGeneratorPos;
 	const Grid _grid;
-	float _radiusFactor = 0.005;
 	int _fieldLine;
 	bool _aliveStatus;
 	int _originalAngle;
-	const float _hitRadius = 15;
-	const float _radiusIncrease = 0.001; 
+	float _radiusFactor;
+	const float _hitRadius;
+	const float _radiusIncrease;
 };
 
 #endif // LASERGENERATOR_H
