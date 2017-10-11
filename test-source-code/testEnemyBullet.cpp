@@ -1,96 +1,76 @@
-#include "GameWindowProperties.h"
-#include "Enemy.h"
+#include "Grid.h"
 #include "EnemyBullet.h"
-#include "Player.h"
+#include "Enemy.h"
+#include <memory>
+#include <iostream>
+using std::shared_ptr;
+using std::make_shared;
+
+using namespace std;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
+#include <doctest.h>
 
-TEST_CASE("Enemy Bullet spawns at Enemy position")
+TEST_CASE("EnemyBullet is initialized with the correct attributes")
 {
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
+    Grid grid{800, 600};
+    shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
     
-	int enemyPosX = enemy.getPosition().getX();
-    int enemyPosY = enemy.getPosition().getY();
-    
-	int enemyBulletPosX = enemyBullet.getPosition().getX();
-	int enemyBulletPosY = enemyBullet.getPosition().getY();
-	
-	CHECK(enemyBulletPosX == enemyPosX);
-	CHECK(enemyBulletPosY == enemyPosY);
-} 
-
-TEST_CASE("Enemy Bullet has the correct radius for proper movement")
-{
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
-    
-    int radiusEnemy = enemy.getPosition().getRadius();
-    int radiusEnemyBullet = enemyBullet.getPosition().getRadius();
-    
-    CHECK(radiusEnemyBullet == radiusEnemy);
+    CHECK(enemyBullet_ptr->getEntityType() == EntityType::ENEMY_BULLET);
+    CHECK(enemyBullet_ptr->isAlive());
+    CHECK_FALSE(enemyBullet_ptr->getRespawn());
+    CHECK(enemyBullet_ptr->getHitRadius() == 6);    
 }
 
-TEST_CASE("Bullet status is set to alive when created")
+TEST_CASE("EnemyBullet spawns at player position")
 {
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
+    Grid grid{800, 600};
+    shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
     
-    bool isEnemyBulletAlive = enemyBullet.isEnemyBulletAlive();
-    bool aliveStatus = true;
+    auto enemyPosX = enemy_ptr->getPosition().getXpos;
+    auto enemyPosY = enemy_ptr->getPosition().getYpos;
+    auto enemyBulletPosX = enemyBullet_ptr->getPosition().getXpos;
+    auto enemyBulletPosY = enemyBullet_ptr->getPosition().getYpos;
     
-    CHECK(isEnemyBulletAlive == aliveStatus);
+    CHECK(enemyBulletPosX == enemyPosX);
+    CHECK(enemyBulletPosY == enemyPosY);
 }
 
-TEST_CASE("Bullet status is set to dead")
+TEST_CASE("EnemyBullet can be set dead")
 {
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
-
-    enemyBullet.setEnemyBulletDead();
-    bool aliveStatus = false;
-    bool isEnemyBulletAlive = enemyBullet.isEnemyBulletAlive();
+    Grid grid{800, 600};
+    shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
+        
+    enemyBullet_ptr->setDead();
     
-    CHECK(isEnemyBulletAlive == aliveStatus);
+    CHECK_FALSE(enemyBullet_ptr->isAlive());
 }
 
-//The bullet should be set to dead when it goes off the screen, implement this when the great refactoring of 2017 takes place
-
-TEST_CASE("Enemy Bullet status is alive after bullet update")  
+TEST_CASE("EnemyBullet is set dead when it reaches the circumference")
 {
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
-
-    enemyBullet.updateEnemyBullet();
+    Grid grid{800, 600};
+    shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
+        
+    while(enemyBullet_ptr->getPosition().getRadius() < grid.getRadius())
+        enemyBullet_ptr->move();
+    enemyBullet_ptr->move();
     
-    bool isEnemyBulletAlive = enemyBullet.isEnemyBulletAlive();
-    bool aliveStatus = true;
+    CHECK_FALSE(enemyBullet_ptr->isAlive());
+    CHECK_FALSE(enemyBullet_ptr->getRespawn());
     
-    CHECK(isEnemyBulletAlive == aliveStatus);
-}
-    
-
-TEST_CASE("Enemy Bullet is fired at correct angle")
-{
-	GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-    Enemy enemy(gameWindow);
-    EnemyBullet enemyBullet(enemy.getPosition(), gameWindow, player.getPosition());
-    
-    int correctAngle = enemy.getPosition().getAngle();
-    int enemyBullet1Angle = enemyBullet.getPosition().getAngle();
-    
-    CHECK(enemyBullet1Angle == correctAngle);   
 }
 
+TEST_CASE("EnemyBullet fires at same angle as Enemy")
+{
+    Grid grid{800, 600};
+    shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
+    
+    auto enemyAngle = enemy_ptr->getPosition().getAngle();
+    auto enemyBulletAngle = enemyBullet_ptr->getPosition().getAngle();
+    CHECK(enemyBulletAngle == enemyAngle);
+}
