@@ -1,6 +1,12 @@
 #include "EnemySpawner.h"
 
-EnemySpawner::EnemySpawner(const Grid& grid) : _grid(grid), _satelliteSpawned(false), _laserGeneratorSpawned(false), _allEnemiesSpawned(false), _allSatellitesSpawned(false)
+EnemySpawner::EnemySpawner(const Grid& grid) 
+    : _grid(grid),
+      _maxEnemies(50),
+      _satelliteSpawned(false), 
+      _laserGeneratorSpawned(false), 
+      _allEnemiesSpawned(false), 
+      _allSatellitesSpawned(false)
 {
 }
 
@@ -90,7 +96,7 @@ vector<shared_ptr<IMovingEntity>> EnemySpawner::spawnLaserGenerator()
     return laserGenerators;
 }
 
-void EnemySpawner::isLaserGenAndSatSpawned(vector<shared_ptr<IMovingEntity>>& gameObjects )
+void EnemySpawner::checkLaserGenAndSat(vector<shared_ptr<IMovingEntity>>& gameObjects )
 {
     int laserGenCount = 0;
     int satteliteCount = 0;

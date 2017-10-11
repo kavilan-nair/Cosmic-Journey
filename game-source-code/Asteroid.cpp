@@ -1,8 +1,12 @@
 #include "Asteroid.h"
 
-Asteroid::Asteroid(const Grid& grid) : _grid(grid), _aliveStatus(true)
+Asteroid::Asteroid(const Grid& grid) 
+    : _grid(grid),
+      _aliveStatus(true),
+      _radiusFactor(0.00001),
+      _radiusIncrease(0.003),      
+      _hitRadius(15)
 {
-    _aliveStatus = true;
 	int randomStartAngle = rand()%360;
 	_asteroidPos.setAngle(randomStartAngle);
 	_asteroidPos.setRadius(0);
@@ -31,10 +35,10 @@ void Asteroid::move()
     if (_asteroidPos.getRadius() < _grid.getRadius())
 	{
         auto radianAngle = (_asteroidPos.getAngle() * M_PI/180);
-        _asteroidPos.setRadius(_asteroidPos.getRadius()  + _factor);
-        _asteroidPos.setXpos(_asteroidPos.getXposInitial() + _factor * _grid.getRadius() * cos(radianAngle));
-        _asteroidPos.setYpos(_asteroidPos.getYposInitial() + _factor * _grid.getRadius() * sin(radianAngle));
-        _factor += 0.003;
+        _asteroidPos.setRadius(_asteroidPos.getRadius()  + _radiusFactor);
+        _asteroidPos.setXpos(_asteroidPos.getXposInitial() + _radiusFactor * _grid.getRadius() * cos(radianAngle));
+        _asteroidPos.setYpos(_asteroidPos.getYposInitial() + _radiusFactor * _grid.getRadius() * sin(radianAngle));
+        _radiusFactor += _radiusIncrease;
 	}
     else 
 	{

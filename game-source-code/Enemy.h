@@ -24,8 +24,9 @@ private:
     const Grid _grid;
     EnemyBullet _enemyBullet;
 
-	float _factor = 0.005;
-    const float _hitRadius = 24;
+	float _speed;
+    float _radiusFactor;
+    const float _radiusIncrease;
 	bool _aliveStatus;
 	bool _reSpawn;
 };

@@ -1,6 +1,11 @@
 #include "CollisionHandler.h"
 
 void CollisionHandler::checkCollisions(vector<shared_ptr<IMovingEntity>>& gameObjects)
+    : _areSatellitesDestroyed(false),
+      _satellitesKilled(0),
+      _points(0),
+      _pointsMultiplier(1),
+      _enemiesKilled(0)
 {
     for (auto &gameObject1 : gameObjects)
     {
@@ -20,7 +25,7 @@ void CollisionHandler::checkCollisions(vector<shared_ptr<IMovingEntity>>& gameOb
 
 void CollisionHandler::playerBulletCollidesWithEnemies(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2)
 {
-    if (gameObject1->getEntityType() == EntityType::PLAYER_BULLET && gameObject2->getEntityType() == EntityType::ENEMY&& gameObject2->isAlive())
+    if (gameObject1->getEntityType() == EntityType::PLAYER_BULLET && gameObject2->getEntityType() == EntityType::ENEMY && gameObject2->isAlive())
     {
         float distance = getDistance(gameObject1, gameObject2);
         if (distance < gameObject2->getHitRadius())

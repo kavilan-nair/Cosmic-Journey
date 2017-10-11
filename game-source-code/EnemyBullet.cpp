@@ -1,6 +1,12 @@
 #include "EnemyBullet.h"
 
-EnemyBullet::EnemyBullet(const Position& enemyPos, const Grid& grid) : _enemyBulletPos(enemyPos), _grid(grid), _aliveStatus(true)
+EnemyBullet::EnemyBullet(const Position& enemyPos, const Grid& grid) 
+    : _enemyBulletPos(enemyPos), 
+      _grid(grid), 
+      _aliveStatus(true),
+      _radiusFactor(0.00001),
+      _radiusIncrease(0.003),
+      _hitRadius(6)
 {
     _enemyBulletPos.setAngle(enemyPos.getAngle());
     _enemyBulletPos.setRadius(0);
@@ -34,10 +40,10 @@ void EnemyBullet::move()
     if (_enemyBulletPos.getRadius() < _grid.getRadius())
 	{
         auto radianAngle = (_enemyBulletPos.getAngle() * M_PI/180);
-        _enemyBulletPos.setRadius(_enemyBulletPos.getRadius()  + _factor);
-        _enemyBulletPos.setXpos(_enemyBulletPos.getXposInitial() + _factor * _grid.getRadius() * cos(radianAngle));
-        _enemyBulletPos.setYpos(_enemyBulletPos.getYposInitial() + _factor * _grid.getRadius() * sin(radianAngle));
-        _factor += 0.003;
+        _enemyBulletPos.setRadius(_enemyBulletPos.getRadius()  + _radiusFactor);
+        _enemyBulletPos.setXpos(_enemyBulletPos.getXposInitial() + _radiusFactor * _grid.getRadius() * cos(radianAngle));
+        _enemyBulletPos.setYpos(_enemyBulletPos.getYposInitial() + _radiusFactor * _grid.getRadius() * sin(radianAngle));
+        _radiusFactor += _radiusIncrease;
 	}
     else 
 	{

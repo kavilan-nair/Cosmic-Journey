@@ -23,8 +23,9 @@ private:
     
     bool _aliveStatus;
 	bool _reSpawn;
-    float _factor = 0.00001;
-    const float _hitRadius = 6;
+    float _radiusFactor;
+    const float _radiusIncrease;
+    const float _hitRadius;
 };
 
 #endif // ENEMYBULLET_H

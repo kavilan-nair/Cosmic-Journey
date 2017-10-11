@@ -21,13 +21,13 @@ public:
     vector<shared_ptr<IMovingEntity>> spawnLaserGenerator();
 	vector<shared_ptr<IMovingEntity>> enemyShoot(vector<shared_ptr<IMovingEntity>>& gameObjects);
     
-    void isLaserGenAndSatSpawned(vector<shared_ptr<IMovingEntity>>& gameObjects );
+    void checkLaserGenAndSat(vector<shared_ptr<IMovingEntity>>& gameObjects );
     int getEnemyReserves(){return _maxEnemies;};
     
 private:
     const Grid _grid;
     
-    int _maxEnemies = 50;
+    int _maxEnemies;
     bool _satelliteSpawned;
     bool _laserGeneratorSpawned;
     bool _allEnemiesSpawned;
