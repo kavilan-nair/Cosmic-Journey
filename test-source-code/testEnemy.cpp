@@ -1,82 +1,88 @@
-#include "GameWindowProperties.h"
 #include "Enemy.h"
+#include "Grid.h"
+#include "EntityType.h"
+#include <memory>
+#include "vector"
+
+using std::shared_ptr;
+using std::make_shared;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-TEST_CASE("Enemy spawn coordinates correct")
+TEST_CASE("Enemy is initialized with correct attributes")
 {
-	srand(time(0));
-	GameWindowProperties gameWindow(800,600);
-	Enemy spawnedEnemy(gameWindow);
+	Grid grid{800, 600};
+	shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
 	
-	int enemyOriginX = spawnedEnemy.getPosition().getoriginX();
-	int enemyOriginY = spawnedEnemy.getPosition().getoriginY();
-	
-	int circleCenterX = gameWindow.getXOrigin();
-	int circleCenterY = gameWindow.getYOrigin();
-	
-	CHECK(enemyOriginX == circleCenterX);
-	CHECK(enemyOriginY == circleCenterY);
-} 
-
-TEST_CASE("Half movement correct location")
-{
-	GameWindowProperties gameWindow(800,600);
-	Enemy spawnedEnemy(gameWindow);
-	float PI = atan(1)*4;
-	int stepSize = 99;
-	int toleranceBand = 2;
-	
-	for(int i = 1; i <= stepSize; i++)
-	{
-		spawnedEnemy.move();
-	}
-	
-	auto radians = (spawnedEnemy.getPosition().getAngle() * PI/180);
-	int enemyCurrentX = gameWindow.getXOrigin() + 0.5*gameWindow.getRadius()*cos(radians);
-	int enemyCurrentY = gameWindow.getYOrigin() + 0.5*gameWindow.getRadius()*sin(radians);
-
-	CHECK(enemyCurrentX - spawnedEnemy.getPosition().getX() <= toleranceBand);
-	CHECK(enemyCurrentY - spawnedEnemy.getPosition().getY() <= toleranceBand);
+	CHECK(enemy_ptr->getEntityType() == EntityType::ENEMY);
+	CHECK(enemy_ptr->isAlive() == true);
+	CHECK(enemy_ptr->getRespawn() == false);
+	CHECK(enemy_ptr->getHitRadius() == 24);
 }
 
-TEST_CASE("Full movement correct location")
+TEST_CASE("Enemy spawns at center of the grid")
 {
-	GameWindowProperties gameWindow(800,600);
-	Enemy spawnedEnemy(gameWindow);
-	float PI = atan(1)*4;
-	int stepSize = 199;
-	int toleranceBand = 2;
+	Grid grid{800, 600};
+	shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
 	
-	for(int i = 1; i <= stepSize; i++)
-	{
-		spawnedEnemy.move();
-	}
-	
-	auto radians = (spawnedEnemy.getPosition().getAngle() * PI/180);
-	int enemyCurrentX = gameWindow.getXOrigin() + gameWindow.getRadius()*cos(radians);
-	int enemyCurrentY = gameWindow.getYOrigin() + gameWindow.getRadius()*sin(radians);
-
-	CHECK(enemyCurrentX - spawnedEnemy.getPosition().getX() <= toleranceBand);
-	CHECK(enemyCurrentY - spawnedEnemy.getPosition().getY() <= toleranceBand);
+	CHECK(grid.getCenterX() == enemy_ptr->getPosition().getXpos());
+	CHECK(grid.getCenterY() == enemy_ptr->getPosition().getYpos());
 }
 
-TEST_CASE("Enemy dies when it reaches the circumference and is flagged for respawn")
+TEST_CASE("Enemy can move")
 {
-	GameWindowProperties gameWindow(800,600);
-	Enemy spawnedEnemy(gameWindow);
-	int stepSize = 300; 
+	Grid grid{800, 600};
+	shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
 	
-	CHECK(spawnedEnemy.isAlive() == true);
-	CHECK(spawnedEnemy.isRespawn() == false);
+	auto xPosBefore = enemy_ptr->getPosition().getXpos();
+	auto yPosBefore = enemy_ptr->getPosition().getYpos();
 	
-	for(int i = 1; i <= stepSize; i++)
-	{
-		spawnedEnemy.move();
-	}
+	enemy_ptr->move();
 	
-	CHECK(spawnedEnemy.isAlive() == false);
-	CHECK(spawnedEnemy.isRespawn() == true);
+	auto xPosAfter = enemy_ptr->getPosition().getXpos();
+	auto yPosAfter = enemy_ptr->getPosition().getYpos();
+	
+	CHECK_FALSE(xPosBefore == xPosAfter);
+	CHECK_FALSE(yPosBefore == yPosAfter);
 }
 
+TEST_CASE("Enemy dying at radius will indicate a respawn")
+{
+	Grid grid{800, 600};
+	shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+	
+	CHECK(enemy_ptr->getRespawn() == false);
+	
+	while(enemy_ptr->getPosition().getRadius() < grid.getRadius())
+	{
+		enemy_ptr->move();
+	}
+	
+	enemy_ptr->move();
+	CHECK(enemy_ptr->getRespawn() == true);
+}
+
+TEST_CASE("Enemy can be set dead")
+{
+    Grid grid{800, 600};
+	shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    
+	CHECK(enemy_ptr->isAlive());
+    enemy_ptr->setDead();
+    CHECK_FALSE(enemy_ptr->isAlive());
+}
+
+TEST_CASE("Enemy can fire bullets")
+{
+	Grid grid{800, 600};
+	shared_ptr<IShootingMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+	
+	auto bulletEnemy1 = enemy_ptr->shoot();
+	auto bulletEnemy2 = enemy_ptr->shoot();
+	
+	bulletEnemy2.push_back(bulletEnemy1[0]);
+	
+	CHECK(bulletEnemy1.size() == 1);
+	CHECK(bulletEnemy2.size() == 2);
+}
