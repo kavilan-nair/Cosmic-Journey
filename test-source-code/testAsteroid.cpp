@@ -8,7 +8,7 @@ using std::make_shared;
 using namespace std;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 
 TEST_CASE("Asteroid is initialized with the correct attributes")
@@ -48,9 +48,12 @@ TEST_CASE("Asteroid movement test")
     
     asteroid_ptr->move();
     
-    CHECK_FALSE(asteroid_ptr->getPosition().getXpos() == initialX );
-    CHECK_FALSE(asteroid_ptr->getPosition().getYpos() == initialY );
-
+    auto currentX = asteroid_ptr->getPosition().getXpos();
+    auto currentY = asteroid_ptr->getPosition().getYpos();
+	
+	bool diffPosition = (currentX != initialX || currentY != initialY);
+	
+	CHECK(diffPosition == true);
 } 
 
 TEST_CASE("Asteroid status can be set to dead")
@@ -58,10 +61,9 @@ TEST_CASE("Asteroid status can be set to dead")
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
     
+	CHECK(asteroid_ptr->isAlive());
     asteroid_ptr->setDead();
-
     CHECK_FALSE(asteroid_ptr->isAlive());
-
 } 
 
 TEST_CASE("Asteroid status is set to dead when out of bounds")

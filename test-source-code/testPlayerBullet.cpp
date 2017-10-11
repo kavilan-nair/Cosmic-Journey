@@ -9,7 +9,7 @@ using std::make_shared;
 using namespace std;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 
 TEST_CASE("PlayerBullet is initialized with the correct attributes")
@@ -39,8 +39,6 @@ TEST_CASE("PlayerBullet spawns at player position")
     
     CHECK(playerBulletPosX == playerPosX);
     CHECK(playerBulletPosY  == playerPosY);
-    
-
 }
 
 TEST_CASE("PlayerBullet can be set dead")
@@ -50,8 +48,8 @@ TEST_CASE("PlayerBullet can be set dead")
     shared_ptr<IMovingEntity> player_ptr = make_shared<Player>(grid);
     shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
     
+	CHECK(playerBullet_ptr->isAlive());
     playerBullet_ptr->setDead();
-    
     CHECK_FALSE(playerBullet_ptr->isAlive());
 }
 

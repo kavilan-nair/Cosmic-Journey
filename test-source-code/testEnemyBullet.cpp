@@ -9,7 +9,7 @@ using std::make_shared;
 using namespace std;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 TEST_CASE("EnemyBullet is initialized with the correct attributes")
 {
@@ -55,8 +55,7 @@ TEST_CASE("EnemyBullet is set dead when it reaches the circumference")
     shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
     shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
         
-    while(enemyBullet_ptr->getPosition().getRadius() < grid.getRadius())
-        enemyBullet_ptr->move();
+    while(enemyBullet_ptr->getPosition().getRadius() < grid.getRadius()) enemyBullet_ptr->move();
     enemyBullet_ptr->move();
     
     CHECK_FALSE(enemyBullet_ptr->isAlive());
