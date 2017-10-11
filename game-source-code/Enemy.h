@@ -24,12 +24,13 @@ private:
     const Grid _grid;
     EnemyBullet _enemyBullet;
 
-	float _speed;
+    float _speed;
     float _radiusFactor;
     const float _radiusIncrease;
-	bool _aliveStatus;
-	bool _reSpawn;
     float _hitRadius;
+    bool _aliveStatus;
+    bool _reSpawn;
+
 };
 
 #endif // ENEMY_H
