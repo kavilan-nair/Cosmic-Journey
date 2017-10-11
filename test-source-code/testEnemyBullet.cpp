@@ -44,16 +44,15 @@ TEST_CASE("EnemyBullet spawns at player position")
     shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
     shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition() ,grid);
     
-    auto xPosBefore = enemy_ptr->getPosition().getXpos;
-    auto yPosBefore = enemy_ptr->getPosition().getYpos;
+    auto xPosBefore = enemyBullet_ptr->getPosition().getXpos();
+    auto yPosBefore = enemyBullet_ptr->getPosition().getYpos();
     enemyBullet_ptr->move();
-    auto xPosAfter = enemy_ptr->getPosition().getXpos;
-    auto yPosAfter = enemy_ptr->getPosition().getYpos;
-
+    auto xPosAfter = enemyBullet_ptr->getPosition().getXpos();
+    auto yPosAfter = enemyBullet_ptr->getPosition().getYpos();
+    
     bool isPositionDifferent = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
     
-    CHECK_FALSE(isPositionDifferent);
-    
+    CHECK(isPositionDifferent);    
 }
 
 TEST_CASE("EnemyBullet can be set dead")

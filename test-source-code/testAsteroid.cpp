@@ -53,7 +53,7 @@ TEST_CASE("Asteroid movement test")
 	
 	bool diffPosition = (currentX != initialX || currentY != initialY);
 	
-	CHECK(diffPosition == true);
+	CHECK(diffPosition);
 } 
 
 TEST_CASE("Asteroid status can be set to dead")

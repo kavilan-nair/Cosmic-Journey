@@ -32,10 +32,10 @@ TEST_CASE("PlayerBullet spawns at player position")
     shared_ptr<IMovingEntity> player_ptr = make_shared<Player>(grid);
     shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
     
-    auto playerPosX = player_ptr->getPosition().getXpos;
-    auto playerPosY = player_ptr->getPosition().getYpos;
-    auto playerBulletPosX = playerBullet_ptr->getPosition().getXpos;
-    auto playerBulletPosY = playerBullet_ptr->getPosition().getYpos;
+    auto playerPosX = player_ptr->getPosition().getXpos();
+    auto playerPosY = player_ptr->getPosition().getYpos();
+    auto playerBulletPosX = playerBullet_ptr->getPosition().getXpos();
+    auto playerBulletPosY = playerBullet_ptr->getPosition().getYpos();
     
     CHECK(playerBulletPosX == playerPosX);
     CHECK(playerBulletPosY  == playerPosY);
@@ -47,18 +47,18 @@ TEST_CASE("PlayerBullet moves from its original position")
     auto bulletNumber = 0;
     shared_ptr<IMovingEntity> player_ptr = make_shared<Player>(grid);
     shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
-
-    auto xPosBefore = player_ptr->getPosition().getXpos;
-    auto yPosBefore = player_ptr->getPosition().getYpos;
+    
+    auto xPosBefore = playerBullet_ptr->getPosition().getXpos();
+    auto yPosBefore = playerBullet_ptr->getPosition().getYpos();
     playerBullet_ptr->move();
-    auto xPosAfter = player_ptr->getPosition().getXpos;
-    auto yPosAfter = player_ptr->getPosition().getYpos;
+    auto xPosAfter = playerBullet_ptr->getPosition().getXpos();
+    auto yPosAfter = playerBullet_ptr->getPosition().getYpos();
     
     bool isPositionDifferent = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
     
-    
-    CHECK_FALSE(isPositionDifferent);
+    CHECK(isPositionDifferent);
 }
+
 
 
 
