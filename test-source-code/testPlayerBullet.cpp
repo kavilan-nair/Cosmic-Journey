@@ -2,15 +2,12 @@
 #include "PlayerBullet.h"
 #include "Player.h"
 #include <memory>
-#include <iostream>
+
 using std::shared_ptr;
 using std::make_shared;
 
-using namespace std;
-
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
-
 
 TEST_CASE("PlayerBullet is initialized with the correct attributes")
 {
@@ -100,7 +97,7 @@ TEST_CASE("PlayerBullet is fired at the correct angle")
     CHECK(playerBulletAngle == playerAngle);
 }
 
-TEST_CASE("PlayerBullet from upgraded gun is fired at the correct angle")
+TEST_CASE("PlayerBullets from upgraded gun is fired at the correct angle")
 {
     Grid grid{800, 600};
     auto bulletNumber1 = 2;

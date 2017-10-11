@@ -2,11 +2,10 @@
 #include "EnemyBullet.h"
 #include "Enemy.h"
 #include <memory>
-#include <iostream>
+
 using std::shared_ptr;
 using std::make_shared;
 
-using namespace std;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
@@ -38,7 +37,7 @@ TEST_CASE("EnemyBullet spawns at player position")
     CHECK(enemyBulletPosY == enemyPosY);
 }
 
-TEST_CASE("EnemyBullet spawns at player position")
+TEST_CASE("EnemyBullet can move")
 {
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
@@ -66,7 +65,7 @@ TEST_CASE("EnemyBullet can be set dead")
     CHECK_FALSE(enemyBullet_ptr->isAlive());
 }
 
-TEST_CASE("EnemyBullet is set dead when it reaches the circumference")
+TEST_CASE("EnemyBullet is set dead when it reaches the circumference of playing circle")
 {
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);

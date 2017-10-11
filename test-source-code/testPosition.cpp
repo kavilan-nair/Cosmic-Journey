@@ -15,7 +15,7 @@ TEST_CASE("Position x and y can be set and retrieved")
     CHECK(testPosition.getYpos() == y);
 }
 
-TEST_CASE("Initial position x and y can be set and retrieved")
+TEST_CASE("Initial  x and y can be set and retrieved")
 {
     Position testPosition{};
     int x = 5;
@@ -27,7 +27,7 @@ TEST_CASE("Initial position x and y can be set and retrieved")
     CHECK(testPosition.getYposInitial() == y);
 }
 
-TEST_CASE("Initial position x and y can be set and retrieved")
+TEST_CASE("Initial radius and angle can be set and retrieved")
 {
     Position testPosition{};
     int radius = 100;

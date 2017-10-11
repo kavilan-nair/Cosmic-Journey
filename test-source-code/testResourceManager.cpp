@@ -14,4 +14,3 @@ TEST_CASE("Resource Manager resource path and entity type set and retrieved")
     CHECK(resourceManager.getEntityID() == entityType);
     CHECK(resourceManager.getResourcePath() == resourcePath);
 }
-

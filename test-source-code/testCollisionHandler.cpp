@@ -7,16 +7,13 @@
 #include "Player.h"
 #include "LaserGenerator.h"
 #include <memory>
-#include <iostream>
 #include <vector>
+
 using std::shared_ptr;
 using std::make_shared;
 
-using namespace std;
-
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
-
 
 TEST_CASE("CollisionHandler is initialized with the correct attributes")
 {
