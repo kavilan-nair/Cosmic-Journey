@@ -1,93 +1,133 @@
-#include "GameWindowProperties.h"
-#include "Satellites.h"
+#include "Satellite.h"
+#include "Grid.h"
+#include "EntityType.h"
+#include <memory>
+#include <iostream>
+#include "vector"
+
+using std::shared_ptr;
+using std::make_shared;
+
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-TEST_CASE("Satellites spawn in the correct location")
+TEST_CASE("Satellite is initialized with correct attributes")
 {
-	srand(time(0));
-	GameWindowProperties gameWindow(800,600);
-	int circleCenterX = gameWindow.getXOrigin();
-	int circleCenterY = gameWindow.getYOrigin();
-	int direction = rand()%360;
-	
-	for(int i = 1; i <= 3; i++)
-	{
-		Satellites spawnedSatellite(gameWindow,direction,i);
-		
-		int satelliteOriginX = spawnedSatellite.getPosition().getoriginX();
-		int satelliteOriginY = spawnedSatellite.getPosition().getoriginY();
-		
-		CHECK(satelliteOriginX == circleCenterX);
-		CHECK(satelliteOriginY == circleCenterY);
-	}
+	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<IMovingEntity> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
+
+	CHECK(satellite_ptr->getEntityType() == EntityType::SATELLITE);
+	CHECK(satellite_ptr->isAlive() == true);
+	CHECK(satellite_ptr->getRespawn() == false);
+	CHECK(satellite_ptr->getHitRadius() == 24);
 }
 
-TEST_CASE("Satellites expand first")
+TEST_CASE("Satellite spawns in center of grid")
 {
-	GameWindowProperties gameWindow(800,600);
-	int direction = rand()%360;	
-	int toleranceBand = 2;
-	int numberSequence = 9;
-	int angleDeviation = 0;
-	float PI = atan(1)*4;
-	float factor = 0.45;
+	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<IMovingEntity> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
 	
-	
-	for(int j = 1; j <= 3; j++)
-	{
-		Satellites spawnedSatellite(gameWindow,direction,j);
-		for(int i = 1; i <= numberSequence; i++)
-		{
-			spawnedSatellite.move();
-		}	
-		
-		if(j == 2) angleDeviation = 20;
-		if(j == 3) angleDeviation = -20;
-		
-		auto radians = ((direction+angleDeviation) * PI/180);
-		int satelliteX = gameWindow.getXOrigin() + factor*gameWindow.getRadius()*cos(radians);
-		int satelliteY = gameWindow.getYOrigin() + factor*gameWindow.getRadius()*sin(radians);
-	
-		CHECK(spawnedSatellite.getPosition().getX() - satelliteX <= toleranceBand);
-		CHECK(spawnedSatellite.getPosition().getY() - satelliteY <= toleranceBand);
-	}
-} 
+	CHECK(grid.getCenterX() == satellite_ptr->getPosition().getXpos());
+	CHECK(grid.getCenterY() == satellite_ptr->getPosition().getYpos());
+}
 
-TEST_CASE("Satellites gyrate correctly")
+TEST_CASE("Satellite can expand for first 10 life-cycles")
 {
-	GameWindowProperties gameWindow(800,600);
-	int direction = rand()%360;	
-	int toleranceBand = 2;
-	int beginGyrating = 10;
-	int numberSequence = rand()%10000+11;
-	float PI = atan(1)*4;
-	float gyrateRadius = 0.05*gameWindow.getRadius();
+	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<IMovingEntity> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
 	
-	for(int j = 1; j <= 3; j++)
-	{
-		Satellites spawnedSatellite(gameWindow,direction,j);
-		
-		for(int i = 1; i <= beginGyrating; i++)
-		{
-			spawnedSatellite.move();
-		}	
-		
-		int satelliteOriginXAfter = spawnedSatellite.getPosition().getoriginX();
-		int satelliteOriginYAfter = spawnedSatellite.getPosition().getoriginY();
-		
-		for(int i = 1; i <= numberSequence; i++)
-		{
-			spawnedSatellite.move();
-		}	
+	auto xPosBefore = satellite_ptr->getPosition().getXpos();
+	auto yPosBefore = satellite_ptr->getPosition().getYpos();
+	
+	satellite_ptr->move();
+	
+	auto xPosAfter = satellite_ptr->getPosition().getXpos();
+	auto yPosAfter = satellite_ptr->getPosition().getYpos();
+	
+	bool diffPosition = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
+	
+	CHECK(diffPosition == true);
+}
 
-		float radians = (spawnedSatellite.getPosition().getAngle() * PI/180)*3;
-		auto additionX = gyrateRadius*cos(radians);
-		auto additionY = gyrateRadius*sin(radians);
-		int satelliteX = satelliteOriginXAfter + additionX;
-		int satelliteY = satelliteOriginYAfter + additionY;
-		
-		CHECK(spawnedSatellite.getPosition().getX() - satelliteX <= toleranceBand);
-		CHECK(spawnedSatellite.getPosition().getY() - satelliteY <= toleranceBand);
+TEST_CASE("Satellite sets new origin at 11th life-cycle")
+{
+	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<Satellite> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
+	
+	auto xPosBefore = satellite_ptr->getPosition().getXposInitial();
+	auto yPosBefore = satellite_ptr->getPosition().getYposInitial(); 
+	
+	while(satellite_ptr->getLifeCycle() < 11)
+	{
+		satellite_ptr->move();
 	}
+	
+	auto xPosAfter = satellite_ptr->getPosition().getXposInitial();
+	auto yPosAfter = satellite_ptr->getPosition().getYposInitial();
+	
+	bool diffPosition = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
+	
+	CHECK(diffPosition == true);
+}
+
+TEST_CASE("Satellite gyrates in circle above 11th life-cycle")
+{
+	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<Satellite> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
+	
+	while(satellite_ptr->getLifeCycle() < 15)
+	{
+		satellite_ptr->move();
+	}
+	
+	auto xPosBefore = satellite_ptr->getPosition().getXpos();
+	auto yPosBefore = satellite_ptr->getPosition().getYpos();
+	
+	for(auto i = 1; i <= 3; i++) satellite_ptr->move();
+	
+	auto xPosAfter = satellite_ptr->getPosition().getXpos();
+	auto yPosAfter = satellite_ptr->getPosition().getYpos();
+	
+	bool diffPosition = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
+	
+	CHECK(diffPosition == true);
+}
+
+TEST_CASE("Satellite can shoot above 11th life-cycle")
+{
+	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<Satellite> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
+	
+	while(satellite_ptr->getLifeCycle() < 12)
+	{
+		satellite_ptr->move();
+	}
+	
+	auto satelliteBullet = satellite_ptr->shoot();
+	CHECK(satelliteBullet.size() == 1);
+	CHECK(satelliteBullet[0]->getEntityType() == EntityType::ENEMY_BULLET);
+}
+
+TEST_CASE("Satellite can be set dead")
+{
+   	Grid grid{800, 600};
+	int directionAngle = 20;
+	int numSatellite= 1;
+	shared_ptr<Satellite> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
+    
+	CHECK(satellite_ptr->isAlive());
+    satellite_ptr->setDead();
+    CHECK_FALSE(satellite_ptr->isAlive());
 }

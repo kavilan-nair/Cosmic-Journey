@@ -43,8 +43,9 @@ TEST_CASE("Enemy can move")
 	auto xPosAfter = enemy_ptr->getPosition().getXpos();
 	auto yPosAfter = enemy_ptr->getPosition().getYpos();
 	
-	CHECK_FALSE(xPosBefore == xPosAfter);
-	CHECK_FALSE(yPosBefore == yPosAfter);
+	bool diffPosition = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
+	
+	CHECK(diffPosition == true);
 }
 
 TEST_CASE("Enemy dying at radius will indicate a respawn")
@@ -85,4 +86,5 @@ TEST_CASE("Enemy can fire bullets")
 	
 	CHECK(bulletEnemy1.size() == 1);
 	CHECK(bulletEnemy2.size() == 2);
+	CHECK(bulletEnemy1[0]->getEntityType() == EntityType::ENEMY_BULLET);
 }
