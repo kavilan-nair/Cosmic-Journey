@@ -10,8 +10,8 @@ class ResourceManager
 public:
 	ResourceManager(EntityType entityID, std::string resourcePath);
 	~ResourceManager();
-	EntityType getEntityID();
-	string getResourcePath();
+	EntityType getEntityID() const;
+	string getResourcePath() const;
 private:
 	string _resourcePath;
 	EntityType _entityType;	

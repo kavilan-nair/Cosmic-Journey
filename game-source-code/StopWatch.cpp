@@ -3,10 +3,8 @@
 
 using namespace std;
 
-StopWatch::StopWatch()
+StopWatch::StopWatch() : timeInitial(0), timeFinal(0)
 {
-	timeInitial = 0;
-	timeFinal = 0;
 }
 
 void StopWatch::startTimer()

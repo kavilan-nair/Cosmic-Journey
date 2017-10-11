@@ -4,18 +4,20 @@
 
 using namespace std;
 
-LaserGenerator::LaserGenerator(const Grid& grid, int inDirection, const int& typeSide) : _grid(grid)
+LaserGenerator::LaserGenerator(const Grid& grid, int inDirection, const int& typeSide) 
+	: _grid(grid), 
+	_fieldLine(0),
+	_aliveStatus(true),
+	_originalAngle(inDirection)
 {
-	_fieldLine = 0;
-	_aliveStatus = true;
-	_originalAngle = inDirection;
+	int angleFactor = 20;
 	if(typeSide == 1)
 	{
-		 inDirection += 20;
+		 inDirection += angleFactor;
 	}
 	else
 	{
-		 inDirection -= 20;
+		 inDirection -= angleFactor;
 	}
 	
 	_laserGeneratorPos.setAngle(inDirection);
@@ -45,10 +47,10 @@ void LaserGenerator::move()
 	if (_laserGeneratorPos.getRadius() < _grid.getRadius())
 	{
         auto radianAngle = (_laserGeneratorPos.getAngle() * M_PI/180);
-        _laserGeneratorPos.setRadius(_laserGeneratorPos.getRadius()  + _factor);
-        _laserGeneratorPos.setXpos(_laserGeneratorPos.getXposInitial() + _factor * _grid.getRadius() * cos(radianAngle));
-        _laserGeneratorPos.setYpos(_laserGeneratorPos.getYposInitial() + _factor * _grid.getRadius() * sin(radianAngle));
-        _factor += 0.001;
+        _laserGeneratorPos.setRadius(_laserGeneratorPos.getRadius()  + _radiusFactor);
+        _laserGeneratorPos.setXpos(_laserGeneratorPos.getXposInitial() + _radiusFactor * _grid.getRadius() * cos(radianAngle));
+        _laserGeneratorPos.setYpos(_laserGeneratorPos.getYposInitial() + _radiusFactor * _grid.getRadius() * sin(radianAngle));
+        _radiusFactor += _radiusIncrease;
 	}
     else 
 	{

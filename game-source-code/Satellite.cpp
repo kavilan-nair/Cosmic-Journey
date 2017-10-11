@@ -2,7 +2,7 @@
 
 Satellite::Satellite(const Grid& grid, int& inDirection,const int& numSatellite) 
 	: _grid(grid),
-	_aliveStatus(true),
+	_aliveStatus(true)
 {
 	int angleFactor = 20;
 	int startingPosition = 0;
@@ -43,9 +43,9 @@ void Satellite::move()
 	if(_lifeCycle <= _phase1) 
 	{
 		auto radianAngle = (_satellitePos.getAngle() * M_PI/180);
-		_satellitePos.setXpos(_satellitePos.getXposInitial() + _speed * _satellitePos.getRadius() * cos(radianAngle));
-		_satellitePos.setYpos(_satellitePos.getYposInitial() + _speed * _satellitePos.getRadius() * sin(radianAngle));
-		_speed += 0.05;
+		_satellitePos.setXpos(_satellitePos.getXposInitial() + _radiusFactor * _satellitePos.getRadius() * cos(radianAngle));
+		_satellitePos.setYpos(_satellitePos.getYposInitial() + _radiusFactor * _satellitePos.getRadius() * sin(radianAngle));
+		_radiusFactor += _radiusIncrease;
 		_lifeCycle++;
     }
 

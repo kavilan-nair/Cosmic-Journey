@@ -37,12 +37,12 @@ void Presentation::renderWindow(vector<shared_ptr<IMovingEntity>> &gameObjects, 
             {
                 sf::Sprite gameObjectSprite;
                 gameObjectSprite.setTexture(i.texture);
-				gameObjectSprite.setOrigin(i.texture.getSize().x/2,i.texture.getSize().y/2);
+				gameObjectSprite.setOrigin(i.texture.getSize().x/_halveSize,i.texture.getSize().y/_halveSize);
                 gameObjectSprite.setPosition(gameObject->getPosition().getXpos(), gameObject->getPosition().getYpos());
                 
                 if(gameObject->getEntityType() != EntityType::SATELLITE)
 				{
-					gameObjectSprite.setRotation(gameObject->getPosition().getAngle() * -0.5);
+					gameObjectSprite.setRotation(gameObject->getPosition().getAngle() * _spriteRotationFactor);
 				}
                 _window.draw(gameObjectSprite);
             }

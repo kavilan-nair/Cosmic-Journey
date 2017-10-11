@@ -55,10 +55,10 @@ void LaserField::move()
     if (_laserFieldPos.getRadius() < _grid.getRadius())
 	{
         auto radianAngle = ((_laserFieldPos.getAngle()+_oscillationFactor) * M_PI/180);
-        _laserFieldPos.setRadius(_laserFieldPos.getRadius()  + _factor);
-        _laserFieldPos.setXpos(_laserFieldPos.getXposInitial() + _factor * _grid.getRadius() * cos(radianAngle));
-        _laserFieldPos.setYpos(_laserFieldPos.getYposInitial() + _factor * _grid.getRadius() * sin(radianAngle));
-        _factor += 0.001;
+        _laserFieldPos.setRadius(_laserFieldPos.getRadius()  + _radiusFactor);
+        _laserFieldPos.setXpos(_laserFieldPos.getXposInitial() + _radiusFactor * _grid.getRadius() * cos(radianAngle));
+        _laserFieldPos.setYpos(_laserFieldPos.getYposInitial() + _radiusFactor * _grid.getRadius() * sin(radianAngle));
+        _radiusFactor += _radiusIncrease;
 	}
     else 
 	{

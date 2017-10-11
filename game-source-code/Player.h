@@ -38,7 +38,7 @@ private:
     Position _playerPos;
 	bool _aliveStatus;
 	Direction _direction;
-	Grid _grid;
+	const Grid _grid;
 	PlayerBullet _playerBullet;
     WeaponType _weaponType = WeaponType::SINGLE;
 	bool _reSpawn;

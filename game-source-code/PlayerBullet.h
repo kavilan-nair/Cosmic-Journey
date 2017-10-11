@@ -23,6 +23,8 @@ private:
     bool _aliveStatus;
 	bool _reSpawn;
     const float _hitRadius = 6;
+	const float _radiusIncrease = 0.0001f;
+	const int _movementCondition = 15;
 };
 
 #endif // PLAYERBULLET_H

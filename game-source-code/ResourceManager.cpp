@@ -1,21 +1,19 @@
 #include "ResourceManager.h"
 
-ResourceManager::ResourceManager(EntityType entityID, std::string resourcePath)
+ResourceManager::ResourceManager(EntityType entityID, std::string resourcePath) : _resourcePath(resourcePath), _entityType(entityID)
 {
-	_resourcePath = resourcePath;
-	_entityType = entityID;
 }
 
 ResourceManager::~ResourceManager()
 {
 }
 
-EntityType ResourceManager::getEntityID()
+EntityType ResourceManager::getEntityID() const
 {
 	return _entityType;
 }
 
-string ResourceManager::getResourcePath()
+string ResourceManager::getResourcePath() const
 {
 	return _resourcePath;
 }

@@ -32,9 +32,9 @@ bool PlayerBullet::isAlive()
 
 void PlayerBullet::move()
 {
-    if (_playerBulletPos.getRadius() > 15)
+    if (_playerBulletPos.getRadius() > _movementCondition)
 	{
-		auto radiusFactor = _grid.getRadius()*0.0001f;
+		auto radiusFactor = _grid.getRadius()*_radiusIncrease;
 		_playerBulletPos.setRadius(_playerBulletPos.getRadius() - radiusFactor);
 		auto rad = (_playerBulletPos.getAngle() * M_PI/180)*0.5;
 		int newXPos = _grid.getCenterX() + _playerBulletPos.getRadius()*cos(rad-M_PI_2);

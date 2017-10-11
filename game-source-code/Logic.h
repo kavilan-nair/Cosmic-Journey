@@ -43,11 +43,12 @@ public:
     void collisions();
     void updateScores();
     void entitiesShoot();
+	void deleteDeadEntities();
     
 private: 
     Presentation _presentation;
     GameState _gameState;
-    Grid _grid{800, 600};
+    const Grid _grid{800, 600};
     HighScoreManager _highScoreManager;
     shared_ptr<PlayerBullet> _playerBullet;
     shared_ptr<Player> _player;
