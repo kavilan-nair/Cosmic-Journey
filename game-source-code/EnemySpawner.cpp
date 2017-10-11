@@ -90,7 +90,7 @@ vector<shared_ptr<IMovingEntity>> EnemySpawner::spawnLaserGenerator()
     return laserGenerators;
 }
 
-void EnemySpawner::checkLaserGenAndSat(vector<shared_ptr<IMovingEntity>>& gameObjects )
+void EnemySpawner::isLaserGenAndSatSpawned(vector<shared_ptr<IMovingEntity>>& gameObjects )
 {
     int laserGenCount = 0;
     int satteliteCount = 0;

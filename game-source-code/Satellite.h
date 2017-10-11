@@ -25,10 +25,13 @@ private:
     const Grid _grid;
     
     const float _hitRadius = 24;
-	float _factor = 0.005;
+	float _speed = 0.005;
 	float _gyrationRadius;
     bool _aliveStatus;
     int _lifeCycle = 1;
+	const int _phase1 = 10;
+	const int _phase2 = 11;
+	const int _phase3 = 11;
 };
 
 #endif // SATELLITE_H

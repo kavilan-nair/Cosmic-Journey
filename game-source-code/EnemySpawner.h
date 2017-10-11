@@ -21,7 +21,7 @@ public:
     vector<shared_ptr<IMovingEntity>> spawnLaserGenerator();
 	vector<shared_ptr<IMovingEntity>> enemyShoot(vector<shared_ptr<IMovingEntity>>& gameObjects);
     
-    void checkLaserGenAndSat(vector<shared_ptr<IMovingEntity>>& gameObjects );
+    void isLaserGenAndSatSpawned(vector<shared_ptr<IMovingEntity>>& gameObjects );
     int getEnemyReserves(){return _maxEnemies;};
     
 private:

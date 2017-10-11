@@ -40,6 +40,7 @@ void Logic::run()
 			entitiesShoot();         
             collisions();            
             updateScores();
+			deleteDeadEntities();
             renderEntities();
             timeFromLastUpdate -= timePerFrame;
         }
@@ -76,15 +77,6 @@ void Logic::updatePlayerPosition()
 
 void Logic::renderEntities()
 {  
-    _gameObjects.erase(remove_if
-    (
-        _gameObjects.begin(), 
-        _gameObjects.end(), 
-        []( shared_ptr<IMovingEntity>& gameObject){ return (!gameObject->isAlive()); }
-    ), 
-    _gameObjects.end()
-    );
-    
 	_presentation.renderWindow(_gameObjects, _player->getLives(), _player->getScore(), _highScore, _enemiesRemaining);
 }
 
@@ -142,7 +134,7 @@ void Logic::spawnLaserGenerators()
         for ( auto &laserGenerators :  _enemySpawner.spawnLaserGenerator() ) 
             _gameObjects.push_back(laserGenerators);
             
-        _enemySpawner.checkLaserGenAndSat(_gameObjects);
+        _enemySpawner.isLaserGenAndSatSpawned(_gameObjects);
 }
 
 void Logic::entitiesShoot()
@@ -171,4 +163,16 @@ void Logic::drawWinnerScreen()
 void Logic::drawGameOverScreen()
 {
     _presentation.displayGameOverScreen(_player->getScore(), _highScore);
+}
+
+void Logic::deleteDeadEntities()
+{
+	 _gameObjects.erase(remove_if
+    (
+        _gameObjects.begin(), 
+        _gameObjects.end(), 
+        []( shared_ptr<IMovingEntity>& gameObject){ return (!gameObject->isAlive()); }
+    ), 
+    _gameObjects.end()
+    );
 }
