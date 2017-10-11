@@ -7,7 +7,7 @@ Enemy::Enemy(const Grid& grid)
       _radiusFactor(0.005),
       _radiusIncrease(0.001),
       _hitRadius(24),
-      _aliveStatus(true);
+      _aliveStatus(true),
       _reSpawn(false)
 {
 
@@ -42,7 +42,7 @@ void Enemy::move()
         _enemyPos.setRadius(_enemyPos.getRadius()  + _radiusFactor);
         _enemyPos.setXpos(_enemyPos.getXposInitial() + _radiusFactor * _grid.getRadius() * cos(radianAngle));
         _enemyPos.setYpos(_enemyPos.getYposInitial() + _radiusFactor * _grid.getRadius() * sin(radianAngle));
-        _radiusFactor += speedIncrease;
+        _radiusFactor += _radiusIncrease;
 	}
     else 
 	{

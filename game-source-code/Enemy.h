@@ -29,6 +29,7 @@ private:
     const float _radiusIncrease;
 	bool _aliveStatus;
 	bool _reSpawn;
+    float _hitRadius;
 };
 
 #endif // ENEMY_H

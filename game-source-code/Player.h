@@ -26,7 +26,6 @@ public:
 	
     void setDirection(const Direction& direction); 
     void upgradeWeaponDouble();
-    void upgradeWeaponTriple();
     bool isGameOver();
     int getLives();
     int addScore(const int& points);

@@ -1,11 +1,6 @@
 #include "CollisionHandler.h"
 
 void CollisionHandler::checkCollisions(vector<shared_ptr<IMovingEntity>>& gameObjects)
-    : _areSatellitesDestroyed(false),
-      _satellitesKilled(0),
-      _points(0),
-      _pointsMultiplier(1),
-      _enemiesKilled(0)
 {
     for (auto &gameObject1 : gameObjects)
     {

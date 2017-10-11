@@ -116,10 +116,6 @@ void Player::upgradeWeaponDouble()
     _weaponType = WeaponType::DOUBLE;
 }
 
-void Player::upgradeWeaponTriple()
-{
-    _weaponType = WeaponType::TRIPLE;
-}
 
 WeaponType Player::getWeaponType()
 {

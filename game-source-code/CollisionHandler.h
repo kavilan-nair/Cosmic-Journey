@@ -28,11 +28,11 @@ private:
     void updateLaserGenerators(vector<shared_ptr<IMovingEntity>>& gameObjects);
     void resetMultiplier();
     
-    bool _areSatellitesDestroyed;
-    int _satellitesKilled;
-    int _points;
-	int _pointsMultiplier;
-    int _enemiesKilled;
+    bool _areSatellitesDestroyed = false;
+    int _satellitesKilled = 0;
+    int _points = 0;
+	int _pointsMultiplier = 1;
+    int _enemiesKilled = 0;
 };
 
 #endif // COLLISIONHANDLER_H

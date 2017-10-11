@@ -134,7 +134,7 @@ void Logic::spawnLaserGenerators()
         for ( auto &laserGenerators :  _enemySpawner.spawnLaserGenerator() ) 
             _gameObjects.push_back(laserGenerators);
             
-        _enemySpawner.isLaserGenAndSatSpawned(_gameObjects);
+        _enemySpawner.checkLaserGenAndSat(_gameObjects);
 }
 
 void Logic::entitiesShoot()
