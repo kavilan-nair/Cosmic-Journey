@@ -127,7 +127,6 @@ TEST_CASE("Satellite can be set dead")
 	int numSatellite= 1;
 	shared_ptr<Satellite> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
     
-	CHECK(satellite_ptr->isAlive());
     satellite_ptr->setDead();
     CHECK_FALSE(satellite_ptr->isAlive());
 }

@@ -61,7 +61,6 @@ TEST_CASE("PlayerBullet collides with Satellite")
     
     CHECK_FALSE(isSatelliteAlive);
     CHECK_FALSE(isPlayerBulletAlive);
-    
 }
 
 TEST_CASE("PlayerBullet collides with LaserGenerator")
@@ -182,7 +181,6 @@ TEST_CASE("Enemy Bullet collides with player")
     
     CHECK_FALSE(isEnemyBulletAlive);
     CHECK_FALSE(isPlayerRespanable);
-    
 }
 
 TEST_CASE("Laser Field collides with player")

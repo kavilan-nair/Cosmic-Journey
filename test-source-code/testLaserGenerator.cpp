@@ -34,7 +34,7 @@ TEST_CASE("LaserGenerator spawns at center of the grid")
 	CHECK(grid.getCenterY() == laserGenerator_ptr->getPosition().getYpos());
 }
 
-TEST_CASE("LaserGenerator can move")
+TEST_CASE("LaserGenerator can move outward from center")
 {
 	Grid grid{800, 600};
 	int directionAngle = 20;

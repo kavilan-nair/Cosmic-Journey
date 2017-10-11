@@ -8,7 +8,6 @@ using std::make_shared;
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-
 TEST_CASE("Asteroid is initialized with the correct attributes")
 {
     Grid grid{800, 600};
@@ -20,8 +19,7 @@ TEST_CASE("Asteroid is initialized with the correct attributes")
     CHECK(asteroid_ptr->getHitRadius() == 15);    
 }
 
-
-TEST_CASE("Asteroid Spawns from the center of the screen")
+TEST_CASE("Asteroid Spawns on center of the grid")
 {
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
@@ -34,7 +32,6 @@ TEST_CASE("Asteroid Spawns from the center of the screen")
     CHECK(asteroidXInitial == gridCenterX);
     CHECK(asteroidYInitial == gridCenterY);
 }
-
 
 TEST_CASE("Asteroid moves from initial position")
 {
@@ -58,8 +55,7 @@ TEST_CASE("Asteroid alive status can be set to dead")
 {
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
-    
-    CHECK(asteroid_ptr->isAlive());
+
     asteroid_ptr->setDead();
     CHECK_FALSE(asteroid_ptr->isAlive());
 } 

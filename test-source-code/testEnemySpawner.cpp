@@ -113,8 +113,7 @@ TEST_CASE("EnemySpawner will spawn new enemy if current enemy is respawnable")
 	enemy_ptr_forRespawn->move();
 	
 	vectorEnemyRespawn.push_back(enemy_ptr_forRespawn);
-	auto respawnedEnemy = enemyspawner_ptr->respawnEnemyNormal(vectorEnemyRespawn);
-	
+	auto respawnedEnemy = enemyspawner_ptr->respawnEnemyNormal(vectorEnemyRespawn); 
 	
 	vectorEnemyNoRespawn.push_back(enemy_ptr_noRespawn);
 	auto noRespawnedEnemy = enemyspawner_ptr->respawnEnemyNormal(vectorEnemyNoRespawn);
