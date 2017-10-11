@@ -41,14 +41,34 @@ TEST_CASE("PlayerBullet spawns at player position")
     CHECK(playerBulletPosY  == playerPosY);
 }
 
+TEST_CASE("PlayerBullet moves from its original position")
+{
+    Grid grid{800, 600};
+    auto bulletNumber = 0;
+    shared_ptr<IMovingEntity> player_ptr = make_shared<Player>(grid);
+    shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
+
+    auto xPosBefore = player_ptr->getPosition().getXpos;
+    auto yPosBefore = player_ptr->getPosition().getYpos;
+    playerBullet_ptr->move();
+    auto xPosAfter = player_ptr->getPosition().getXpos;
+    auto yPosAfter = player_ptr->getPosition().getYpos;
+    
+    bool isPositionDifferent = (xPosAfter != xPosBefore || yPosAfter != yPosBefore);
+    
+    
+    CHECK_FALSE(isPositionDifferent);
+}
+
+
+
 TEST_CASE("PlayerBullet can be set dead")
 {
     Grid grid{800, 600};
     auto bulletNumber = 0;
     shared_ptr<IMovingEntity> player_ptr = make_shared<Player>(grid);
     shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
-    
-	CHECK(playerBullet_ptr->isAlive());
+
     playerBullet_ptr->setDead();
     CHECK_FALSE(playerBullet_ptr->isAlive());
 }
