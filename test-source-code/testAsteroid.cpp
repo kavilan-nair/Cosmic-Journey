@@ -13,10 +13,10 @@ using namespace std;
 
 TEST_CASE("Asteroid is initialized with the correct attributes")
 {
-	Grid grid{800, 600};
+    Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
     
-	CHECK(asteroid_ptr->getEntityType() == EntityType::ASTEROID);
+    CHECK(asteroid_ptr->getEntityType() == EntityType::ASTEROID);
     CHECK(asteroid_ptr->isAlive());
     CHECK_FALSE(asteroid_ptr->getRespawn());
     CHECK(asteroid_ptr->getHitRadius() == 15);    
@@ -25,7 +25,7 @@ TEST_CASE("Asteroid is initialized with the correct attributes")
 
 TEST_CASE("Asteroid Spawns from the center of the screen")
 {
-	Grid grid{800, 600};
+    Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
     
     auto asteroidXInitial = asteroid_ptr->getPosition().getXposInitial();
@@ -33,14 +33,14 @@ TEST_CASE("Asteroid Spawns from the center of the screen")
     auto gridCenterX = grid.getCenterX();
     auto gridCenterY = grid.getCenterY();
     
-	CHECK(asteroidXInitial == gridCenterX);
-	CHECK(asteroidYInitial == gridCenterY);
+    CHECK(asteroidXInitial == gridCenterX);
+    CHECK(asteroidYInitial == gridCenterY);
 }
 
 
 TEST_CASE("Asteroid movement test")
 {
-	Grid grid{800, 600};
+    Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
     
     auto initialX = asteroid_ptr->getPosition().getXposInitial();
@@ -55,7 +55,7 @@ TEST_CASE("Asteroid movement test")
 
 TEST_CASE("Asteroid status can be set to dead")
 {
-	Grid grid{800, 600};
+    Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
     
     asteroid_ptr->setDead();
@@ -66,7 +66,7 @@ TEST_CASE("Asteroid status can be set to dead")
 
 TEST_CASE("Asteroid status is set to dead when out of bounds")
 {
-	Grid grid{800, 600};
+    Grid grid{800, 600};
     shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
     //objects need to move till its out of bounds
     while (asteroid_ptr->getPosition().getRadius() < grid.getRadius())
