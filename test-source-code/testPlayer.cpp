@@ -1,197 +1,115 @@
 #include "Player.h"
-#include "GameWindowProperties.h"
-#include "Game.h"
+#include "Grid.h"
+#include "Direction.h"
+#include "EntityType.h"
+#include <memory>
 
+using std::shared_ptr;
+using std::make_shared;
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-TEST_CASE("360 degrees clockwise returns to origin")
+TEST_CASE("Player is initialized with correct attributes")
 {
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-
-	for(int i = 1; i <= 72; i++)
-	{
-		player.moveClockwise();
-	}
+	Grid grid{800, 600};
+	shared_ptr<IMovingEntity> player_ptr = make_shared<Player>(grid);
 	
-	int playerEndX = player.getPosition().getX();
-	int playerEndY = player.getPosition().getY();
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
-} 
-
-TEST_CASE("360 degrees anticlockwise returns to origin")
-{
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-	
-	for(int i = 1; i <= 72; i++)
-	{
-		player.moveAntiClockwise();
-	}
-	
-	int playerEndX = player.getPosition().getX()+1;
-	int playerEndY = player.getPosition().getY()+1;
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
-} 
-
-TEST_CASE("18 Clockwise + 18 anticlockwise movements returns to origin")
-{
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-	
-	for(int i = 1; i <= 18; i++)
-	{
-		player.moveClockwise();
-	}
-	
-	for(int i = 1; i <= 18; i++)
-	{
-		player.moveAntiClockwise();
-	}
-	
-	int playerEndX = player.getPosition().getX()+1;
-	int playerEndY = player.getPosition().getY()+1;
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
-} 
-
-TEST_CASE("36 Clockwise + 36 anticlockwise movements returns to origin")
-{
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-	
-	for(int i = 1; i <= 36; i++)
-	{
-		player.moveClockwise();
-	}
-	
-	for(int i = 1; i <= 36; i++)
-	{
-		player.moveAntiClockwise();
-	}
-	
-	int playerEndX = player.getPosition().getX()+1;
-	int playerEndY = player.getPosition().getY()+1;
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
-} 
-
-TEST_CASE("54 Clockwise + 54 anticlockwise movements returns to origin")
-{
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-	
-	for(int i = 1; i <= 54; i++)
-	{
-		player.moveClockwise();
-	}
-	
-	for(int i = 1; i <= 54; i++)
-	{
-		player.moveAntiClockwise();
-	}
-	
-	int playerEndX = player.getPosition().getX()+1;
-	int playerEndY = player.getPosition().getY()+1;
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
-} 
-
-TEST_CASE("72 Clockwise + 72 anticlockwise movements returns to origin")
-{
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-	
-	for(int i = 1; i <= 72; i++)
-	{
-		player.moveClockwise();
-	}
-	
-	for(int i = 1; i <= 72; i++)
-	{
-		player.moveAntiClockwise();
-	}
-	
-	int playerEndX = player.getPosition().getX()+1;
-	int playerEndY = player.getPosition().getY()+1;
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
-} 
-
-TEST_CASE("Random Clockwise + identical random anticlockwise movements returns to origin")
-{
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
-	
-	
-	srand(time(0));
-	int randMovements = rand()%71;
-	for(int i = 1; i <= randMovements; i++)
-	{
-		player.moveClockwise();
-	}
-	
-	for(int i = 1; i <= randMovements; i++)
-	{
-		player.moveAntiClockwise();
-	}
-	
-	int playerEndX = player.getPosition().getX()+1;
-	int playerEndY = player.getPosition().getY()+1;
-	
-	CHECK(playerEndX == playerStartX);
-	CHECK(playerEndY == playerStartY);
+	CHECK(player_ptr->getEntityType() == EntityType::PLAYER);
+	CHECK(player_ptr->isAlive() == true);
+	CHECK(player_ptr->getRespawn() == false);
+	CHECK(player_ptr->getHitRadius() == 24);
 }
 
-TEST_CASE("Player dying at different angles causes return to origin")
+TEST_CASE("Player can move left")
 {
-    GameWindowProperties gameWindow(800,600);
-    Player player(gameWindow);
-	int playerStartX = player.getPosition().getX();
-	int playerStartY = player.getPosition().getY();
+	Grid grid{800, 600};
+	shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+	player_ptr->setDirection(Direction::CLOCKWISE);
 	
+	auto xPosBefore = player_ptr->getPosition().getXpos();
+	auto yPosBefore = player_ptr->getPosition().getYpos();
 	
-	int randomMovements = rand()%10000 +1;
-	for(int i = 1; i <= randomMovements; i++)
-	{
-		player.moveClockwise();
-	}
+	player_ptr->move();
 	
-	int playerCurrentX = player.getPosition().getX();
-	int playerCurrentY = player.getPosition().getY();
+	auto xPosAfter = player_ptr->getPosition().getXpos();
+	auto yPosAfter = player_ptr->getPosition().getYpos();
 	
-	player.respawn();
+	CHECK_FALSE(xPosBefore == xPosAfter);
+	CHECK_FALSE(yPosBefore == yPosAfter);
 	
-	CHECK_FALSE(playerCurrentX == playerStartX);
-	CHECK_FALSE(playerCurrentY == playerStartY);
+	CHECK(xPosAfter == 397);
+	CHECK(yPosAfter == 584);
+}
+
+TEST_CASE("Player can move right")
+{
+	Grid grid{800, 600};
+	shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+	player_ptr->setDirection(Direction::ANTICLOCKWISE);
 	
-	int playerRespawnX = player.getPosition().getX();
-	int playerRespawnY = player.getPosition().getY();
+	auto xPosBefore = player_ptr->getPosition().getXpos();
+	auto yPosBefore = player_ptr->getPosition().getYpos();
 	
-	CHECK(playerRespawnX == playerStartX);
-	CHECK(playerRespawnY == playerStartY);
+	player_ptr->move();
+	
+	auto xPosAfter = player_ptr->getPosition().getXpos();
+	auto yPosAfter = player_ptr->getPosition().getYpos();
+	
+	CHECK_FALSE(xPosBefore == xPosAfter);
+	CHECK_FALSE(yPosBefore == yPosAfter);
+	
+	CHECK(xPosAfter == 402);
+	CHECK(yPosAfter == 584);
+}
+
+TEST_CASE("Player can stay in the same position")
+{
+	Grid grid{800, 600};
+	shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+	player_ptr->setDirection(Direction::HOVER);
+	
+	auto xPosBefore = player_ptr->getPosition().getXpos();
+	auto yPosBefore = player_ptr->getPosition().getYpos();
+	
+	player_ptr->move();
+	
+	auto xPosAfter = player_ptr->getPosition().getXpos();
+	auto yPosAfter = player_ptr->getPosition().getYpos();
+	
+	CHECK(xPosBefore == xPosAfter);
+	CHECK(yPosBefore == yPosAfter);
+}
+
+TEST_CASE("Player respawns in correct position")
+{
+	Grid grid{800, 600};
+	shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+	player_ptr->setDirection(Direction::ANTICLOCKWISE);
+	
+	auto xPosBeforeRespawn = player_ptr->getPosition().getXpos();
+	auto yPosBeforeRespawn = player_ptr->getPosition().getYpos();
+	
+	player_ptr->move();
+	player_ptr->setDead();
+	
+	auto xPosAfterRespawn = player_ptr->getPosition().getXpos();
+	auto yPosAfterRespawn = player_ptr->getPosition().getYpos();
+	
+	CHECK(xPosBeforeRespawn == xPosAfterRespawn);
+	CHECK(yPosBeforeRespawn == yPosAfterRespawn);
+}
+
+TEST_CASE("Player can shoot different amounts of bullets depending on weapon upgrades")
+{
+	Grid grid{800, 600};
+	shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+	auto bulletSingle = player_ptr->shoot();
+	
+	player_ptr->upgradeWeaponDouble();
+	
+	auto bulletDouble = player_ptr->shoot();
+	
+	CHECK(bulletSingle.size() == 1);
+	CHECK(bulletDouble.size() == 2);
 }
