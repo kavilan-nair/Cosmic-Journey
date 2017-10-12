@@ -10,10 +10,10 @@ ResourceManager::~ResourceManager()
 
 EntityType ResourceManager::getEntityID() const
 {
-	return _entityType;
+    return _entityType;
 }
 
 string ResourceManager::getResourcePath() const
 {
-	return _resourcePath;
+    return _resourcePath;
 }

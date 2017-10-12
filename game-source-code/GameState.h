@@ -6,10 +6,10 @@
 */
 enum class GameState
 {
-	SPLASHSCREEN = 0,
-	ACTIVE,
-	GAME_OVER,
-	GAME_WON
+    SPLASHSCREEN = 0,
+    ACTIVE,
+    GAME_OVER,
+    GAME_WON
 };
 
 #endif // GAMESTATE_H

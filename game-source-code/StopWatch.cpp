@@ -13,21 +13,21 @@ StopWatch::~StopWatch()
 
 void StopWatch::startTimer()
 {
-	timeInitial = getProcessTime();
+    timeInitial = getProcessTime();
 }
 
 double StopWatch::stopTimer()
 {
-	return getProcessTime() - timeInitial;
+    return getProcessTime() - timeInitial;
 }
 
 double StopWatch::getDuration()
 {	
-	return getProcessTime();
+    return getProcessTime();
 }
 
 double StopWatch::getProcessTime()
 {
-	clock_t time = clock();
-	return static_cast<double>(time)/CLOCKS_PER_SEC;
+    clock_t time = clock();
+    return static_cast<double>(time)/CLOCKS_PER_SEC;
 }

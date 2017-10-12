@@ -6,8 +6,8 @@
 */
 enum class WeaponType
 {
-	SINGLE = 0,
-	DOUBLE
+    SINGLE = 0,
+    DOUBLE
 };
 
 #endif //WEAPONTYPE_H

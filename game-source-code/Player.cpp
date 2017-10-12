@@ -2,20 +2,20 @@
 #include <Functional>
 
 Player::Player(const Grid& grid) 
-	: _grid(grid),
-	_playerBullet(_playerPos, _grid, 1), 
-	_hitRadius(24),
-	_lives(3),
-	_score(0)
+    : _grid(grid),
+    _playerBullet(_playerPos, _grid, 1), 
+    _hitRadius(24),
+    _lives(3),
+    _score(0)
 {
-	_aliveStatus = true;
-	_direction = Direction::HOVER;
-	_playerPos.setAngle(0);
-	_playerPos.setXpos(grid.getCenterX());
-	_playerPos.setYpos(grid.getCenterY() + grid.getRadius());
-	_playerPos.setRadius(grid.getRadius());
-	_playerPos.setXposInitial(grid.getCenterX());  
-	_playerPos.setYposInitial(grid.getCenterY());
+    _aliveStatus = true;
+    _direction = Direction::HOVER;
+    _playerPos.setAngle(0);
+    _playerPos.setXpos(grid.getCenterX());
+    _playerPos.setYpos(grid.getCenterY() + grid.getRadius());
+    _playerPos.setRadius(grid.getRadius());
+    _playerPos.setXposInitial(grid.getCenterX());  
+    _playerPos.setYposInitial(grid.getCenterY());
 }
 
 Player::~Player()
@@ -24,119 +24,119 @@ Player::~Player()
 
 Position Player::getPosition()
 {
-	return _playerPos;
+    return _playerPos;
 }
 
 EntityType Player::getEntityType()
 {
-	return EntityType::PLAYER;
+    return EntityType::PLAYER;
 }
 
 void Player::move()
 {
-	
-	if (getDirection() == Direction::CLOCKWISE)
-		_playerPos.setAngle(_playerPos.getAngle() - 1);
-	else if(getDirection() == Direction::ANTICLOCKWISE)
-		_playerPos.setAngle(_playerPos.getAngle() + 1);
-		
-	auto radianAngle = (_playerPos.getAngle() * M_PI / 180)* 0.5;
-	int newXPos = _playerPos.getXposInitial() + _playerPos.getRadius() * cos(radianAngle - M_PI_2);
-	int newYPos = _playerPos.getYposInitial() - _playerPos.getRadius() * sin(radianAngle - M_PI_2);
-	_playerPos.setXpos(newXPos);
-	_playerPos.setYpos(newYPos);        
+    
+    if (getDirection() == Direction::CLOCKWISE)
+        _playerPos.setAngle(_playerPos.getAngle() - 1);
+    else if(getDirection() == Direction::ANTICLOCKWISE)
+        _playerPos.setAngle(_playerPos.getAngle() + 1);
+        
+    auto radianAngle = (_playerPos.getAngle() * M_PI / 180)* 0.5;
+    int newXPos = _playerPos.getXposInitial() + _playerPos.getRadius() * cos(radianAngle - M_PI_2);
+    int newYPos = _playerPos.getYposInitial() - _playerPos.getRadius() * sin(radianAngle - M_PI_2);
+    _playerPos.setXpos(newXPos);
+    _playerPos.setYpos(newYPos);        
 }
 vector<shared_ptr<IMovingEntity>> Player::shoot()
 {
-	vector<shared_ptr<IMovingEntity>> bulletVector;
-	
-	if (_weaponType == WeaponType::SINGLE)
-		 bulletVector.push_back(std::make_shared<PlayerBullet>(_playerPos, _grid, 1));    
-	
-	if (_weaponType == WeaponType::DOUBLE)
-	{
-		bulletVector.push_back(std::make_shared<PlayerBullet>(_playerPos, _grid, 2));
-		bulletVector.push_back(std::make_shared<PlayerBullet>(_playerPos, _grid, 3));
-	}    
-	
+    vector<shared_ptr<IMovingEntity>> bulletVector;
+    
+    if (_weaponType == WeaponType::SINGLE)
+         bulletVector.push_back(std::make_shared<PlayerBullet>(_playerPos, _grid, 1));    
+    
+    if (_weaponType == WeaponType::DOUBLE)
+    {
+        bulletVector.push_back(std::make_shared<PlayerBullet>(_playerPos, _grid, 2));
+        bulletVector.push_back(std::make_shared<PlayerBullet>(_playerPos, _grid, 3));
+    }    
+    
    
-	return bulletVector;
+    return bulletVector;
 }
 
 bool Player::isAlive()
 {
-	return _aliveStatus;
+    return _aliveStatus;
 }
 
 Direction Player::getDirection()
 {
-	return _direction;
+    return _direction;
 }
 
 void Player::setDirection(const Direction& direction)
 {
-	_direction = direction;
+    _direction = direction;
 }
 
 bool Player::getRespawn()
 {
-	return false;
+    return false;
 }
 
 void Player::setDead()
 {   
-	_aliveStatus = false;
-	respawn();
+    _aliveStatus = false;
+    respawn();
 }
 
 float Player::getHitRadius()
 {
-	return _hitRadius;
+    return _hitRadius;
 }
 
 void Player::respawn()
 {
-	_lives--;
-	_weaponType = WeaponType::SINGLE;
-	_aliveStatus = true;
-	_direction = Direction::HOVER;
-	_playerPos.setAngle(0);
-	_playerPos.setXpos(_grid.getCenterX());
-	_playerPos.setYpos(_grid.getCenterY() + _grid.getRadius());
-	_playerPos.setRadius(_grid.getRadius());
-	_playerPos.setXposInitial(_grid.getCenterX());  
-	_playerPos.setYposInitial(_grid.getCenterY());
+    _lives--;
+    _weaponType = WeaponType::SINGLE;
+    _aliveStatus = true;
+    _direction = Direction::HOVER;
+    _playerPos.setAngle(0);
+    _playerPos.setXpos(_grid.getCenterX());
+    _playerPos.setYpos(_grid.getCenterY() + _grid.getRadius());
+    _playerPos.setRadius(_grid.getRadius());
+    _playerPos.setXposInitial(_grid.getCenterX());  
+    _playerPos.setYposInitial(_grid.getCenterY());
 }
 
 bool Player::isGameOver()
 {
-	if (_lives <= 0)
-		return true;
-	else
-		return false;
+    if (_lives <= 0)
+        return true;
+    else
+        return false;
 }
 
 void Player::upgradeWeaponDouble()
 {
-	_weaponType = WeaponType::DOUBLE;
+    _weaponType = WeaponType::DOUBLE;
 }
 
 
 WeaponType Player::getWeaponType()
 {
-	return _weaponType;
+    return _weaponType;
 }
 
 int Player::getLives()
 {
-	return _lives;
+    return _lives;
 }
 int Player::addScore(const int& points)
 {
-	_score += points;
-	return _score;
+    _score += points;
+    return _score;
 }
 int Player::getScore()
 {
-	return _score;
+    return _score;
 }

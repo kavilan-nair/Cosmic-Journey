@@ -10,24 +10,24 @@
 */
 class SplashScreen
 {
-	public:
-		/**
-		* Default constructor. Creates SplashScreen object
-		*/
-		SplashScreen();
-		/**
-		* Displays the SplashScreen
-		* @param renderWindow is of type sf::RenderWindow 
-		*/
-		void show(sf::RenderWindow& renderWindow);
-		/**
-		* Default destructor. Creates SplashScreen object
-		*/
-		~SplashScreen();
-	
-	private:
-		sf::Texture _splashTexture;
-		sf::Font font;
+    public:
+        /**
+        * Default constructor. Creates SplashScreen object
+        */
+        SplashScreen();
+        /**
+        * Displays the SplashScreen
+        * @param renderWindow is of type sf::RenderWindow 
+        */
+        void show(sf::RenderWindow& renderWindow);
+        /**
+        * Default destructor. Creates SplashScreen object
+        */
+        ~SplashScreen();
+    
+    private:
+        sf::Texture _splashTexture;
+        sf::Font font;
 };
 
 #endif //SPLASHSCREEN_H

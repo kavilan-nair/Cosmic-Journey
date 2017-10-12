@@ -10,60 +10,60 @@ Position::~Position()
 
 int Position::getXpos() const
 {
-	return _xPos;
+    return _xPos;
 }
 
 int Position::getYpos() const
 {
-	return _yPos;
+    return _yPos;
 }
 
 int Position::getRadius() const
 {
-	return _radius;
+    return _radius;
 }
 
 int Position::getAngle() const
 {
-	return _angle;
+    return _angle;
 }
 
 int Position::getXposInitial() const
 {
-	return _xPosInitial;
+    return _xPosInitial;
 }
 
 int Position::getYposInitial() const 
 {
-	return _yPosInitial;
+    return _yPosInitial;
 }
 
 void Position::setXpos(int xPos)
 {
-	_xPos = xPos;
+    _xPos = xPos;
 }
 
 void Position::setYpos(int yPos)
 {
-	_yPos = yPos;
+    _yPos = yPos;
 }
 
 void Position::setRadius(int radius)
 {
-	_radius = radius;
+    _radius = radius;
 }
 
 void Position::setAngle(int angle)
 {
-	_angle = angle;
+    _angle = angle;
 }
 
 void Position::setXposInitial(int xPosInitial)
 {
-	_xPosInitial = xPosInitial;
+    _xPosInitial = xPosInitial;
 }
 
 void Position::setYposInitial(int yPosInitial)
 {
-	_yPosInitial = yPosInitial;
+    _yPosInitial = yPosInitial;
 }

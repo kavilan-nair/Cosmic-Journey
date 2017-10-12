@@ -10,25 +10,24 @@
 */
 class WinnerScreen
 {
-	public:
-		/**
-		* Default constructor. Creates WinnerScreen object
-		*/
-		WinnerScreen();
-		/**
-		* Displays the WinnerScreen
-		* @param renderWindow is of type sf::RenderWindow 
-		*/
-		void show(sf::RenderWindow& renderWindow, const int& score, const& highscore);
-		/**
-		* Default destructor. Creates SplashScreen object
-		*/
-		~WinnerScreen();
-		
-	private:
-		
-		sf::Texture _winnerTexture;
-		sf::Font font;
+    public:
+        /**
+        * Default constructor. Creates WinnerScreen object
+        */
+        WinnerScreen();
+        /**
+        * Displays the WinnerScreen
+        * @param renderWindow is of type sf::RenderWindow 
+        */
+        void show(sf::RenderWindow& renderWindow, const int& score, const& highscore);
+        /**
+        * Default destructor. Creates SplashScreen object
+        */
+        ~WinnerScreen();
+        
+    private:
+        sf::Texture _winnerTexture;
+        sf::Font font;
 };
 
 #endif //WINNERSCREEN_H
