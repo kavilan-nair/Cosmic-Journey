@@ -2,17 +2,17 @@
 #define POSITION_H
 
 /**
-* Position class - data class encapsulating the getters, setters and variables that define an objects position.
+* Position class - data class encapsulating the getters, setters and variables that define the position of an objects.
 */
 class Position
 {
     public:
         /**
-        * @brief Default constructor. Creates a Position object containing the radius, center x and y coordinates of a circle, current x and y coordinates and .
+        * @brief Default constructor. Creates a Position object containing the radius, angle, center x and y coordinates of a circle, current x and y coordinates.
         */
         Position();
         /**
-        * @brief Default deconstructor. Destroys the Position once it has gone out of scope.
+        * @brief Default destructor. Destroys the Position object.
         */
         ~Position();
         /**

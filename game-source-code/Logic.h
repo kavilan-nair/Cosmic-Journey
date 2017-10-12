@@ -35,7 +35,7 @@ class Logic
         */
         Logic();
         /**
-        * @brief Default deconstructor. Destroys the Logic object once it has gone out of scope.
+        * @brief Default destructor. Destroys the Logic object.
         */
         ~Logic();
         /**
@@ -47,7 +47,7 @@ class Logic
         */
         void renderEntities();
         /**
-        * @brief Function that randomly spawns objects of type Enemy if the random number allows.
+        * @brief Function that randomly spawns objects of type Enemy if the random number generated allows.
         */
         void spawnEnemyNormal();
         /**
@@ -55,11 +55,11 @@ class Logic
         */
         void updatePlayerPosition();
         /**
-        * @brief Function that calls the virtual move function for all objects that are alive.
+        * @brief Function that calls the virtual move override function for all objects that are alive.
         */
         void updateEntities();
         /**
-        * @brief Function that calls Presentaion object to get the key stroke and maps it to an enum. 
+        * @brief Function that calls Presentation object to get the key stroke and maps it to an enum. 
         */
         void inputCommands();
         /**
@@ -75,15 +75,15 @@ class Logic
         */
         void drawGameOverScreen();
         /**
-        * @brief Function that randomly spawns group of 3 objects of type Satellite if the random number allows.
+        * @brief Function that randomly spawns group of 3 objects of type Satellite if the random number generated allows.
         */
         void spawnSatellites();
         /**
-        * @brief Function that randomly spawns group of objects of 2 type LaserGenerator and 7 of type LaserField if the random number allows.
+        * @brief Function that randomly spawns group of objects of 2 type LaserGenerator and 7 of type LaserField if the random number generated allows.
         */
         void spawnLaserGenerators();
         /**
-        * @brief Function that randomly spawns an object of type Asteroid if the random number allows.
+        * @brief Function that randomly spawns an object of type Asteroid if the random number generated allows.
         */
         void spawnAsteroids();
         /**
@@ -99,7 +99,7 @@ class Logic
         */
         void entitiesShoot();
         /**
-        * @brief Function that deletes all dead objects from a vector.
+        * @brief Function that deletes all dead objects from a vector of shared pointers of type IMovingEntity.
         */
         void deleteDeadEntities();
         

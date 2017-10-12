@@ -6,28 +6,28 @@
 using std::string;
 
 /**
-* ResourceManager class - Data class containing an EntityType and string to the resource png
+* ResourceManager class - Data class containing an EntityType and string to the resource png.
 */
 
 class ResourceManager
 {
     public:
         /**
-        * Parameterized constructor. Creates a ResourceManager object
+        * @brief Parameterized constructor. Creates a ResourceManager object.
         */
         ResourceManager(EntityType entityID, std::string resourcePath);
         /**
-        * Default destructor. Deletes ResourceManager object
+        * @brief Default destructor. Destroys ResourceManager object.
         */
         ~ResourceManager();
         /**
-        * Returns the EntityID related to the ResourceManager
-        * @returns _entityType of type EntityType
+        * @brief Returns the EntityID related to the ResourceManager.
+        * @returns enum of strongly typed EntityType enum.
         */
         EntityType getEntityID() const;
         /**
-        * Returns the path related to the resource 
-        * @returns _resourcePath of type string
+        * @brief Returns the location on the disk related to the resource. 
+        * @returns string with path to resource.png.
         */
         string getResourcePath() const;
         

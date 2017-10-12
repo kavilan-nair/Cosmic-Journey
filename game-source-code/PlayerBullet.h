@@ -12,53 +12,47 @@ class PlayerBullet : public IMovingEntity
 {
     public:
         /**
-        * Parameterized constructor. Creates PlayerBullet object at the position of the player depending on bulletNumber.
+        * @brief Parameterized constructor. Creates PlayerBullet object at the position of the Player depending on bulletNumber.
         * @param playerPos is an object of type Position that contains the position of the Player that is to fire the bullet.
-        * @param grid is an object of type Grid which contains data about the grid height, width, center and radius.
+        * @param grid is an object of type Grid which contains data about the height, width, center and radius.
         * @param bulletNumber is of type int, if this value is 0, it creates the bullet at the angle of the player. If this value is 1, it creates it +10 degrees away from player and -10 degrees if the number is 3. This is to allow the functionality for the player to fire 2 bullets with a weapon upgrade.
         */
         PlayerBullet(const Position& playerPos, const Grid& grid, const int& bulletNumber);
         /**
-        * Default destructor. Destroys the object once it has gone out of scope.
+        * @brief Default destructor. Destroys the PlayerBullet object.
         */
         ~PlayerBullet();
         /**
-        * Inherited from IMovingEntity.
-        * Returns a copy of the Position object of the PlayerBullet which contains data about the origin, current position, angle and radius.
+        * @brief Inherited from IMovingEntity. Gets a copy of the PlayerBullet positional data.
+        * @return Position of the PlayerBullet which contains data about the origin, current position, angle and radius.
         */     
         virtual Position getPosition() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns a strongly typed enum of EntityType, PLAYERBULLET.
-        * @return EntityType enum.
+        * @brief Inherited from IMovingEntity. Gets a copy of the type the PlayerBullet is.
+        * @return PLAYERBULLET type of the strongly typed enum class EntityType.
         */
         virtual EntityType getEntityType() override;
         /**
-        * Inherited from IMovingEntity.
-        * Moves player bullet radially intwards until it is near the centre of the grid sets the alive status to dead once past this point.
+        * @brief Inherited from IMovingEntity. Moves PlayerBullet radially inwards.
         */
         virtual void move() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns a boolean member variable whether player bullet object is alive or not.
-        * @return _aliveStatus.
+        * @brief Inherited from IMovingEntity. Returns a boolean whether PlayerBullet object is alive or not.
+        * @return bool with value of true or false.
         */
         virtual bool isAlive() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns false as it overrides inherited interface but has no use.
-        * @return false.
+        * @brief Inherited from IMovingEntity. Returns false as it overrides inherited interface but has no use.
+        * @return bool with value of false.
         */
         virtual bool getRespawn() override;
         /**
-        * Inherited from IMovingEntity.
-        * Sets the boolean _aliveStatus member variable to false.
+        * @brief Inherited from IMovingEntity. Sets the PlayerBullet object dead.
         */
         virtual void setDead() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns the float radius of the enemy bullet object that is used to check collisions.
-        * @return _hitRadius.
+        * @brief Inherited from IMovingEntity. Returns the radius of the enemy PlayerBullet object that is used to check collisions.
+        * @return float with value of radius of PlayerBullet object.
         */
         virtual float getHitRadius() override;
         

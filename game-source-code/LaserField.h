@@ -5,21 +5,21 @@
 #include "Grid.h"
 
 /**
-* LaserField class - represents the outer laser Field arc.
+* LaserField class - represents the outer laser field arc.
 * Inherits from IMovingEntity class.
 */
 class LaserField : public IMovingEntity
 {
     public:
         /**
-        * @brief Parameterized constructor. Inherits from the IMovingEntity class. Creates a LaserField at center of the circle.
+        * @brief Parameterized constructor. Inherits from the IMovingEntity class. Creates a LaserField at center of the circle of the Grid.
         * @param grid is an object of type Grid which contains data about the height, width, center and radius.
         * @param Angle is an int which contains the angle the object will be created at.
         * @param Location is an int which tells the constructor where in the arc length the LaserField object is. 
         */
         LaserField(const Grid& grid, int Angle, const int& Location);
         /**
-        * @brief Default deconstructor. Destroys the LaserField once it has gone out of scope.
+        * @brief Default destructor. Destroys the LaserField object.
         */
         ~LaserField();
         /**
@@ -38,12 +38,12 @@ class LaserField : public IMovingEntity
         virtual void move() override;
         /**
         * @brief Inherited from IMovingEntity. Returns a boolean whether LaserField is alive or not.
-        * @return Boolean with either true or false.
+        * @return bool with either true or false.
         */
         virtual bool isAlive() override;
         /** 
         * @brief Inherited from IMovingEntity. Returns false as it overrides base class but has no use.
-        * @return Boolean with false.
+        * @return bool with value of false.
         */ 
         virtual bool getRespawn() override;
         /**
@@ -52,7 +52,7 @@ class LaserField : public IMovingEntity
         virtual void setDead() override;
         /**
         * @brief Inherited from IMovingEntity. Returns the radius of the LaserField.
-        * @return Float with radius of the LaserField.
+        * @return float with radius of the LaserField.
         */
         virtual float getHitRadius() override;
         

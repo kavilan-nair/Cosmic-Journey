@@ -2,37 +2,37 @@
 #define STOPWATCH_H
 
 /**
-* StopWatch class - Reads a text file containing the highscore and sets the highscore in the textfile
+* StopWatch class - times the speed at which the CPU executes instructions.
 */
 
 class StopWatch 
 {
     public:
         /**
-        * Default constructor. Creates StopWatch object
+        * @brief Default constructor. Creates StopWatch object.
         */
         StopWatch();
         /**
-        * Default destructor. Deletes StopWatch object
+        * @brief Default destructor. Deletes StopWatch object.
         */
         ~StopWatch();
         /**
-        * Starts the stopwatch timer
+        * @brief Starts the stopwatch timer.
         */
         void startTimer();
         /**
-        * Stops the stopwatch timer and 
-        * @return the time elapsed
+        * @brief Stops the stopwatch timer.
+        * @return double containing the time elapsed.
         */
         double stopTimer();
         /**
-        * Returns the duration time
-        * @return process time of type double
+        * @brief Returns the clock value of the CPU.
+        * @return double containing the clock value.
         */
         double getProcessTime();
         /**
-        * Returns the duration time
-        * @return duration time of type double
+        * @brief Returns the duration of the CPU process by calling the getProcessTime() function.
+        * @return double containing the process time.
         */
         double getDuration();	
         
