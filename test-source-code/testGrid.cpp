@@ -27,3 +27,4 @@ TEST_CASE("Check grid center and radius properties")
     CHECK(grid.getCenterY() == centerY);
     CHECK(grid.getRadius() == radius);
 }
+

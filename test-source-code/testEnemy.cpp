@@ -30,7 +30,7 @@ TEST_CASE("Enemy spawns at center of the grid")
     CHECK(grid.getCenterY() == enemy_ptr->getPosition().getYpos());
 }
 
-TEST_CASE("Enemy can move outwards from center")
+TEST_CASE("Enemy can move")
 {
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
@@ -68,7 +68,8 @@ TEST_CASE("Enemy can be set dead")
 {
     Grid grid{800, 600};
     shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
-	
+    
+    CHECK(enemy_ptr->isAlive());
     enemy_ptr->setDead();
     CHECK_FALSE(enemy_ptr->isAlive());
 }

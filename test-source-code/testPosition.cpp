@@ -38,3 +38,4 @@ TEST_CASE("Initial radius and angle can be set and retrieved")
     CHECK(testPosition.getRadius() == radius);
     CHECK(testPosition.getAngle() == angle);
 }
+
