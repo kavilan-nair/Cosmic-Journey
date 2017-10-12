@@ -61,6 +61,7 @@ TEST_CASE("PlayerBullet collides with Satellite")
     
     CHECK_FALSE(isSatelliteAlive);
     CHECK_FALSE(isPlayerBulletAlive);
+    
 }
 
 TEST_CASE("PlayerBullet collides with LaserGenerator")
@@ -181,6 +182,7 @@ TEST_CASE("Enemy Bullet collides with player")
     
     CHECK_FALSE(isEnemyBulletAlive);
     CHECK_FALSE(isPlayerRespanable);
+    
 }
 
 TEST_CASE("Laser Field collides with player")
@@ -201,4 +203,77 @@ TEST_CASE("Laser Field collides with player")
     
     CHECK_FALSE(isPlayerRespanable);
     CHECK_FALSE(isLaserFieldAlive);
+}
+
+TEST_CASE("Check Player Bullet can not collide with player")
+{
+    CollisionHandler collisionHandler{};
+    Grid grid{800, 600};
+    auto bulletNumber = 0;
+    shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+    shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
+    vector<shared_ptr<IMovingEntity>> gameObjects;
+    gameObjects.push_back(player_ptr);
+    gameObjects.push_back(playerBullet_ptr);
+
+    collisionHandler.checkCollisions(gameObjects);
+    bool isPlayerAlive = gameObjects[0]->isAlive();
+    bool isPlayerBulletAlive = gameObjects[1]->isAlive();
+    
+    CHECK(isPlayerAlive);
+    CHECK(isPlayerBulletAlive);
+}
+
+TEST_CASE("Check Player Bullet can not collide with player")
+{
+    CollisionHandler collisionHandler{};
+    Grid grid{800, 600};
+    auto bulletNumber = 0;
+    shared_ptr<Player> player_ptr = make_shared<Player>(grid);
+    shared_ptr<IMovingEntity> playerBullet_ptr = make_shared<PlayerBullet>(player_ptr->getPosition() ,grid, bulletNumber);
+    vector<shared_ptr<IMovingEntity>> gameObjects;
+    gameObjects.push_back(player_ptr);
+    gameObjects.push_back(playerBullet_ptr);
+
+    collisionHandler.checkCollisions(gameObjects);
+    bool isPlayerAlive = gameObjects[0]->isAlive();
+    bool isPlayerBulletAlive = gameObjects[1]->isAlive();
+    
+    CHECK(isPlayerAlive);
+    CHECK(isPlayerBulletAlive);
+}
+
+TEST_CASE("Check Enemies cant collide with each other")
+{
+    CollisionHandler collisionHandler{};
+    Grid grid{800, 600};
+	int directionAngle = 20;
+    int numSatellite= 1;
+	int startAngle = 0;
+    int laserGenNumber = 1;
+    shared_ptr<IMovingEntity> enemy_ptr = make_shared<Enemy>(grid);
+    shared_ptr<IMovingEntity> enemyBullet_ptr = make_shared<EnemyBullet>(enemy_ptr->getPosition(), grid);    
+	shared_ptr<IMovingEntity> satellite_ptr = make_shared<Satellite>(grid,directionAngle,numSatellite);
+    shared_ptr<IMovingEntity> laserGen_ptr = make_shared<LaserGenerator>(grid,startAngle,laserGenNumber);
+	shared_ptr<IMovingEntity> asteroid_ptr = make_shared<Asteroid>(grid);
+	
+	vector<shared_ptr<IMovingEntity>> gameObjects;
+    gameObjects.push_back(enemy_ptr);
+	gameObjects.push_back(enemyBullet_ptr);
+	gameObjects.push_back(satellite_ptr);
+	gameObjects.push_back(laserGen_ptr);
+	gameObjects.push_back(asteroid_ptr);
+
+    collisionHandler.checkCollisions(gameObjects);
+    bool isEnemyAlive = gameObjects[0]->isAlive();
+	bool isEnemyBulletAlive = gameObjects[1]->isAlive();
+	bool isSatelliteAlive = gameObjects[2]->isAlive();
+	bool isLaserGenAlive = gameObjects[3]->isAlive();
+	bool isAsteroidAlive = gameObjects[4]->isAlive();
+	
+    CHECK(isEnemyAlive);
+	CHECK(isEnemyBulletAlive);
+	CHECK(isSatelliteAlive);
+	CHECK(isLaserGenAlive);
+	CHECK(isAsteroidAlive);
 }
