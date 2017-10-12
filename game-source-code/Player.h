@@ -108,15 +108,14 @@ class Player : public IShootingMovingEntity
         void respawn();
 
         Position _playerPos;
-        bool _aliveStatus;
-        Direction _direction;
         const Grid _grid;
         PlayerBullet _playerBullet;
+		const float _hitRadius;
+		int _lives;
+		int _score;
         WeaponType _weaponType;
-        bool _reSpawn;
-        const float _hitRadius;
-        int _lives;
-        int _score;
+		bool _aliveStatus;
+        Direction _direction;
 };
 
 #endif // PLAYER_H

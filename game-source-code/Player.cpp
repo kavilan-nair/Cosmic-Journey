@@ -6,10 +6,11 @@ Player::Player(const Grid& grid)
     _playerBullet(_playerPos, _grid, 1), 
     _hitRadius(24),
     _lives(3),
-    _score(0)
+    _score(0),
+	_weaponType(WeaponType::SINGLE),
+	_aliveStatus(true),
+    _direction(Direction::HOVER)
 {
-    _aliveStatus = true;
-    _direction = Direction::HOVER;
     _playerPos.setAngle(0);
     _playerPos.setXpos(grid.getCenterX());
     _playerPos.setYpos(grid.getCenterY() + grid.getRadius());
