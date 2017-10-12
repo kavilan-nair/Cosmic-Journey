@@ -31,73 +31,74 @@ class Presentation
 		*/
 		~Presentation();
 		/**
-        * Draws and displays the game sprites, and calls displayLivesRemaining function
+		* Draws and displays the game sprites, and calls displayLivesRemaining function
 		* @param gameObjects is a vector of shared pointers of type IMovingEntity
 		* @param lives is of type const int containing the number of lives of the players
 		* @param score is of type const int containing the current score
 		* @param highscore is of type const int containing the highscore
 		* @param enemies is of type const int and is the number of enemies remaining to kill
-	    */
+		*/
 		void renderWindow(vector<shared_ptr<IMovingEntity>> &gameObjects, const int& lives, const int& score, const int& highScore, const int& enemies);
 		/**
-        * Checks whether a key is pressed or released by the user and calls handlePlayerInput
-	    */
+		* Checks whether a key is pressed or released by the user and calls handlePlayerInput
+		*/
 		void processInputEvents();
 		/**
 		* Detect what key has been pressed and set _isLeftPressed, _isRightPressed, _isSpacePressed and sets then accordingly 
 		* @param key is of type sf::Keyboard::Key and holds what keyboard key is pressed
 		* @param isPressed is of type const bool and indicates whether the key is pressed or released
-	    */
+		*/
 		void handlePlayerInput(const sf::Keyboard::Key key, const bool isPressed);
 		/**
 		* Assigns the correct texture to the sprite depending on the type of entity it is
-	    */
+		*/
 		void loadTextures();
 		/**
 		* Draws the background sprite for the game
-	    */
+		*/
 		void drawBackground();
 		/**
 		* Displays the SplashScreen to the user
-	    */
+		*/
 		void displaySplashScreen();
 		/**
 		* Displays the GameWinnerScreen to the user with their score and the HighScore
 		* @param score is of type const int and holds the Player score
 		* @param highScore is of type const int and holds the highscore for the game
-	    */
+		*/
 		void displayGameWinner(const int& score, const int& highScore);
 		/**
 		* Displays the GameOverScreen to the user with their score and the HighScore
 		* @param score is of type const int and holds the Player score
 		* @param highScore is of type const int and holds the highscore for the game
-	    */
+		*/
 		void displayGameOverScreen(const int& score, const int& highScore);
 		/**
-        * Draws the text onscreen to show the number of lives, current score, previous high score and number of enemies remaining
+		* Draws the text onscreen to show the number of lives, current score, previous high score and number of enemies remaining
 		* @param lives is of type const int containing the number of lives of the players
 		* @param score is of type const int containing the current score
 		* @param highscore is of type const int containing the highscore
 		* @param enemies is of type const int and is the number of enemies remaining to kill
-	    */
+		*/
 		void displayLivesRemaining(const int& lives, const int& score, const int& highscore, const int& enemies);
 		/**
-        * Returns a bool indicating whether the left key is pressed or not
+		* Returns a bool indicating whether the left key is pressed or not
 		* @return _isLeftPressed is of type bool
-	    */		
+		*/		
 		bool getLeftKeyPress()  const {return _isLeftPressed;};
 		/**
-        * Returns a bool indicating whether the right key is pressed or not
+		* Returns a bool indicating whether the right key is pressed or not
 		* @return _isRightPressed is of type bool
-	    */	
+		*/	
 		bool getRightKeyPress() const {return _isRightPressed;};
 		/**
-        * Returns a bool indicating whether the space key is pressed or not
+		* Returns a bool indicating whether the space key is pressed or not
 		* @return _isSpacePressed is of type bool
-	    */	
+		*/	
 		bool getSpaceKeyPress() const {return _isSpacePressed;};
 
 	private:
+	
 		sf::RenderWindow _window;
 		sf::Texture _backgroundTexture;	
 		sf::Sprite _backgroundSprite;

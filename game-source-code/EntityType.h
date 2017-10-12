@@ -13,7 +13,7 @@ enum class EntityType
 	PLAYER_BULLET,
 	ENEMY_BULLET,
 	LASER_FIELD,
-    ASTEROID
+	ASTEROID
 };
 
 #endif // ENTITYTYPES_H

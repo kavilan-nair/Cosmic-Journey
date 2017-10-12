@@ -6,8 +6,8 @@
 
 enum class Direction
 {
-    CLOCKWISE,
-    ANTICLOCKWISE,
+	CLOCKWISE,
+	ANTICLOCKWISE,
 	HOVER
 };
 

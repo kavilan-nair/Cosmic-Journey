@@ -3,7 +3,7 @@
 
 WinnerScreen::WinnerScreen()
 {
-    _winnerTexture.loadFromFile("Resources/Background.png");
+	_winnerTexture.loadFromFile("Resources/Background.png");
 }
 
 void WinnerScreen::show(sf::RenderWindow& renderWindow, const int& score, const& highscore)
@@ -26,41 +26,41 @@ void WinnerScreen::show(sf::RenderWindow& renderWindow, const int& score, const&
 	controls.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/2 + 200);
 	controls.setStyle(sf::Text::Bold);
 	controls.setColor(sf::Color::Yellow);
-    
-    std::string yourScore = "You scored: " + std::to_string(score); 
-    sf::Text sfScore(yourScore, font);
-    sfScore.setCharacterSize(25);
-    sfScore.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/2 - 50);
-    sfScore.setStyle(sf::Text::Bold);
-    sfScore.setColor(sf::Color::Yellow);
-    
-    std::string highscoreText = "Highscore: " + std::to_string(highscore); 
-    sf::Text sfHighScore(highscoreText, font);
-    sfHighScore.setCharacterSize(25);
-    sfHighScore.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/2);
-    sfHighScore.setStyle(sf::Text::Bold);
-    sfHighScore.setColor(sf::Color::Yellow);
-    
+	
+	std::string yourScore = "You scored: " + std::to_string(score); 
+	sf::Text sfScore(yourScore, font);
+	sfScore.setCharacterSize(25);
+	sfScore.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/2 - 50);
+	sfScore.setStyle(sf::Text::Bold);
+	sfScore.setColor(sf::Color::Yellow);
+	
+	std::string highscoreText = "Highscore: " + std::to_string(highscore); 
+	sf::Text sfHighScore(highscoreText, font);
+	sfHighScore.setCharacterSize(25);
+	sfHighScore.setPosition(renderWindow.getSize().x/4,renderWindow.getSize().y/2);
+	sfHighScore.setStyle(sf::Text::Bold);
+	sfHighScore.setColor(sf::Color::Yellow);
+	
 	
 	renderWindow.draw(background);
 	renderWindow.draw(controls);
 	renderWindow.draw(title);
-    renderWindow.draw(sfScore);
-    renderWindow.draw(sfHighScore);
-    renderWindow.display();
-    
-    sf::Event event;
-    while(true)
-    {
-        while (renderWindow.pollEvent(event))              
-        {
+	renderWindow.draw(sfScore);
+	renderWindow.draw(sfHighScore);
+	renderWindow.display();
+	
+	sf::Event event;
+	while(true)
+	{
+		while (renderWindow.pollEvent(event))              
+		{
 			if(event.key.code == sf::Keyboard::Return)
-            {
-                renderWindow.close();
-                return;
-            }
-        }
-    }
+			{
+				renderWindow.close();
+				return;
+			}
+		}
+	}
 }
 
 WinnerScreen::~WinnerScreen()

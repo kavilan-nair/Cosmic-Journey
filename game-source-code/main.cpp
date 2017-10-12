@@ -2,10 +2,10 @@
 
 int main()
 {
-    while (true)
-    {
-        Logic logic{};
-        logic.run();
-    }
+	while (true)
+	{
+		Logic logic{};
+		logic.run();
+	}
 	return 0;
 }

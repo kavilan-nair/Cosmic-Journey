@@ -34,16 +34,16 @@ void SplashScreen::show(sf::RenderWindow& renderWindow)
 	renderWindow.draw(background);
 	renderWindow.draw(controls);
 	renderWindow.draw(title);
-    renderWindow.display();
-    
-    sf::Event event;
-    while(true)
-    {
-        while (renderWindow.pollEvent(event))              
-        {
+	renderWindow.display();
+	
+	sf::Event event;
+	while(true)
+	{
+		while (renderWindow.pollEvent(event))              
+		{
 			if(event.key.code == sf::Keyboard::Space){return;}
-        }
-    }
+		}
+	}
 }
 
 SplashScreen::~SplashScreen()

@@ -8,14 +8,14 @@ PlayerBullet::PlayerBullet(const Position& playerPos, const Grid& grid, const in
 	_radiusIncrease(0.0001f),
 	_movementCondition(15)
 {
-    if (bulletNumber == 2)
-    {
-        _playerBulletPos.setAngle(_playerBulletPos.getAngle() + 10);
-    }
-    else if (bulletNumber == 3)
-    {
-        _playerBulletPos.setAngle(_playerBulletPos.getAngle() - 10);
-    }
+	if (bulletNumber == 2)
+	{
+		_playerBulletPos.setAngle(_playerBulletPos.getAngle() + 10);
+	}
+	else if (bulletNumber == 3)
+	{
+		_playerBulletPos.setAngle(_playerBulletPos.getAngle() - 10);
+	}
 }
 
 PlayerBullet::~PlayerBullet()
@@ -24,21 +24,21 @@ PlayerBullet::~PlayerBullet()
 
 Position PlayerBullet::getPosition()
 {
-    return _playerBulletPos;
+	return _playerBulletPos;
 }
 EntityType PlayerBullet::getEntityType()
 {
-    return EntityType::PLAYER_BULLET;
+	return EntityType::PLAYER_BULLET;
 }
 
 bool PlayerBullet::isAlive()
 {
-    return _aliveStatus;
+	return _aliveStatus;
 } 	
 
 void PlayerBullet::move()
 {
-    if (_playerBulletPos.getRadius() > _movementCondition)
+	if (_playerBulletPos.getRadius() > _movementCondition)
 	{
 		auto radiusFactor = _grid.getRadius()*_radiusIncrease;
 		_playerBulletPos.setRadius(_playerBulletPos.getRadius() - radiusFactor);
@@ -61,10 +61,10 @@ bool PlayerBullet::getRespawn()
 
 void PlayerBullet::setDead()
 {   
-    _aliveStatus = false;
+	_aliveStatus = false;
 }
 
 float PlayerBullet::getHitRadius()
 {
-    return _hitRadius;
+	return _hitRadius;
 }

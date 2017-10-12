@@ -13,23 +13,24 @@ class ResourceManager
 {
 	public:
 		/**
-        * Parameterized constructor. Creates a ResourceManager object
-        */
+		* Parameterized constructor. Creates a ResourceManager object
+		*/
 		ResourceManager(EntityType entityID, std::string resourcePath);
 		/**
-	    * Default destructor. Deletes ResourceManager object
-	    */
+		* Default destructor. Deletes ResourceManager object
+		*/
 		~ResourceManager();
 		/**
-        * Returns the EntityID related to the ResourceManager
-        * @returns _entityType of type EntityType
-	    */
+		* Returns the EntityID related to the ResourceManager
+		* @returns _entityType of type EntityType
+		*/
 		EntityType getEntityID() const;
 		/**
-        * Returns the path related to the resource 
-        * @returns _resourcePath of type string
-	    */
+		* Returns the path related to the resource 
+		* @returns _resourcePath of type string
+		*/
 		string getResourcePath() const;
+		
 	private:
 		string _resourcePath;
 		EntityType _entityType;	

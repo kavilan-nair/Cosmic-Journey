@@ -11,13 +11,13 @@ Presentation::Presentation()
 	_isRightPressed(false),
 	_isSpacePressed(false)
 {
-    loadTextures();
+	loadTextures();
 	_backgroundTexture.loadFromFile("Resources/Background.png");
 	_backgroundTexture.setSmooth(true);
 	_backgroundSprite.setTexture(_backgroundTexture);
 	drawBackground();
-    
-    font.loadFromFile("Resources/Font.ttf");
+	
+	font.loadFromFile("Resources/Font.ttf");
 }
 
 void Presentation::drawBackground()
@@ -32,30 +32,30 @@ Presentation::~Presentation()
 void Presentation::renderWindow(vector<shared_ptr<IMovingEntity>> &gameObjects, const int& lives, const int& score, const int& highScore, const int& enemies)
 {    
 	_window.clear();
-     _window.draw(_backgroundSprite);
-     displayLivesRemaining(lives, score, highScore, enemies);
-     
-     
+	 _window.draw(_backgroundSprite);
+	 displayLivesRemaining(lives, score, highScore, enemies);
+	 
+	 
 	for (auto const &gameObject : gameObjects)
 	{
-        for (auto const &i : _textureslList)
-        {
-            if (i.entityType == gameObject->getEntityType())
-            {
-                sf::Sprite gameObjectSprite;
-                gameObjectSprite.setTexture(i.texture);
+		for (auto const &i : _textureslList)
+		{
+			if (i.entityType == gameObject->getEntityType())
+			{
+				sf::Sprite gameObjectSprite;
+				gameObjectSprite.setTexture(i.texture);
 				gameObjectSprite.setOrigin(i.texture.getSize().x/_halveSize,i.texture.getSize().y/_halveSize);
-                gameObjectSprite.setPosition(gameObject->getPosition().getXpos(), gameObject->getPosition().getYpos());
-                
-                if(gameObject->getEntityType() != EntityType::SATELLITE)
+				gameObjectSprite.setPosition(gameObject->getPosition().getXpos(), gameObject->getPosition().getYpos());
+				
+				if(gameObject->getEntityType() != EntityType::SATELLITE)
 				{
 					gameObjectSprite.setRotation(gameObject->getPosition().getAngle() * _spriteRotationFactor);
 				}
-                _window.draw(gameObjectSprite);
-            }
-        }
+				_window.draw(gameObjectSprite);
+			}
+		}
 	}    
-    _window.display();
+	_window.display();
 }
 
 void Presentation::processInputEvents()
@@ -66,19 +66,19 @@ void Presentation::processInputEvents()
 		switch (event.type)
 		{
 			case sf::Event::KeyPressed:
-                handlePlayerInput(event.key.code, true);
+				handlePlayerInput(event.key.code, true);
 				break;
 
 			case sf::Event::KeyReleased:
-               handlePlayerInput(event.key.code, false);
+			   handlePlayerInput(event.key.code, false);
 				break;
 			
 			case sf::Event::Closed:
 				_window.close();
 				break;
 				
-            default:
-                break;
+			default:
+				break;
 		}
 	}
 }
@@ -103,12 +103,12 @@ void Presentation::handlePlayerInput(const sf::Keyboard::Key key, const bool isP
 
 void Presentation::loadTextures()
 {
-    for(unsigned int i = 0; i != _paths.size(); i++)
+	for(unsigned int i = 0; i != _paths.size(); i++)
 	{
 		ResourceManager resource{static_cast<EntityType>(i), _paths.at(i)};
 		_entityTextures.push_back(resource);
 	}
-    
+	
 	for (auto entityTexture : _entityTextures)
 	{
 		sf::Texture texture;
@@ -124,53 +124,53 @@ void Presentation::loadTextures()
 
 void Presentation::displaySplashScreen()
 {
-    SplashScreen splashScreen;
-    splashScreen.show(_window);
+	SplashScreen splashScreen;
+	splashScreen.show(_window);
 }
 
 
 void Presentation::displayGameOverScreen(const int& score, const int& highScore)
 {
-    GameOverScreen gameOverScreen;
-    gameOverScreen.show(_window, score, highScore);
+	GameOverScreen gameOverScreen;
+	gameOverScreen.show(_window, score, highScore);
 }
 
 void Presentation::displayGameWinner(const int& score, const int& highScore)
 {
-    WinnerScreen gameWinnerScreen{};
-    gameWinnerScreen.show(_window, score, highScore);
+	WinnerScreen gameWinnerScreen{};
+	gameWinnerScreen.show(_window, score, highScore);
 }
 
 void Presentation::displayLivesRemaining(const int& lives, const int& score, const int& highscore, const int& enemies)
 {  
-     font.loadFromFile("Resources/Font.ttf");
-    
-    string numberOfLives = std::to_string(lives-1) +" lives remaining"; 
-    sf::Text sfLives(numberOfLives, font);
-    sfLives.setCharacterSize(24);
-    sfLives.setPosition(20, 20);
-    sfLives.setColor(sf::Color::Yellow);
-    
-    string scoreText = "Score: " + std::to_string(score);  
-    sf::Text sfScore(scoreText, font);
-    sfScore.setCharacterSize(24);
-    sfScore.setPosition(680, 20);
-    sfScore.setColor(sf::Color::Yellow);
-    
-    string highscoreText = "High Score: " + std::to_string(highscore);  
-    sf::Text sfHighScore(highscoreText, font);
-    sfHighScore.setCharacterSize(24);
-    sfHighScore.setPosition(650, 550);
-    sfHighScore.setColor(sf::Color::Yellow);
-    
-    string enemiesLeft = "Enemies left: " + std::to_string(enemies);  
-    sf::Text sfEnemiesLeft(enemiesLeft, font);
-    sfEnemiesLeft.setCharacterSize(24);
-    sfEnemiesLeft.setPosition(20, 550);
-    sfEnemiesLeft.setColor(sf::Color::Yellow);
-    
-    _window.draw(sfScore);
-    _window.draw(sfHighScore);
-    _window.draw(sfLives);
-    _window.draw(sfEnemiesLeft);
+	 font.loadFromFile("Resources/Font.ttf");
+	
+	string numberOfLives = std::to_string(lives-1) +" lives remaining"; 
+	sf::Text sfLives(numberOfLives, font);
+	sfLives.setCharacterSize(24);
+	sfLives.setPosition(20, 20);
+	sfLives.setColor(sf::Color::Yellow);
+	
+	string scoreText = "Score: " + std::to_string(score);  
+	sf::Text sfScore(scoreText, font);
+	sfScore.setCharacterSize(24);
+	sfScore.setPosition(680, 20);
+	sfScore.setColor(sf::Color::Yellow);
+	
+	string highscoreText = "High Score: " + std::to_string(highscore);  
+	sf::Text sfHighScore(highscoreText, font);
+	sfHighScore.setCharacterSize(24);
+	sfHighScore.setPosition(650, 550);
+	sfHighScore.setColor(sf::Color::Yellow);
+	
+	string enemiesLeft = "Enemies left: " + std::to_string(enemies);  
+	sf::Text sfEnemiesLeft(enemiesLeft, font);
+	sfEnemiesLeft.setCharacterSize(24);
+	sfEnemiesLeft.setPosition(20, 550);
+	sfEnemiesLeft.setColor(sf::Color::Yellow);
+	
+	_window.draw(sfScore);
+	_window.draw(sfHighScore);
+	_window.draw(sfLives);
+	_window.draw(sfEnemiesLeft);
 }
