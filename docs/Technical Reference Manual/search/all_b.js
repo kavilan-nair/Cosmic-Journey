@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['satellite',['Satellite',['../class_satellite.html',1,'Satellite'],['../class_satellite.html#a01bfeadf8fe0610ad0e6cc7400b3ebb9',1,'Satellite::Satellite()']]],
+  ['setangle',['setAngle',['../class_position.html#a9d2a5e32a3dfcb4760dec9d06b91d019',1,'Position']]],
+  ['setdead',['setDead',['../class_asteroid.html#a8b253f6d4360c7b74047764a02eaf238',1,'Asteroid::setDead()'],['../class_enemy.html#a123bc5eed038c57b0a6eea5f0bf534bb',1,'Enemy::setDead()'],['../class_enemy_bullet.html#a49d4e433efe0a8be817af4bc417f84da',1,'EnemyBullet::setDead()'],['../class_i_moving_entity.html#ab7f65505e004fb0bf9ce4de0ac1e9c01',1,'IMovingEntity::setDead()'],['../class_i_shooting_moving_entity.html#a2fb65108165bbfc0bdfdb43939757f43',1,'IShootingMovingEntity::setDead()'],['../class_laser_field.html#a36e249de4a9553cbe2c1065c43ebc503',1,'LaserField::setDead()'],['../class_laser_generator.html#a029059498837af51505181925eb84eab',1,'LaserGenerator::setDead()'],['../class_player.html#aa80cb1bb780409d404e828879d36d267',1,'Player::setDead()'],['../class_player_bullet.html#a02394d72d9f74c97159bdf47f419adf7',1,'PlayerBullet::setDead()'],['../class_satellite.html#a5ea89bb68a65096679dd04daf6a88b12',1,'Satellite::setDead()']]],
+  ['setdirection',['setDirection',['../class_player.html#ad748d1a275406176bb6abb5a90f4074f',1,'Player']]],
+  ['sethighscore',['setHighScore',['../class_high_score_manager.html#adae8fe0c6d9235544b3079ffcb8a7b74',1,'HighScoreManager']]],
+  ['setradius',['setRadius',['../class_position.html#a407b36e95119d6e134fdf1b7fa39d29b',1,'Position']]],
+  ['setxpos',['setXpos',['../class_position.html#af29b590472bff2651745b7d90d8fadc7',1,'Position']]],
+  ['setxposinitial',['setXposInitial',['../class_position.html#aa512c9d91896c736a88f24d7bf20c854',1,'Position']]],
+  ['setypos',['setYpos',['../class_position.html#a0682d59e5408c607477ae32568666309',1,'Position']]],
+  ['setyposinitial',['setYposInitial',['../class_position.html#a6be00144705c045cf5fd43aadab5e07b',1,'Position']]],
+  ['shoot',['shoot',['../class_enemy.html#a935b21462ef787e5082202fd69c916c1',1,'Enemy::shoot()'],['../class_i_shooting_moving_entity.html#aaf273c530e0f1095676998d9141382ff',1,'IShootingMovingEntity::shoot()'],['../class_laser_generator.html#a88131de87b24ae70cbca288d1ccad5cd',1,'LaserGenerator::shoot()'],['../class_player.html#acf75a106bf3725be6570d2495e64c330',1,'Player::shoot()'],['../class_satellite.html#a29119c6bf69591280463aa1687f9134d',1,'Satellite::shoot()']]],
+  ['show',['show',['../class_game_over_screen.html#a3378887aa1bfafa23af5fb250329ab88',1,'GameOverScreen::show()'],['../class_splash_screen.html#a6c91bf097fc483fbdf4e959c9cd6ef81',1,'SplashScreen::show()'],['../class_winner_screen.html#a55a5891e31cf2dd4144f21c5f17500ea',1,'WinnerScreen::show()']]],
+  ['spawnasteroid',['spawnAsteroid',['../class_enemy_spawner.html#ad23a38804326a025944e0cecca189a82',1,'EnemySpawner']]],
+  ['spawnasteroids',['spawnAsteroids',['../class_logic.html#aac684beb8e7852635c7f093484beaac1',1,'Logic']]],
+  ['spawnenemynormal',['spawnEnemyNormal',['../class_enemy_spawner.html#a50537286a6c13e61443d095bccb01a5b',1,'EnemySpawner::spawnEnemyNormal()'],['../class_logic.html#ab4f9ec991da06dd0fbe96acf308e6431',1,'Logic::spawnEnemyNormal()']]],
+  ['spawnenemysatellite',['spawnEnemySatellite',['../class_enemy_spawner.html#a0f9c8a22f73a9fc02b2bbe9b2f156d7e',1,'EnemySpawner']]],
+  ['spawnlasergenerator',['spawnLaserGenerator',['../class_enemy_spawner.html#a74a344e8dd009f150654d1d16a397f5a',1,'EnemySpawner']]],
+  ['spawnlasergenerators',['spawnLaserGenerators',['../class_logic.html#a44d27363dabdc97bd173694c99a052a4',1,'Logic']]],
+  ['spawnsatellites',['spawnSatellites',['../class_logic.html#a1d14720c6e5e43bb12b0bd338a333377',1,'Logic']]],
+  ['splashscreen',['SplashScreen',['../class_splash_screen.html',1,'SplashScreen'],['../class_splash_screen.html#af7cda68255a26779cb49fd7a26d11492',1,'SplashScreen::SplashScreen()']]],
+  ['starttimer',['startTimer',['../class_stop_watch.html#a23301f735a2e3190435e39c9fd70cdf2',1,'StopWatch']]],
+  ['stoptimer',['stopTimer',['../class_stop_watch.html#a2f593a685879fd9e617d004a448b32bb',1,'StopWatch']]],
+  ['stopwatch',['StopWatch',['../class_stop_watch.html',1,'StopWatch'],['../class_stop_watch.html#ad715945060eeb23baa3c036ad19b1edb',1,'StopWatch::StopWatch()']]]
+];

@@ -1,0 +1,7 @@
+<map id="IShootingMovingEntity" name="IShootingMovingEntity">
+<area shape="rect" id="node3" href="$class_enemy.html" title="Enemy" alt="" coords="5,155,68,181"/>
+<area shape="rect" id="node4" href="$class_laser_generator.html" title="LaserGenerator" alt="" coords="92,155,203,181"/>
+<area shape="rect" id="node5" href="$class_player.html" title="Player" alt="" coords="227,155,286,181"/>
+<area shape="rect" id="node6" href="$class_satellite.html" title="Satellite" alt="" coords="310,155,379,181"/>
+<area shape="rect" id="node2" href="$class_i_moving_entity.html" title="IMovingEntity" alt="" coords="153,5,251,32"/>
+</map>

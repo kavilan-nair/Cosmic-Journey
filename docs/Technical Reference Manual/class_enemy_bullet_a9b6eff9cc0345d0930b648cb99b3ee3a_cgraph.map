@@ -1,0 +1,11 @@
+<map id="EnemyBullet::EnemyBullet" name="EnemyBullet::EnemyBullet">
+<area shape="rect" id="node2" href="$class_position.html#a9d2a5e32a3dfcb4760dec9d06b91d019" title="Sets a value as the angle of the object. " alt="" coords="245,5,373,32"/>
+<area shape="rect" id="node3" href="$class_position.html#a6fdc39697a2176e8ece4d2380abe0646" title="Gets a constant copy of the angle of the object. " alt="" coords="245,56,373,83"/>
+<area shape="rect" id="node4" href="$class_position.html#a407b36e95119d6e134fdf1b7fa39d29b" title="Sets a value as the radius of the object. " alt="" coords="242,107,377,133"/>
+<area shape="rect" id="node5" href="$class_position.html#aa512c9d91896c736a88f24d7bf20c854" title="Sets a value as the initial x coordinate of the object. " alt="" coords="233,157,386,184"/>
+<area shape="rect" id="node6" href="$class_position.html#abb198e21a2fa40e957425c4dbb8e6848" title="Gets a constant copy of the current x coordinate of the object. " alt="" coords="248,208,371,235"/>
+<area shape="rect" id="node7" href="$class_position.html#a6be00144705c045cf5fd43aadab5e07b" title="Sets a value as the initial y coordinate of the object. " alt="" coords="232,259,387,285"/>
+<area shape="rect" id="node8" href="$class_position.html#ac2e0136e6c74e173f7459902789c4bd1" title="Gets a constant copy of the current y coordinate of the object. " alt="" coords="247,309,372,336"/>
+<area shape="rect" id="node9" href="$class_position.html#af29b590472bff2651745b7d90d8fadc7" title="Sets a value as the x coordinate of the object. " alt="" coords="248,360,371,387"/>
+<area shape="rect" id="node10" href="$class_position.html#a0682d59e5408c607477ae32568666309" title="Sets a value as the y coordinate of the object. " alt="" coords="247,411,372,437"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="LaserGenerator" name="LaserGenerator">
+<area shape="rect" id="node2" href="$class_i_shooting_moving_entity.html" title="IShootingMovingEntity" alt="" coords="5,80,156,107"/>
+<area shape="rect" id="node3" href="$class_i_moving_entity.html" title="IMovingEntity" alt="" coords="31,5,130,32"/>
+</map>

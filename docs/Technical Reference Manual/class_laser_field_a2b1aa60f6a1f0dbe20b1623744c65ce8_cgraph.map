@@ -1,0 +1,10 @@
+<map id="LaserField::LaserField" name="LaserField::LaserField">
+<area shape="rect" id="node2" href="$class_position.html#a9d2a5e32a3dfcb4760dec9d06b91d019" title="Sets a value as the angle of the object. " alt="" coords="217,5,345,32"/>
+<area shape="rect" id="node3" href="$class_position.html#a407b36e95119d6e134fdf1b7fa39d29b" title="Sets a value as the radius of the object. " alt="" coords="214,56,349,83"/>
+<area shape="rect" id="node4" href="$class_position.html#aa512c9d91896c736a88f24d7bf20c854" title="Sets a value as the initial x coordinate of the object. " alt="" coords="205,107,358,133"/>
+<area shape="rect" id="node5" href="$class_grid.html#ae0f25c8112c8d26c75ad4163b9fe6e4c" title="Gets a copy of the x position center of the Grid. " alt="" coords="223,157,340,184"/>
+<area shape="rect" id="node6" href="$class_position.html#a6be00144705c045cf5fd43aadab5e07b" title="Sets a value as the initial y coordinate of the object. " alt="" coords="204,208,359,235"/>
+<area shape="rect" id="node7" href="$class_grid.html#a4e384c6c224cee509e30f6c9778c331b" title="Gets a copy of the y position center of the Grid. " alt="" coords="222,259,341,285"/>
+<area shape="rect" id="node8" href="$class_position.html#af29b590472bff2651745b7d90d8fadc7" title="Sets a value as the x coordinate of the object. " alt="" coords="220,309,343,336"/>
+<area shape="rect" id="node9" href="$class_position.html#a0682d59e5408c607477ae32568666309" title="Sets a value as the y coordinate of the object. " alt="" coords="219,360,344,387"/>
+</map>

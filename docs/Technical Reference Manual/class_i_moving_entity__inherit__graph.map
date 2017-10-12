@@ -1,0 +1,11 @@
+<map id="IMovingEntity" name="IMovingEntity">
+<area shape="rect" id="node2" href="$class_asteroid.html" title="Asteroid" alt="" coords="5,80,76,107"/>
+<area shape="rect" id="node3" href="$class_enemy_bullet.html" title="EnemyBullet" alt="" coords="101,80,197,107"/>
+<area shape="rect" id="node4" href="$class_i_shooting_moving_entity.html" title="IShootingMovingEntity" alt="" coords="221,80,372,107"/>
+<area shape="rect" id="node9" href="$class_laser_field.html" title="LaserField" alt="" coords="397,80,479,107"/>
+<area shape="rect" id="node10" href="$class_player_bullet.html" title="PlayerBullet" alt="" coords="504,80,596,107"/>
+<area shape="rect" id="node5" href="$class_enemy.html" title="Enemy" alt="" coords="100,155,163,181"/>
+<area shape="rect" id="node6" href="$class_laser_generator.html" title="LaserGenerator" alt="" coords="187,155,297,181"/>
+<area shape="rect" id="node7" href="$class_player.html" title="Player" alt="" coords="322,155,381,181"/>
+<area shape="rect" id="node8" href="$class_satellite.html" title="Satellite" alt="" coords="405,155,474,181"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="EnemyBullet::move" name="EnemyBullet::move">
+<area shape="rect" id="node2" href="$class_position.html#abd858a9a7eeebe4d9c728eb7f13b8dcd" title="Gets a constant copy of the radius of the object of the circle of the Grid. " alt="" coords="198,5,333,32"/>
+<area shape="rect" id="node3" href="$class_grid.html#ace1d5c4f5f03c7d602b762d38a551fe3" title="Gets a copy of the radius of the abstracted circle of the Grid. " alt="" coords="209,56,321,83"/>
+<area shape="rect" id="node4" href="$class_position.html#a6fdc39697a2176e8ece4d2380abe0646" title="Gets a constant copy of the angle of the object. " alt="" coords="201,107,329,133"/>
+<area shape="rect" id="node5" href="$class_position.html#a407b36e95119d6e134fdf1b7fa39d29b" title="Sets a value as the radius of the object. " alt="" coords="198,157,333,184"/>
+<area shape="rect" id="node6" href="$class_position.html#af29b590472bff2651745b7d90d8fadc7" title="Sets a value as the x coordinate of the object. " alt="" coords="204,208,327,235"/>
+<area shape="rect" id="node7" href="$class_position.html#a182823334bfdbea8edac0851f74682ee" title="Gets a constant copy of the original x coordinate of the object. " alt="" coords="189,259,342,285"/>
+<area shape="rect" id="node8" href="$class_position.html#a0682d59e5408c607477ae32568666309" title="Sets a value as the y coordinate of the object. " alt="" coords="203,309,328,336"/>
+<area shape="rect" id="node9" href="$class_position.html#ab7cc5fb34e6b74c03099e351ac8174c2" title="Gets a constant copy of the original y coordinate of the object. " alt="" coords="188,360,343,387"/>
+</map>

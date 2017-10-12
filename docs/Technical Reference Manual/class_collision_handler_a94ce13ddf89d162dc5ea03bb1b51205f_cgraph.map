@@ -1,0 +1,9 @@
+<map id="CollisionHandler::checkCollisions" name="CollisionHandler::checkCollisions">
+<area shape="rect" id="node2" href="$class_collision_handler.html#a223750b7dee52927c336cf0075f90fb1" title="Checks whether the PlayerBullet object collides with the Enemy object, it then sets the alive status ..." alt="" coords="287,5,466,47"/>
+<area shape="rect" id="node3" href="$class_collision_handler.html#aaa2f04645fbd158cf8f4374017c5b0c4" title="Checks whether the Enemy object collides with the Player object, it then sets the alive status to dea..." alt="" coords="273,71,481,112"/>
+<area shape="rect" id="node4" href="$class_collision_handler.html#a0216dd8655f28945569561bcbcdf8d69" title="Checks whether the PlayerBullet object collides with the Satellite object, it then sets the alive sta..." alt="" coords="285,136,468,177"/>
+<area shape="rect" id="node5" href="$class_collision_handler.html#a2575b1c611503b14462aad5ef4ce0bb9" title="Checks whether the PlayerBullet object collides with the LaserGenerator object, it then sets the aliv..." alt="" coords="268,201,485,243"/>
+<area shape="rect" id="node6" href="$class_collision_handler.html#a4c14e009e2cadd7f53258eaa788c5357" title="Checks whether the LaserField object collides with the Player object, it then sets the alive status t..." alt="" coords="287,267,466,308"/>
+<area shape="rect" id="node7" href="$class_collision_handler.html#a874e1b2820b79b9340aa84269881f998" title="Checks whether the Asteroid object collides with the Player object, it then sets the alive status to ..." alt="" coords="292,332,461,373"/>
+<area shape="rect" id="node8" href="$class_collision_handler.html#a90f5fe4187e8bffa02d0eed0862267e8" title="Checks whether there is more than one set of of LaserGenerators alive on the grid. " alt="" coords="295,397,458,439"/>
+</map>

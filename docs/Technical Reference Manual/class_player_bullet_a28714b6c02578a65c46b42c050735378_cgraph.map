@@ -1,0 +1,4 @@
+<map id="PlayerBullet::PlayerBullet" name="PlayerBullet::PlayerBullet">
+<area shape="rect" id="node2" href="$class_position.html#a9d2a5e32a3dfcb4760dec9d06b91d019" title="Sets a value as the angle of the object. " alt="" coords="224,5,352,32"/>
+<area shape="rect" id="node3" href="$class_position.html#a6fdc39697a2176e8ece4d2380abe0646" title="Gets a constant copy of the angle of the object. " alt="" coords="224,56,352,83"/>
+</map>

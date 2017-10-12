@@ -1,0 +1,6 @@
+<map id="Satellite" name="Satellite">
+<area shape="rect" id="node2" href="$class_i_shooting_moving_entity.html" title="IShootingMovingEntity" alt="" coords="5,81,156,108"/>
+<area shape="rect" id="node3" href="$class_i_moving_entity.html" title="IMovingEntity" alt="" coords="31,5,130,32"/>
+<area shape="rect" id="node4" href="$class_grid.html" title="Grid" alt="" coords="180,81,227,108"/>
+<area shape="rect" id="node5" href="$class_position.html" title="Position" alt="" coords="251,81,321,108"/>
+</map>

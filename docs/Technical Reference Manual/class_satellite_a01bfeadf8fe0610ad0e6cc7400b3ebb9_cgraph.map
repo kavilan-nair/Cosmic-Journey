@@ -1,0 +1,12 @@
+<map id="Satellite::Satellite" name="Satellite::Satellite">
+<area shape="rect" id="node2" href="$class_position.html#a9d2a5e32a3dfcb4760dec9d06b91d019" title="Sets a value as the angle of the object. " alt="" coords="191,5,319,32"/>
+<area shape="rect" id="node3" href="$class_position.html#a407b36e95119d6e134fdf1b7fa39d29b" title="Sets a value as the radius of the object. " alt="" coords="187,56,322,83"/>
+<area shape="rect" id="node4" href="$class_grid.html#ace1d5c4f5f03c7d602b762d38a551fe3" title="Gets a copy of the radius of the abstracted circle of the Grid. " alt="" coords="199,107,311,133"/>
+<area shape="rect" id="node5" href="$class_position.html#aa512c9d91896c736a88f24d7bf20c854" title="Sets a value as the initial x coordinate of the object. " alt="" coords="178,157,331,184"/>
+<area shape="rect" id="node6" href="$class_grid.html#ae0f25c8112c8d26c75ad4163b9fe6e4c" title="Gets a copy of the x position center of the Grid. " alt="" coords="196,208,313,235"/>
+<area shape="rect" id="node7" href="$class_position.html#a6be00144705c045cf5fd43aadab5e07b" title="Sets a value as the initial y coordinate of the object. " alt="" coords="177,259,332,285"/>
+<area shape="rect" id="node8" href="$class_grid.html#a4e384c6c224cee509e30f6c9778c331b" title="Gets a copy of the y position center of the Grid. " alt="" coords="195,309,314,336"/>
+<area shape="rect" id="node9" href="$class_position.html#af29b590472bff2651745b7d90d8fadc7" title="Sets a value as the x coordinate of the object. " alt="" coords="193,360,316,387"/>
+<area shape="rect" id="node10" href="$class_position.html#a0682d59e5408c607477ae32568666309" title="Sets a value as the y coordinate of the object. " alt="" coords="192,411,317,437"/>
+<area shape="rect" id="node11" href="$class_position.html#abd858a9a7eeebe4d9c728eb7f13b8dcd" title="Gets a constant copy of the radius of the object of the circle of the Grid. " alt="" coords="187,461,322,488"/>
+</map>
