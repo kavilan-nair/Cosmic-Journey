@@ -18,7 +18,7 @@ class Enemy : public IShootingMovingEntity
         */
         Enemy(const Grid& grid);
         /**
-        * @brief Default deconstructor. Destroys the Enemy once it has gone out of scope.
+        * @brief Default destructor. Destroys the Enemy once it has gone out of scope.
         */
         ~Enemy();
         /**
@@ -28,7 +28,7 @@ class Enemy : public IShootingMovingEntity
         virtual Position getPosition() override;
         /**
         * @brief Inherited from IShootingMovingEntity. Gets a copy of the type the Enemy is.
-        * @return ENEMY type of the strongly typed enum class EntityType.
+        * @return ENEMY which is a strongly typed enum class EntityType.
         */
         virtual EntityType getEntityType() override;
         /**
@@ -36,18 +36,18 @@ class Enemy : public IShootingMovingEntity
         */
         virtual void move() override;
         /**
-        * @brief Inherited from IShootingMovingEntity. Returns a boolean whether Enemy is alive or not.
-        * @return Boolean with either true or false.
+        * @brief Inherited from IShootingMovingEntity. Returns a bool whether Enemy is alive or not.
+        * @return bool with either true or false.
         */
         virtual bool isAlive() override;
         /**
-        * @brief Inherited from IShootingMovingEntity. Returns the amount of EnemyBullet fired.
-        * @return Vector of shared pointers of EnemyBullet type.
+        * @brief Inherited from IShootingMovingEntity. Returns a vector of shared pointers of type EnemyBullet.
+        * @return vector of shared pointers of type EnemyBullet.
         */
         virtual vector<shared_ptr<IMovingEntity>> shoot() override;
         /**
         * @brief Inherited from IShootingMovingEntity. Returns whether Enemy is respawning or not.
-        * @return Boolean with true or false.
+        * @return bool with true or false.
         */
         virtual bool getRespawn() override;
         /**
@@ -56,7 +56,7 @@ class Enemy : public IShootingMovingEntity
         virtual void setDead() override;
         /**
         * @brief Inherited from IShootingMovingEntity. Returns the radius of the Enemy.
-        * @return Float with radius of the Enemy.
+        * @return float with radius of the Enemy.
         */
         virtual float getHitRadius() override;
         

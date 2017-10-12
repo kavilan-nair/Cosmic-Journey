@@ -10,16 +10,16 @@ class GameOverScreen
 {
     public:
         /**
-        * Default constructor. Creates GameOverScreen object
+        * @brief Default constructor. Creates GameOverScreen object
         */
         GameOverScreen();
         /**
-        * Displays the GameOverScreen
+        * @brief Displays the GameOverScreen
         * @param renderWindow is of type sf::RenderWindow 
         */
         void show(sf::RenderWindow& renderWindow, const int& score, const& highscore);
         /**
-        * Default destructor. Deletes GameOverScreen object
+        * @brief Default destructor. Deletes GameOverScreen object
         */
         ~GameOverScreen();
 

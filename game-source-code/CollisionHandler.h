@@ -17,77 +17,77 @@ class CollisionHandler
 {
     public:
         /**
-        * Moves enemy bullet radially outwards until it is out of the grid radius and then sets the alive status to dead.
+        * @brief Iterates through gamObjects vector and checks for collisions between objects
         * @param gameObjects is a vector of shared pointers of type IMovingEntity and contains all current active gameObjects.
         */
         void checkCollisions(vector<shared_ptr<IMovingEntity>>& gameObjects);
         /**
-        * Returns true of false depending on whether a group of 3 satellites has been destroyed.
-        * @return true/false.
+        * @brief Checks whether a group of 3 satellites has been destroyed which is the condition to upgrade weapon.
+        * @return bool
         */
         bool isWeaponUpgradable();
         /**
-        * Returns the number of points scored per frame and is of type int.   
-        * @return _points
+        * @brief Calculates number of points scored per frame.   
+        * @return int with the number of points scored.
         */
         int getPoints();
         /**
-        * Returns the number of enemies killed per frame and is of type int.   
+        * @brief Calculates the number of enemies killed per frame and is of type int.   
         * @return _enemiesKilled
         */
         int getEnemiesKilled();
         
     private:
         /**
-        * Returns float containing the distance between gameObject1 and gameObject2 using the distance formula.
+        * @brief Calculates the distance between gameObject1 and gameObject2 using the distance formula.
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         * @return float containing distance between the two gameObjects
         */
         float getDistance(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether the PlayerBullet object collides with the Enemy object, it then sets the alive status to dead for both objects
+        * @brief Checks whether the PlayerBullet object collides with the Enemy object, it then sets the alive status to dead for both objects
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         */
         void playerBulletCollidesWithEnemies(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether the Enemy object collides with the Player object, it then sets the alive status to dead for both objects
+        * @brief Checks whether the Enemy object collides with the Player object, it then sets the alive status to dead for both objects
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         */
         void enemyCollidesWithPlayers(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether the PlayBullet object collides with the Satellite object, it then sets the alive status to dead for both objects
+        * @brief Checks whether the PlayerBullet object collides with the Satellite object, it then sets the alive status to dead for both objects
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         */
         void playerBulletCollidesWithSatellites(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether the PlayBullet object collides with the LaserGenerator object, it then sets the alive status to dead for both objects
+        * @brief Checks whether the PlayerBullet object collides with the LaserGenerator object, it then sets the alive status to dead for both objects
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         */
         void playerBulletCollidesWithLaserGenerator(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether the LaserField object collides with the Player object, it then sets the alive status to dead for both objects
+        * @brief Checks whether the LaserField object collides with the Player object, it then sets the alive status to dead for both objects
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         */
         void laserFieldCollidesWithPlayer(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether the Asteroid object collides with the Player object, it then sets the alive status to dead for both objects
+        * @brief Checks whether the Asteroid object collides with the Player object, it then sets the alive status to dead for both objects
         * @param gameObject1 is an object of type IMovingEntity
         * @param gameObject2 is an object of type IMovingEntity
         */
         void asteroidCollidesWithPlayer(shared_ptr<IMovingEntity>& gameObject1, shared_ptr<IMovingEntity>& gameObject2);
         /**
-        * Checks whether there is more than one set of of LaserGenerators alive on the grid
+        * @brief Checks whether there is more than one set of of LaserGenerators alive on the grid
         * @param gameObjects is a vector of  object of type IMovingEntity
         */
         void updateLaserGenerators(vector<shared_ptr<IMovingEntity>>& gameObjects);
         /**
-        * Resets the _pointsMultiplier to 1x
+        * @brief Resets the points multiplier to 1x
         */
         void resetMultiplier();
         

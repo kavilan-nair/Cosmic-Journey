@@ -12,7 +12,7 @@ class EnemyBullet : public IMovingEntity
 {
     public:
         /**
-        * Parameterized constructor. Creates EnemyBullet object at the position of the enemy with the same angle.
+        * @brief Parameterized constructor. Creates EnemyBullet object at the position of the enemy with the same angle.
         * @param enemyPos is an object of type Position that contains the position of the Enemy that is to fire the bullet.
         * @param grid is an object of type Grid which contains data about the grid height, width, center and radius.
         */
@@ -22,42 +22,37 @@ class EnemyBullet : public IMovingEntity
         */
         ~EnemyBullet();
         /**
-        * Inherited from IMovingEntity.
-        * Returns a copy of the Position object of the EnemyBullet which contains data about the origin, current position, angle and radius.
-        */     
+        * @brief Inherited from IMovingEntity.  Gets a copy of the EnemyBullet positional data.
+        * @return Position of the EnemyBullet Object containing center, current position, radius and angle.
+        */      
         virtual Position getPosition() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns a strongly typed enum of EntityType, ENEMYBULLET.
-        * @return EntityType enum.
+        * @brief Inherited from IMovingEntity. Returns a strongly typed enum, EntityType.
+        * @return ENEMY_BULLET which is a strongly typed enum class EntityType.
         */
         virtual EntityType getEntityType() override;
         /**
-        * Inherited from IMovingEntity.
-        * Moves enemy bullet radially outwards until it is out of the grid radius and then sets the alive status to dead.
+        * @brief Inherited from IMovingEntity. Returns a bool member variable whether EnemyBullet object is alive or not.
+        * @return _aliveStatus.
         */
         virtual void move() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns a boolean member variable whether enemy bullet object is alive or not.
-        * @return _aliveStatus.
+        * @brief Inherited from IMovingEntity. Returns a bool member variable whether EnemyBullet object is alive or not.
+        * @return bool
         */
         virtual bool isAlive() override;
-        /**
-        * Inherited from IMovingEntity.
-        * Returns false as it overrides inherited interface but has no use.
-        * @return false.
-        */
+        /** 
+        * @brief Inherited from IMovingEntity. Returns false as it overrides base class but has no use.
+        * @return bool
+        */ 
         virtual bool getRespawn() override;
-        /**
-        * Inherited from IMovingEntity.
-        * Sets the boolean _aliveStatus member variable to false.
+         /**
+        * @brief Inherited from IMovingEntity. Sets the EnemyBullet dead when killed. 
         */
         virtual void setDead() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns the float radius of the enemy bullet object that is used to check collisions.
-        * @return _hitRadius.
+        * @brief Inherited from IMovingEntity. Returns the radius of the EnemyBullet.
+        * @return float with radius of the EnemyBullet.
         */
         virtual float getHitRadius() override;
         

@@ -9,27 +9,26 @@ using std::fstream;
 using std::ios;
 
 /**
-* HighScoreManager class - Reads a text file containing the highscore and sets the highscore in the textfile
+* HighScoreManager class - Reads a text file containing the highscore and writes the highscore in the textfile
 */
 class HighScoreManager
 {
     public:
         /**
-        * Default constructor. Creates HighScoreManager object
+        * @brief Default constructor. Creates HighScoreManager object
         */
         HighScoreManager();
         /**
-        * Default destructor. Deletes HighScoreManager object
+        * @brief Default destructor. Deletes HighScoreManager object
         */
         ~HighScoreManager();
         /**
-        * Returns the highscore that is stored in the textfile
-        * @returns _highscore of type int
+        * @brief Retrieves the highscore that is stored in the textfile.
+        * @returns int containing highScore
         */
         int getHighScore();
         /**
-        * Writes the highscore to the highscore textfile
-        * @returns _highscore of type int
+        * @brief Writes the highscore to the highscores textfile
         */
         void setHighScore(int highScore);
     

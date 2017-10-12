@@ -13,51 +13,45 @@ class Asteroid : public IMovingEntity
 {
     public:
         /**
-        * Parameterized constructor. Creates Asteroid object at the centre of the grid, the asteroid is also assigned a random angle between 0-360 degreess.
+        * @brief Parameterized constructor. Creates Asteroid object at the centre of the grid, the asteroid is also assigned a random angle between 0-360 degreess.
         * @param grid is an object of type Grid which contains data about the grid height, width, center and radius.
         */
         Asteroid(const Grid& grid);
         /**
-        * Default destructor. Destroys the object once it has gone out of scope.
+        * @brief Default destructor. Destroys the object once it has gone out of scope.
         */
         ~Asteroid();
         /**
-        * Inherited from IMovingEntity.
-        * Returns a copy of the Position object of the asteroid which contains data about the origin, current position, angle and radius.
+        * @brief Inherited from IMovingEntity.  Gets a copy of the Asteroid positional data.
+        * @return Position of the Asteroid Object containing center, current position, radius and angle.
         */      
         virtual Position getPosition() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns a strongly typed enum, EntityType.
-        * @return EntityType enum.
+        * @brief Inherited from IMovingEntity. Returns a strongly typed enum, EntityType.
+        * @return ASTEROID which is a strongly typed enum class EntityType.
         */
         virtual EntityType getEntityType() override;
         /**
-        * Inherited from IMovingEntity.
-        * Moves asteroid radially outwards until it is out of the grid radius and then sets the alive status to dead.
+        * @brief Inherited from IMovingEntity. Moves Asteroid radially outwards until it is out of the grid radius and then sets the alive status to dead.
         */
         virtual void move() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns a boolean member variable whether asteroid object is alive or not.
-        * @return _aliveStatus.
+        * @brief Inherited from IMovingEntity. Returns a bool member variable whether Asteroid object is alive or not.
+        * @return bool
         */
         virtual bool isAlive() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns false as it overrides inherited interface but has no use.
-        * @return false.
+        * @brief Inherited from IMovingEntity. Returns a bool whether Asteroid is alive or not.
+        * @return bool
         */
         virtual bool getRespawn() override;
         /**
-        * Inherited from IMovingEntity.
-        * Sets the boolean _aliveStatus member variable to false.
+        * @brief Inherited from IMovingEntity. Sets the Asteroid dead when killed. 
         */
         virtual void setDead() override;
         /**
-        * Inherited from IMovingEntity.
-        * Returns the float radius of the asteroid object that is used to check collisions.
-        * @return _hitRadius.
+        * @brief Inherited from IMovingEntity. Returns the radius of the Asteroid.
+        * @return float with radius of the Asteroid.
         */
         virtual float getHitRadius() override;
         

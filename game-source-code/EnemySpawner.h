@@ -20,22 +20,22 @@ class EnemySpawner
         */
         EnemySpawner(const Grid& grid);
         /**
-        * @brief Default deconstructor. Destroys the EnemySpawner once it has gone out of scope.
+        * @brief Default destructor. Destroys the EnemySpawner once it has gone out of scope.
         */
         ~EnemySpawner();
         /**
         * @brief Function that spawns a normal Enemy based on a random number generator.
-        * @return vector of shared pointers of type IMovingEntity for number of enemies spawned.
+        * @return vector of shared pointers of type IMovingEntity for enemies spawned.
         */
         vector<shared_ptr<IMovingEntity> > spawnEnemyNormal();
         /**
         * @brief Function that spawns an Asteroid based on a random number generator.
-        * @return vector of shared pointers of type IMovingEntity for number of asteroids spawned.
+        * @return vector of shared pointers of type IMovingEntity for asteroids spawned.
         */
         vector<shared_ptr<IMovingEntity> > spawnAsteroid();
         /**
         * @brief Function that checks if an enemy is ready for respawning and then spawns a new one.
-        * @return vector of shared pointers of type IMovingEntity for number of enemies respawned.
+        * @return vector of shared pointers of type IMovingEntity for enemies respawned.
         */
         vector<shared_ptr<IMovingEntity> > respawnEnemyNormal(vector<shared_ptr<IMovingEntity> >& gameObjects);
         /**
@@ -50,7 +50,7 @@ class EnemySpawner
         vector<shared_ptr<IMovingEntity> > spawnLaserGenerator();
         /**
         * @brief Function that makes Enemy and Satellite objects shoot based on a random number generator.
-        * @return vector of shared pointers of type IMovingEntity number of EnemyBullets fired.
+        * @return vector of shared pointers of type IMovingEntity of EnemyBullets fired.
         */
         vector<shared_ptr<IMovingEntity> > enemyShoot(vector<shared_ptr<IMovingEntity> >& gameObjects);
         /**

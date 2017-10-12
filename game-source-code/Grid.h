@@ -14,31 +14,31 @@ class Grid
         */
         Grid(const int& width, const int& height);
         /**
-        * @brief Default deconstructor. Destroys the Grid once it has gone out of scope.
+        * @brief Default destructor. Destroys the Grid once it has gone out of scope.
         */
         ~Grid();
         /**
-        * @brief Gets a constant copy of the width of the Grid.
+        * @brief Gets a copy of the width of the Grid.
         * @return int with width value.
         */
         int getWidth()   const;
         /**
-        * @brief Gets a constant copy of the height of the Grid.
+        * @brief Gets a copy of the height of the Grid.
         * @return int with height value.
         */
         int getHeight()  const;
         /**
-        * @brief Gets a constant copy of the x position center of the Grid.
+        * @brief Gets a copy of the x position center of the Grid.
         * @return int with x value at center.
         */
         int getCenterX() const;
         /**
-        * @brief Gets a constant copy of the y position center of the Grid.
+        * @brief Gets a copy of the y position center of the Grid.
         * @return int with y value at center.
         */
         int getCenterY() const;
         /**
-        * @brief Gets a constant copy of the radius of the abstracted circle of the Grid.
+        * @brief Gets a copy of the radius of the abstracted circle of the Grid.
         * @return int with value of radius.
         */
         int getRadius()  const;

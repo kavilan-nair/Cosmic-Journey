@@ -2,7 +2,7 @@
 #define GAMESTATE_H
 
 /**
-* GameState is a strongly typed enum used to by Logic to identify what state the game is
+* GameState is a strongly typed enum used to by Logic to identify what state the game is in
 */
 enum class GameState
 {
