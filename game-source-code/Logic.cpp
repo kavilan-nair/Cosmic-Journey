@@ -18,7 +18,7 @@ void Logic::run()
         
     _gameState=GameState::ACTIVE;
      
-    StopWatch timer;
+    StopWatch timer{};
     timer.startTimer();
 	auto timeFromLastUpdate = 0.f;
 	auto timePerFrame = 1.0f/6000.f;

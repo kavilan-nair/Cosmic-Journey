@@ -7,6 +7,10 @@ StopWatch::StopWatch() : timeInitial(0), timeFinal(0)
 {
 }
 
+StopWatch::~StopWatch()
+{
+}
+
 void StopWatch::startTimer()
 {
 	timeInitial = getProcessTime();
