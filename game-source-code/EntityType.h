@@ -1,6 +1,9 @@
 #ifndef ENTITYTYPES_H
 #define ENTITYTYPES_H
 
+/**
+* EntityType is a strongly typed enum used to by the objects that inherit from IMovingEntity
+*/
 enum class EntityType
 {
 	PLAYER = 0,
