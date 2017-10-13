@@ -1,8 +1,8 @@
 <map id="Logic" name="Logic">
-<area shape="rect" id="node2" href="$class_grid.html" title="Grid" alt="" coords="408,131,455,157"/>
-<area shape="rect" id="node14" href="$class_enemy_spawner.html" title="EnemySpawner" alt="" coords="764,264,877,291"/>
-<area shape="rect" id="node5" href="$class_resource_manager.html" title="ResourceManager" alt="" coords="757,491,884,517"/>
-<area shape="rect" id="node19" href="$class_high_score_manager.html" title="HighScoreManager" alt="" coords="755,549,887,576"/>
-<area shape="rect" id="node9" href="$class_presentation.html" title="Presentation" alt="" coords="773,436,868,463"/>
-<area shape="rect" id="node13" href="$class_collision_handler.html" title="CollisionHandler" alt="" coords="763,600,878,627"/>
+<area shape="rect" id="node2" href="$class_grid.html" title="Grid" alt="" coords="80,20,127,47"/>
+<area shape="rect" id="node12" href="$class_enemy_spawner.html" title="EnemySpawner" alt="" coords="379,141,492,168"/>
+<area shape="rect" id="node4" href="$class_resource_manager.html" title="ResourceManager" alt="" coords="372,268,499,295"/>
+<area shape="rect" id="node17" href="$class_high_score_manager.html" title="HighScoreManager" alt="" coords="369,319,501,345"/>
+<area shape="rect" id="node7" href="$class_presentation.html" title="Presentation" alt="" coords="388,420,483,447"/>
+<area shape="rect" id="node11" href="$class_collision_handler.html" title="CollisionHandler" alt="" coords="378,521,493,548"/>
 </map>
