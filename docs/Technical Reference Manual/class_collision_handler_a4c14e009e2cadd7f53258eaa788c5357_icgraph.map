@@ -1,0 +1,4 @@
+<map id="CollisionHandler::laserFieldCollidesWithPlayer" name="CollisionHandler::laserFieldCollidesWithPlayer">
+<area shape="rect" id="node2" href="$class_collision_handler.html#a94ce13ddf89d162dc5ea03bb1b51205f" title="Iterates through gamObjects vector and checks for collisions between objects. " alt="" coords="232,13,447,39"/>
+<area shape="rect" id="node3" href="$class_logic.html#a57980860990e4de73114c41d349d5b19" title="Function that checks for collisions between all valid entities. " alt="" coords="495,13,609,39"/>
+</map>

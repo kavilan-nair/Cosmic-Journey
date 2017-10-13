@@ -1,0 +1,4 @@
+<map id="Presentation::handlePlayerInput" name="Presentation::handlePlayerInput">
+<area shape="rect" id="node2" href="$class_presentation.html#a0ae752fb12e3530acd81469e68d743a3" title="Checks whether a key is pressed or released by the user and calls handlePlayerInput. " alt="" coords="232,5,409,47"/>
+<area shape="rect" id="node3" href="$class_logic.html#a633db35adbf5291ee249199dfb114931" title="Function that calls Presentation object to get the key stroke and maps it to an enum. " alt="" coords="457,13,612,39"/>
+</map>

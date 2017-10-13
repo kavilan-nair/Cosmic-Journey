@@ -1,0 +1,3 @@
+<map id="Player::getDirection" name="Player::getDirection">
+<area shape="rect" id="node2" href="$class_player.html#a1d35b7b1cd1a890042abdfdc55cafb14" title="Inherited from IShootingMovingEntity. Moves the Player clockwise, anticlockwise or not at all dependi..." alt="" coords="189,5,287,32"/>
+</map>

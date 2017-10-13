@@ -1,0 +1,3 @@
+<map id="EnemySpawner::enemyShoot" name="EnemySpawner::enemyShoot">
+<area shape="rect" id="node2" href="$class_logic.html#a840ad5a5317010c96af154f6dd59c5c7" title="Function that allows objects to shoot if the random number allows. " alt="" coords="248,5,385,32"/>
+</map>

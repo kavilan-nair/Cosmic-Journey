@@ -76,11 +76,12 @@ Collaboration diagram for Logic:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_logic__coll__graph.png" border="0" usemap="#_logic_coll__map" alt="Collaboration graph"/></div>
 <map name="_logic_coll__map" id="_logic_coll__map">
-<area shape="rect" id="node2" href="class_grid.html" title="Grid" alt="" coords="80,9,127,36"/>
-<area shape="rect" id="node12" href="class_enemy_spawner.html" title="EnemySpawner" alt="" coords="379,140,492,167"/>
-<area shape="rect" id="node5" href="class_presentation.html" title="Presentation" alt="" coords="388,324,483,351"/>
-<area shape="rect" id="node11" href="class_collision_handler.html" title="CollisionHandler" alt="" coords="378,425,493,452"/>
-<area shape="rect" id="node17" href="class_high_score_manager.html" title="HighScoreManager" alt="" coords="369,492,501,519"/>
+<area shape="rect" id="node2" href="class_grid.html" title="Grid" alt="" coords="408,131,455,157"/>
+<area shape="rect" id="node14" href="class_enemy_spawner.html" title="EnemySpawner" alt="" coords="764,264,877,291"/>
+<area shape="rect" id="node5" href="class_resource_manager.html" title="ResourceManager" alt="" coords="757,491,884,517"/>
+<area shape="rect" id="node19" href="class_high_score_manager.html" title="HighScoreManager" alt="" coords="755,549,887,576"/>
+<area shape="rect" id="node9" href="class_presentation.html" title="Presentation" alt="" coords="773,436,868,463"/>
+<area shape="rect" id="node13" href="class_collision_handler.html" title="CollisionHandler" alt="" coords="763,600,878,627"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -98,6 +99,10 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic.html#abf175ef9069615527bfbd10864b20df4">run</a> ()</td></tr>
 <tr class="memdesc:abf175ef9069615527bfbd10864b20df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that starts the main game loop. <br /></td></tr>
 <tr class="separator:abf175ef9069615527bfbd10864b20df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a441fc1bc32265369c1a72b087792280f"><td class="memItemLeft" align="right" valign="top"><a id="a441fc1bc32265369c1a72b087792280f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic.html#a441fc1bc32265369c1a72b087792280f">loadTexturePaths</a> ()</td></tr>
+<tr class="memdesc:a441fc1bc32265369c1a72b087792280f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that loads all the resources and links it to a ResourceType. <br /></td></tr>
+<tr class="separator:a441fc1bc32265369c1a72b087792280f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a31c0b24061c7ae7a157d1482d89d69"><td class="memItemLeft" align="right" valign="top"><a id="a9a31c0b24061c7ae7a157d1482d89d69"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_logic.html#a9a31c0b24061c7ae7a157d1482d89d69">renderEntities</a> ()</td></tr>
 <tr class="memdesc:a9a31c0b24061c7ae7a157d1482d89d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that sends a vector of shared pointers of type <a class="el" href="class_i_moving_entity.html">IMovingEntity</a> to <a class="el" href="class_presentation.html">Presentation</a> to draw. <br /></td></tr>
@@ -173,6 +178,9 @@ const <a class="el" href="class_grid.html">Grid</a>&#160;</td><td class="memItem
 <tr class="memitem:a3284d42989e87c0df3201dd3420a22e8"><td class="memItemLeft" align="right" valign="top"><a id="a3284d42989e87c0df3201dd3420a22e8"></a>
 <a class="el" href="class_high_score_manager.html">HighScoreManager</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_highScoreManager</b></td></tr>
 <tr class="separator:a3284d42989e87c0df3201dd3420a22e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55943e4b068af576680a7679d46b02c"><td class="memItemLeft" align="right" valign="top"><a id="ac55943e4b068af576680a7679d46b02c"></a>
+<a class="el" href="class_resource_manager.html">ResourceManager</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_resourceManager</b></td></tr>
+<tr class="separator:ac55943e4b068af576680a7679d46b02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe772e5da32f41cd512c94af7f2d3c05"><td class="memItemLeft" align="right" valign="top"><a id="abe772e5da32f41cd512c94af7f2d3c05"></a>
 shared_ptr&lt; <a class="el" href="class_player_bullet.html">PlayerBullet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_playerBullet</b></td></tr>
 <tr class="separator:abe772e5da32f41cd512c94af7f2d3c05"><td class="memSeparator" colspan="2">&#160;</td></tr>

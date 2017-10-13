@@ -1,0 +1,9 @@
+<map id="Grid::getCenterY" name="Grid::getCenterY">
+<area shape="rect" id="node2" href="$class_asteroid.html#a8701c3690bfccb66216cf912bb3de9e7" title="Parameterized constructor. Creates Asteroid object at the centre of the grid, the asteroid is also as..." alt="" coords="213,5,339,32"/>
+<area shape="rect" id="node3" href="$class_enemy.html#a40bea9bd3d2749446830c13c289e8787" title="Parameterized constructor. Inherits from the IShootingMovingEntity class. Creates Enemy at center of ..." alt="" coords="220,56,332,83"/>
+<area shape="rect" id="node4" href="$class_laser_field.html#a2b1aa60f6a1f0dbe20b1623744c65ce8" title="Parameterized constructor. Inherits from the IMovingEntity class. Creates a LaserField at center of t..." alt="" coords="201,107,351,133"/>
+<area shape="rect" id="node5" href="$class_laser_generator.html#aedd712dfb353d61a96517b03851be992" title="Parameterized constructor. Inherits from the IShootingMovingEntity class. Creates a LaserGenerator at..." alt="" coords="172,157,380,184"/>
+<area shape="rect" id="node6" href="$class_player.html#ae1264a74e8aed292f9a57a4234a12ce1" title="Parameterized constructor. Inherits from the IShootingMovingEntity class. Creates Player object on th..." alt="" coords="224,208,328,235"/>
+<area shape="rect" id="node7" href="$class_player_bullet.html#aa56a8f4f9db3978834521b58cffa9004" title="Inherited from IMovingEntity. Moves PlayerBullet radially inwards. " alt="" coords="211,259,341,285"/>
+<area shape="rect" id="node8" href="$class_satellite.html#a01bfeadf8fe0610ad0e6cc7400b3ebb9" title="Parameterized constructor. Inherits from the IShootingMovingEntity class. Creates a Satellite at cent..." alt="" coords="214,309,338,336"/>
+</map>

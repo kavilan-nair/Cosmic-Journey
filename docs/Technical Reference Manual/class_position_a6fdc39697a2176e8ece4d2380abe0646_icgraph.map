@@ -1,0 +1,11 @@
+<map id="Position::getAngle" name="Position::getAngle">
+<area shape="rect" id="node2" href="$class_asteroid.html#af570b41b44989e12e6a854e24d905c43" title="Inherited from IMovingEntity. Moves Asteroid radially outwards until it is out of the grid radius and..." alt="" coords="217,5,325,32"/>
+<area shape="rect" id="node3" href="$class_enemy.html#a90a135c93792574d2675a670ac25b081" title="Inherited from IShootingMovingEntity. Moves the Enemy radially outwards from center. " alt="" coords="220,56,321,83"/>
+<area shape="rect" id="node4" href="$class_enemy_bullet.html#a9b6eff9cc0345d0930b648cb99b3ee3a" title="Parameterized constructor. Creates EnemyBullet object at the position of the enemy with the same angl..." alt="" coords="181,107,360,133"/>
+<area shape="rect" id="node5" href="$class_enemy_bullet.html#ad1b4f2d19074a8ca503a8482669b99c7" title="Inherited from IMovingEntity. Returns a bool member variable whether EnemyBullet object is alive or n..." alt="" coords="203,157,338,184"/>
+<area shape="rect" id="node6" href="$class_laser_field.html#a97df9079057d00ea8bc1e4068c10816f" title="Inherited from MovingEntity. Moves the LaserField radially outwards from center. " alt="" coords="211,208,331,235"/>
+<area shape="rect" id="node7" href="$class_laser_generator.html#a633185a45f2fc3853dd51807c06aeb1f" title="Inherited from IShootingMovingEntity. Moves the LaserGenerator radially outwards from center..." alt="" coords="196,259,345,285"/>
+<area shape="rect" id="node8" href="$class_player_bullet.html#a28714b6c02578a65c46b42c050735378" title="Parameterized constructor. Creates PlayerBullet object at the position of the Player depending on bul..." alt="" coords="185,309,356,336"/>
+<area shape="rect" id="node9" href="$class_player_bullet.html#aa56a8f4f9db3978834521b58cffa9004" title="Inherited from IMovingEntity. Moves PlayerBullet radially inwards. " alt="" coords="205,360,336,387"/>
+<area shape="rect" id="node10" href="$class_satellite.html#accc5dbc902daf23f2280ab19c37cdd0b" title="Inherited from IShootingMovingEntity. Moves the Satellite radially outwards from center and later gyr..." alt="" coords="217,411,324,437"/>
+</map>

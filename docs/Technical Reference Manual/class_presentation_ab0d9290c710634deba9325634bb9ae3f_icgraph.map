@@ -1,0 +1,4 @@
+<map id="Presentation::displayLivesRemaining" name="Presentation::displayLivesRemaining">
+<area shape="rect" id="node2" href="$class_presentation.html#a0f33e732141157729d261dbb9c9bd73f" title="Draws and displays the game sprites, and calls displayLivesRemaining function. " alt="" coords="227,13,412,39"/>
+<area shape="rect" id="node3" href="$class_logic.html#a9a31c0b24061c7ae7a157d1482d89d69" title="Function that sends a vector of shared pointers of type IMovingEntity to Presentation to draw..." alt="" coords="460,13,601,39"/>
+</map>

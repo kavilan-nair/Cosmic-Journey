@@ -76,6 +76,8 @@ $(function() {
 Collaboration diagram for Presentation:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_presentation__coll__graph.png" border="0" usemap="#_presentation_coll__map" alt="Collaboration graph"/></div>
+<map name="_presentation_coll__map" id="_presentation_coll__map">
+</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -103,10 +105,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:abf0f39f19125a2cc13b40d570507f8ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_presentation.html#abf0f39f19125a2cc13b40d570507f8ee">handlePlayerInput</a> (const sf::Keyboard::Key key, const bool isPressed)</td></tr>
 <tr class="memdesc:abf0f39f19125a2cc13b40d570507f8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect what key has been pressed and sets a private variable accordingly.  <a href="#abf0f39f19125a2cc13b40d570507f8ee">More...</a><br /></td></tr>
 <tr class="separator:abf0f39f19125a2cc13b40d570507f8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6901d1af73cca32930b7c72d1a6b08cc"><td class="memItemLeft" align="right" valign="top"><a id="a6901d1af73cca32930b7c72d1a6b08cc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_presentation.html#a6901d1af73cca32930b7c72d1a6b08cc">loadTextures</a> ()</td></tr>
-<tr class="memdesc:a6901d1af73cca32930b7c72d1a6b08cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the correct texture to the sprite depending on the type of entity it is. <br /></td></tr>
-<tr class="separator:a6901d1af73cca32930b7c72d1a6b08cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad84fa951db03aa9c20d8d8ab4d429e31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_presentation.html#ad84fa951db03aa9c20d8d8ab4d429e31">loadTextures</a> (vector&lt; <a class="el" href="class_resource_manager.html">ResourceManager</a> &gt; resources)</td></tr>
+<tr class="memdesc:ad84fa951db03aa9c20d8d8ab4d429e31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the correct texture to the sprite depending on the type of entity it is.  <a href="#ad84fa951db03aa9c20d8d8ab4d429e31">More...</a><br /></td></tr>
+<tr class="separator:ad84fa951db03aa9c20d8d8ab4d429e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f6e88131ece1bb6f5dbf9f98a07adb2"><td class="memItemLeft" align="right" valign="top"><a id="a6f6e88131ece1bb6f5dbf9f98a07adb2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_presentation.html#a6f6e88131ece1bb6f5dbf9f98a07adb2">drawBackground</a> ()</td></tr>
 <tr class="memdesc:a6f6e88131ece1bb6f5dbf9f98a07adb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the background sprite for the game. <br /></td></tr>
@@ -145,9 +146,9 @@ sf::Texture&#160;</td><td class="memItemRight" valign="bottom"><b>_backgroundTex
 <tr class="memitem:a62a342ec65a662fcdec83443c5d32faf"><td class="memItemLeft" align="right" valign="top"><a id="a62a342ec65a662fcdec83443c5d32faf"></a>
 sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><b>_backgroundSprite</b></td></tr>
 <tr class="separator:a62a342ec65a662fcdec83443c5d32faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab09281ced75718e6438bb1eee6755504"><td class="memItemLeft" align="right" valign="top"><a id="ab09281ced75718e6438bb1eee6755504"></a>
-sf::Font&#160;</td><td class="memItemRight" valign="bottom"><b>font</b></td></tr>
-<tr class="separator:ab09281ced75718e6438bb1eee6755504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd6bb70f13bd873fb73b23041eb0db8d"><td class="memItemLeft" align="right" valign="top"><a id="afd6bb70f13bd873fb73b23041eb0db8d"></a>
+sf::Font&#160;</td><td class="memItemRight" valign="bottom"><b>_font</b></td></tr>
+<tr class="separator:afd6bb70f13bd873fb73b23041eb0db8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab056c50cd1b43e664191042053fa4bc"><td class="memItemLeft" align="right" valign="top"><a id="aab056c50cd1b43e664191042053fa4bc"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>_halveSize</b></td></tr>
 <tr class="separator:aab056c50cd1b43e664191042053fa4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,17 +167,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_isRightPressed</b></
 <tr class="memitem:a725780525d8742f7c637bc750038e600"><td class="memItemLeft" align="right" valign="top"><a id="a725780525d8742f7c637bc750038e600"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>_isSpacePressed</b></td></tr>
 <tr class="separator:a725780525d8742f7c637bc750038e600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad5919a4396ae73c2c1537f09a73ff4e"><td class="memItemLeft" align="right" valign="top"><a id="aad5919a4396ae73c2c1537f09a73ff4e"></a>
-vector&lt; <a class="el" href="class_resource_manager.html">ResourceManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_entityTextures</b></td></tr>
-<tr class="separator:aad5919a4396ae73c2c1537f09a73ff4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdf5bc87b46720a3d2d4f044b108f98e"><td class="memItemLeft" align="right" valign="top"><a id="afdf5bc87b46720a3d2d4f044b108f98e"></a>
 vector&lt; <a class="el" href="struct_presentation_1_1texture_identifier.html">textureIdentifier</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_textureslList</b></td></tr>
 <tr class="separator:afdf5bc87b46720a3d2d4f044b108f98e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d1ee2a9d0a42e9eab95997c6695997f"><td class="memItemLeft" align="right" valign="top"><a id="a8d1ee2a9d0a42e9eab95997c6695997f"></a>
 vector&lt; sf::Sprite &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_allSprites</b></td></tr>
 <tr class="separator:a8d1ee2a9d0a42e9eab95997c6695997f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a213a8a7bc12512ba6244083fcbbd7d6e"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_paths</b></td></tr>
-<tr class="separator:a213a8a7bc12512ba6244083fcbbd7d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_presentation.html">Presentation</a> class - Uses the SFML library to display all game sprites </p>
@@ -223,6 +219,14 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node2" href="class_game_over_screen.html#a3378887aa1bfafa23af5fb250329ab88" title="Displays the GameOverScreen. " alt="" coords="232,13,395,39"/>
 </map>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_a4aff9c1165c8fc695c4ff15353336558_icgraph.png" border="0" usemap="#class_presentation_a4aff9c1165c8fc695c4ff15353336558_icgraph" alt=""/></div>
+<map name="class_presentation_a4aff9c1165c8fc695c4ff15353336558_icgraph" id="class_presentation_a4aff9c1165c8fc695c4ff15353336558_icgraph">
+<area shape="rect" id="node2" href="class_logic.html#ac60964e5d6fb3712e56858e4f3b4d837" title="Function that calls the GameOverScreen object to display its window when Player loses all lives..." alt="" coords="232,13,423,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -266,6 +270,14 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_presentation_a11d89acd7f192273410daedc34b06010_cgraph.png" border="0" usemap="#class_presentation_a11d89acd7f192273410daedc34b06010_cgraph" alt=""/></div>
 <map name="class_presentation_a11d89acd7f192273410daedc34b06010_cgraph" id="class_presentation_a11d89acd7f192273410daedc34b06010_cgraph">
 <area shape="rect" id="node2" href="class_winner_screen.html#a55a5891e31cf2dd4144f21c5f17500ea" title="Displays the WinnerScreen. " alt="" coords="232,13,375,39"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_a11d89acd7f192273410daedc34b06010_icgraph.png" border="0" usemap="#class_presentation_a11d89acd7f192273410daedc34b06010_icgraph" alt=""/></div>
+<map name="class_presentation_a11d89acd7f192273410daedc34b06010_icgraph" id="class_presentation_a11d89acd7f192273410daedc34b06010_icgraph">
+<area shape="rect" id="node2" href="class_logic.html#a8f5d88df13aab9f03e207969f24617da" title="Function that calls the WinnerScreen object to display its window when all enemies killed..." alt="" coords="232,13,403,39"/>
 </map>
 </div>
 
@@ -319,6 +331,15 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_ab0d9290c710634deba9325634bb9ae3f_icgraph.png" border="0" usemap="#class_presentation_ab0d9290c710634deba9325634bb9ae3f_icgraph" alt=""/></div>
+<map name="class_presentation_ab0d9290c710634deba9325634bb9ae3f_icgraph" id="class_presentation_ab0d9290c710634deba9325634bb9ae3f_icgraph">
+<area shape="rect" id="node2" href="class_presentation.html#a0f33e732141157729d261dbb9c9bd73f" title="Draws and displays the game sprites, and calls displayLivesRemaining function. " alt="" coords="227,13,412,39"/>
+<area shape="rect" id="node3" href="class_logic.html#a9a31c0b24061c7ae7a157d1482d89d69" title="Function that sends a vector of shared pointers of type IMovingEntity to Presentation to draw..." alt="" coords="460,13,601,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -347,6 +368,14 @@ Here is the call graph for this function:</div>
 
 <p>Returns a bool indicating whether the left key is pressed or not. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool with value of whether input was captured or not. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_a88f5f64b1508ab5baba0315b7c4e31ad_icgraph.png" border="0" usemap="#class_presentation_a88f5f64b1508ab5baba0315b7c4e31ad_icgraph" alt=""/></div>
+<map name="class_presentation_a88f5f64b1508ab5baba0315b7c4e31ad_icgraph" id="class_presentation_a88f5f64b1508ab5baba0315b7c4e31ad_icgraph">
+<area shape="rect" id="node2" href="class_logic.html#ad95eb101f8a0c86f40b04caf2f0d56c9" title="Function that assigns the input from the user to a direction of the Player object. " alt="" coords="219,13,403,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -403,6 +432,14 @@ Here is the call graph for this function:</div>
 
 <p>Returns a bool indicating whether the space key is pressed or not. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool with value of whether input was captured or not. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_ae9933fb2c56c98a2649e7bd8a182ba41_icgraph.png" border="0" usemap="#class_presentation_ae9933fb2c56c98a2649e7bd8a182ba41_icgraph" alt=""/></div>
+<map name="class_presentation_ae9933fb2c56c98a2649e7bd8a182ba41_icgraph" id="class_presentation_ae9933fb2c56c98a2649e7bd8a182ba41_icgraph">
+<area shape="rect" id="node2" href="class_logic.html#ad95eb101f8a0c86f40b04caf2f0d56c9" title="Function that assigns the input from the user to a direction of the Player object. " alt="" coords="235,13,419,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -440,6 +477,49 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_abf0f39f19125a2cc13b40d570507f8ee_icgraph.png" border="0" usemap="#class_presentation_abf0f39f19125a2cc13b40d570507f8ee_icgraph" alt=""/></div>
+<map name="class_presentation_abf0f39f19125a2cc13b40d570507f8ee_icgraph" id="class_presentation_abf0f39f19125a2cc13b40d570507f8ee_icgraph">
+<area shape="rect" id="node2" href="class_presentation.html#a0ae752fb12e3530acd81469e68d743a3" title="Checks whether a key is pressed or released by the user and calls handlePlayerInput. " alt="" coords="232,5,409,47"/>
+<area shape="rect" id="node3" href="class_logic.html#a633db35adbf5291ee249199dfb114931" title="Function that calls Presentation object to get the key stroke and maps it to an enum. " alt="" coords="457,13,612,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad84fa951db03aa9c20d8d8ab4d429e31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad84fa951db03aa9c20d8d8ab4d429e31">&#9670;&nbsp;</a></span>loadTextures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Presentation::loadTextures </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; <a class="el" href="class_resource_manager.html">ResourceManager</a> &gt;&#160;</td>
+          <td class="paramname"><em>resources</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns the correct texture to the sprite depending on the type of entity it is. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resources</td><td>is of type <a class="el" href="class_resource_manager.html">ResourceManager</a> and contains the resource path and type </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_ad84fa951db03aa9c20d8d8ab4d429e31_icgraph.png" border="0" usemap="#class_presentation_ad84fa951db03aa9c20d8d8ab4d429e31_icgraph" alt=""/></div>
+<map name="class_presentation_ad84fa951db03aa9c20d8d8ab4d429e31_icgraph" id="class_presentation_ad84fa951db03aa9c20d8d8ab4d429e31_icgraph">
+<area shape="rect" id="node2" href="class_logic.html#a441fc1bc32265369c1a72b087792280f" title="Function that loads all the resources and links it to a ResourceType. " alt="" coords="231,5,393,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -506,30 +586,15 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node2" href="class_presentation.html#ab0d9290c710634deba9325634bb9ae3f" title="Draws the text onscreen to show the number of lives, current score, previous high score and number of..." alt="" coords="239,5,412,47"/>
 </map>
 </div>
-
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_presentation_a0f33e732141157729d261dbb9c9bd73f_icgraph.png" border="0" usemap="#class_presentation_a0f33e732141157729d261dbb9c9bd73f_icgraph" alt=""/></div>
+<map name="class_presentation_a0f33e732141157729d261dbb9c9bd73f_icgraph" id="class_presentation_a0f33e732141157729d261dbb9c9bd73f_icgraph">
+<area shape="rect" id="node2" href="class_logic.html#a9a31c0b24061c7ae7a157d1482d89d69" title="Function that sends a vector of shared pointers of type IMovingEntity to Presentation to draw..." alt="" coords="239,5,380,32"/>
+</map>
 </div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a213a8a7bc12512ba6244083fcbbd7d6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a213a8a7bc12512ba6244083fcbbd7d6e">&#9670;&nbsp;</a></span>_paths</h2>
 
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector&lt;string&gt; Presentation::_paths</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;Resources/PlayerAlt.png&quot;</span>, </div><div class="line">                                <span class="stringliteral">&quot;Resources/Enemy.png&quot;</span>, </div><div class="line">                                <span class="stringliteral">&quot;Resources/Satellite.png&quot;</span>, </div><div class="line">                                <span class="stringliteral">&quot;Resources/LaserGenerator.png&quot;</span>,</div><div class="line">                                <span class="stringliteral">&quot;Resources/PlayerBullet.png&quot;</span>,</div><div class="line">                                <span class="stringliteral">&quot;Resources/EnemyBullet.png&quot;</span>,</div><div class="line">                                <span class="stringliteral">&quot;Resources/LaserField.png&quot;</span>,</div><div class="line">                                <span class="stringliteral">&quot;Resources/Asteroid.png&quot;</span>}</div></div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

@@ -1,0 +1,4 @@
+<map id="GameOverScreen::show" name="GameOverScreen::show">
+<area shape="rect" id="node2" href="$class_presentation.html#a4aff9c1165c8fc695c4ff15353336558" title="Displays the GameOverScreen to the user with their score and the HighScore. " alt="" coords="216,5,395,47"/>
+<area shape="rect" id="node3" href="$class_logic.html#ac60964e5d6fb3712e56858e4f3b4d837" title="Function that calls the GameOverScreen object to display its window when Player loses all lives..." alt="" coords="443,13,633,39"/>
+</map>

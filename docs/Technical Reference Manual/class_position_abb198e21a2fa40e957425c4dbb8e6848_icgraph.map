@@ -1,0 +1,4 @@
+<map id="Position::getXpos" name="Position::getXpos">
+<area shape="rect" id="node2" href="$class_enemy_bullet.html#a9b6eff9cc0345d0930b648cb99b3ee3a" title="Parameterized constructor. Creates EnemyBullet object at the position of the enemy with the same angl..." alt="" coords="176,5,355,32"/>
+<area shape="rect" id="node3" href="$class_satellite.html#accc5dbc902daf23f2280ab19c37cdd0b" title="Inherited from IShootingMovingEntity. Moves the Satellite radially outwards from center and later gyr..." alt="" coords="212,56,319,83"/>
+</map>

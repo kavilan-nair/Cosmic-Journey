@@ -1,0 +1,3 @@
+<map id="Presentation::displayGameOverScreen" name="Presentation::displayGameOverScreen">
+<area shape="rect" id="node2" href="$class_logic.html#ac60964e5d6fb3712e56858e4f3b4d837" title="Function that calls the GameOverScreen object to display its window when Player loses all lives..." alt="" coords="232,13,423,39"/>
+</map>

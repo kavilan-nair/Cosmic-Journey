@@ -1,0 +1,3 @@
+<map id="EnemySpawner::spawnLaserGenerator" name="EnemySpawner::spawnLaserGenerator">
+<area shape="rect" id="node2" href="$class_logic.html#a44d27363dabdc97bd173694c99a052a4" title="Function that randomly spawns group of objects of 2 type LaserGenerator and 7 of type LaserField if t..." alt="" coords="244,13,439,39"/>
+</map>
