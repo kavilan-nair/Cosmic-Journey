@@ -1,39 +1,50 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
-#include "EntityType.h"
+#include "ResourceType.h"
 #include <string>
 using std::string;
+#include <vector>
+using std::vector;
 
 /**
-* ResourceManager class - Data class containing an EntityType and string to the resource png.
+* ResourceManager class - Data class containing a ResourceType and the path to resource
 */
 
 class ResourceManager
 {
-    public:
+public:
+        /**
+        * @brief Default constructor. Creates a ResourceManager object.
+        */
+        ResourceManager();
         /**
         * @brief Parameterized constructor. Creates a ResourceManager object.
         */
-        ResourceManager(EntityType entityID, std::string resourcePath);
+        ResourceManager(ResourceType resourceType, std::string resourcePath);
         /**
         * @brief Default destructor. Destroys ResourceManager object.
         */
         ~ResourceManager();
         /**
-        * @brief Returns the EntityID related to the ResourceManager.
-        * @returns enum of strongly typed EntityType enum.
+        * @brief Returns the ResourceType related to the ResourceManager.
+        * @returns enum of strongly typed ResourceType enum.
         */
-        EntityType getEntityID() const;
+        ResourceType getResourceType() const;
         /**
         * @brief Returns the location on the disk related to the resource. 
         * @returns string with path to resource.png.
         */
         string getResourcePath() const;
+        /**
+        * @brief Returns a vector of ResourceManager containing all the resource infor for the project
+        * @returns vector of type ResourceManager
+        */
+        vector<ResourceManager> getResourceInfo();
         
     private:
         string _resourcePath;
-        EntityType _entityType;	
+        ResourceType _resourceType;	
 };
 
 #endif // RESOURCEMANAGER_H

@@ -1,6 +1,10 @@
 #include "Logic.h"
 
-Logic::Logic() : _presentation(), _gameState(GameState::SPLASHSCREEN),  _enemySpawner(_grid),_highScore(_highScoreManager.getHighScore()),_enemiesRemaining(0)
+Logic::Logic() 
+    : _presentation(), 
+      _gameState(GameState::SPLASHSCREEN),  
+      _enemySpawner(_grid),_highScore(_highScoreManager.getHighScore()),
+      _enemiesRemaining(0)
 {
     srand(time(0));
     _player = make_shared<Player>(_grid);
@@ -17,12 +21,13 @@ void Logic::run()
         drawSplashScreen();
         
     _gameState=GameState::ACTIVE;
-     
+    loadTexturePaths();
+ 
     StopWatch timer{};
     timer.startTimer();
     auto timeFromLastUpdate = 0.f;
     auto timePerFrame = 1.0f/6000.f;
-
+    
     while(_gameState == GameState::ACTIVE)
     {
         timeFromLastUpdate += timer.stopTimer();
@@ -175,4 +180,9 @@ void Logic::deleteDeadEntities()
     ), 
         _gameObjects.end()
     );
+}
+
+void Logic::loadTexturePaths()
+{
+   _presentation.loadTextures(_resourceManager.getResourceInfo());
 }

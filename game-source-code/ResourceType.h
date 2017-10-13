@@ -1,0 +1,18 @@
+#ifndef RESOURCETYPE_H
+#define RESOURCETYPE_H
+
+enum class ResourceType
+{
+    PLAYER = 0,
+    ENEMY,
+    SATELLITE,
+    LASER_GENERATOR,
+    PLAYER_BULLET,
+    ENEMY_BULLET,
+    LASER_FIELD,
+    ASTEROID,
+    BACKGROUND,
+    FONT
+};
+
+#endif // RESOURCETYPE_H

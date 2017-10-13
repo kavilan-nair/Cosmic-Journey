@@ -43,6 +43,10 @@ class Logic
         */
         void run();
         /**
+        * @brief Function that loads all the resources and links it to a ResourceType
+        */
+        void loadTexturePaths();
+        /**
         * @brief Function that sends a vector of shared pointers of type IMovingEntity to Presentation to draw.
         */
         void renderEntities();
@@ -102,12 +106,14 @@ class Logic
         * @brief Function that deletes all dead objects from a vector of shared pointers of type IMovingEntity.
         */
         void deleteDeadEntities();
+
         
     private: 
         Presentation _presentation;
         GameState _gameState;
         const Grid _grid{800, 600};
         HighScoreManager _highScoreManager;
+        ResourceManager _resourceManager;
         shared_ptr<PlayerBullet> _playerBullet;
         shared_ptr<Player> _player;
         vector<shared_ptr<IMovingEntity>> _gameObjects;
@@ -115,7 +121,7 @@ class Logic
         EnemySpawner _enemySpawner;
         int _highScore;
         int _enemiesRemaining;
-        bool _debounce = false; 
+        bool _debounce = false;
 };
 
 #endif // LOGIC_H

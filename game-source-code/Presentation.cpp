@@ -11,13 +11,6 @@ Presentation::Presentation()
     _isRightPressed(false),
     _isSpacePressed(false)
 {
-    loadTextures();
-    _backgroundTexture.loadFromFile("Resources/Background.png");
-    _backgroundTexture.setSmooth(true);
-    _backgroundSprite.setTexture(_backgroundTexture);
-    drawBackground();
-    
-    font.loadFromFile("Resources/Font.ttf");
 }
 
 void Presentation::drawBackground()
@@ -101,24 +94,33 @@ void Presentation::handlePlayerInput(const sf::Keyboard::Key key, const bool isP
         _debounceKey = false;
 }
 
-void Presentation::loadTextures()
+void Presentation::loadTextures(vector<ResourceManager> resources)
 {
-    for(unsigned int i = 0; i != _paths.size(); i++)
+    for(auto resource : resources)
     {
-        ResourceManager resource{static_cast<EntityType>(i), _paths.at(i)};
-        _entityTextures.push_back(resource);
-    }
-    
-    for (auto entityTexture : _entityTextures)
-    {
-        sf::Texture texture;
-        texture.loadFromFile(entityTexture.getResourcePath());
-        texture.setSmooth(true);
-        
-        textureIdentifier currentTex;
-        currentTex.entityType = entityTexture.getEntityID();
-        currentTex.texture = texture;
-        _textureslList.push_back(currentTex);
+        if (resource.getResourceType() == ResourceType::BACKGROUND)
+        {
+            _backgroundTexture.loadFromFile(resource.getResourcePath());
+            _backgroundTexture.setSmooth(true);
+            _backgroundSprite.setTexture(_backgroundTexture);
+            drawBackground();
+        }
+        else if (resource.getResourceType() == ResourceType::FONT)
+        {
+            _font.loadFromFile(resource.getResourcePath());
+        }
+        else
+        {
+            sf::Texture texture;
+            texture.loadFromFile(resource.getResourcePath());
+            texture.setSmooth(true);
+            int entityTypeInt = static_cast<int>(resource.getResourceType());
+
+            textureIdentifier currentTex;
+            currentTex.entityType = static_cast<EntityType>(entityTypeInt);
+            currentTex.texture = texture;
+            _textureslList.push_back(currentTex);
+        }
     }
 }
 
@@ -143,28 +145,28 @@ void Presentation::displayGameWinner(const int& score, const int& highScore)
 
 void Presentation::displayLivesRemaining(const int& lives, const int& score, const int& highscore, const int& enemies)
 {  
-     font.loadFromFile("Resources/Font.ttf");
+     _font.loadFromFile("Resources/Font.ttf");
     
     string numberOfLives = std::to_string(lives-1) +" lives remaining"; 
-    sf::Text sfLives(numberOfLives, font);
+    sf::Text sfLives(numberOfLives, _font);
     sfLives.setCharacterSize(24);
     sfLives.setPosition(20, 20);
     sfLives.setColor(sf::Color::Yellow);
     
     string scoreText = "Score: " + std::to_string(score);  
-    sf::Text sfScore(scoreText, font);
+    sf::Text sfScore(scoreText, _font);
     sfScore.setCharacterSize(24);
     sfScore.setPosition(680, 20);
     sfScore.setColor(sf::Color::Yellow);
     
     string highscoreText = "High Score: " + std::to_string(highscore);  
-    sf::Text sfHighScore(highscoreText, font);
+    sf::Text sfHighScore(highscoreText, _font);
     sfHighScore.setCharacterSize(24);
     sfHighScore.setPosition(650, 550);
     sfHighScore.setColor(sf::Color::Yellow);
     
     string enemiesLeft = "Enemies left: " + std::to_string(enemies);  
-    sf::Text sfEnemiesLeft(enemiesLeft, font);
+    sf::Text sfEnemiesLeft(enemiesLeft, _font);
     sfEnemiesLeft.setCharacterSize(24);
     sfEnemiesLeft.setPosition(20, 550);
     sfEnemiesLeft.setColor(sf::Color::Yellow);

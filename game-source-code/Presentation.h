@@ -18,6 +18,7 @@ using std::make_shared;
 /**
 * Presentation class - Uses the SFML library to display all game sprites
 */
+
 class Presentation
 {
     public:
@@ -50,10 +51,12 @@ class Presentation
         void handlePlayerInput(const sf::Keyboard::Key key, const bool isPressed);
         /**
         * @brief Assigns the correct texture to the sprite depending on the type of entity it is.
+        * @param resources is of type ResourceManager and contains the resource path and type
         */
-        void loadTextures();
+         void loadTextures(vector<ResourceManager> resources);
         /**
         * @brief Draws the background sprite for the game.
+        * 
         */
         void drawBackground();
         /**
@@ -95,13 +98,13 @@ class Presentation
         * @return bool with value of whether input was captured or not.
         */	
         bool getSpaceKeyPress() const {return _isSpacePressed;};
-
+        
     private:
     
         sf::RenderWindow _window;
         sf::Texture _backgroundTexture;	
         sf::Sprite _backgroundSprite;
-        sf::Font font;
+        sf::Font _font;
         
         const int _halveSize;
         const float _spriteRotationFactor;
@@ -111,26 +114,15 @@ class Presentation
         bool _isRightPressed;
         bool _isSpacePressed;
         
-		/**
-		* TextureIdentifier struct - contains the sf::texture relating to its corresponding EntityType
-		*/
         struct textureIdentifier
         {
             sf::Texture texture;
             EntityType entityType;
         };
         
-        vector<ResourceManager> _entityTextures;
         vector<textureIdentifier> _textureslList;
         vector<sf::Sprite> _allSprites;
-        vector<string> _paths = {"Resources/PlayerAlt.png", 
-                                "Resources/Enemy.png", 
-                                "Resources/Satellite.png", 
-                                "Resources/LaserGenerator.png",
-                                "Resources/PlayerBullet.png",
-                                "Resources/EnemyBullet.png",
-                                "Resources/LaserField.png",
-                                "Resources/Asteroid.png"};
+
 };
 
 #endif // PRESENTATION_H
