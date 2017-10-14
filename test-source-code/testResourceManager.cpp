@@ -4,13 +4,13 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-TEST_CASE("Resource Manager resource path and entity type set and retrieved")
+TEST_CASE("Resource Manager resource path and entity type set are retrieved")
 {
     
-    EntityType entityType = EntityType::PLAYER;
+    ResourceType resourceType = ResourceType::PLAYER;
     string resourcePath = "Resources/PlayerAlt.png";
-    ResourceManager resourceManager{entityType, resourcePath };
+    ResourceManager resourceManager{resourceType, resourcePath };
     
-    CHECK(resourceManager.getEntityID() == entityType);
+    CHECK(resourceManager.getResourceType() == resourceType);
     CHECK(resourceManager.getResourcePath() == resourcePath);
 }
