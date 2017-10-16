@@ -114,6 +114,9 @@ class Presentation
         bool _isRightPressed;
         bool _isSpacePressed;
         
+        /**
+        * TextureIdentifier struct - contains the sf::texture relating to its corresponding EntityType
+        */
         struct textureIdentifier
         {
             sf::Texture texture;

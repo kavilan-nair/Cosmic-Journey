@@ -8,21 +8,13 @@
 
 #include "stopwatch.h"
 #include "Presentation.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "PlayerBullet.h"
 #include "CollisionHandler.h"
 #include "GameState.h"
-#include "Satellite.h"
 #include "HighScoreManager.h"
-#include "LaserField.h"
-#include "LaserGenerator.h"
 #include "EnemySpawner.h"
 
 using std::shared_ptr;
-using std::unique_ptr;
 using std::make_shared;
-using std::make_unique;
 
 /**
 * Logic class - Controls the behaviour of the game objects before sending them to be rendered and displayed.
@@ -42,6 +34,9 @@ class Logic
         * @brief Function that starts the main game loop.
         */
         void run();
+       
+        
+    private: 
         /**
         * @brief Function that loads all the resources and links it to a ResourceType
         */
@@ -107,8 +102,6 @@ class Logic
         */
         void deleteDeadEntities();
 
-        
-    private: 
         Presentation _presentation;
         GameState _gameState;
         const Grid _grid{800, 600};
